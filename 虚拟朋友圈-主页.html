@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>频道列表</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="http://www.yzm.com/dist/images/favicon.ico">
+        <!--<link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/channel-list.css">-->
+        <style>
+/*通用列表*/
+body{width: 100%;margin:0;padding:0;background-color: hsl(0,1%,98%);-webkit-font-smoothing: antialiased;font-family:'Avenir Next',Avenir,'Helvetica Neue',Helvetica,'Lantinghei SC','Hiragino Sans GB','Microsoft YaHei',STHeiti,'WenQuanYi Micro Hei',SimSun,sans-serif;overflow-x: hidden;}
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video { margin: 0;padding: 0;border: 0;-webkit-tap-highlight-color: rgba(255,255,255,0);}
+ul li{list-style: none;}
+a{text-decoration: none;}
+html{width: 100%; box-sizing: border-box;font-size: 62.5%;}
+ul li{list-style: none;}
+
+/*弹性盒布局*/
+.sys-flex,.m2o-flex{display: -webkit-flex;display: -ms-flexbox;display: flex;}
+.sys-flex-center,.m2o-flex-center{-webkit-align-items: center;-ms-flex-align: center;align-items: center;} /*设置或检索弹性盒子元素在侧轴（纵轴）方向上的对齐方式。*/
+.sys-flex-one,.m2o-flex-one{-webkit-flex: 1;-ms-flex: 1;flex: 1;}  /*设置或检索伸缩盒对象的子元素如何分配空间。*/
+.sys-flex-two,.m2o-flex-two{-webkit-box-flex:2; -moz-box-flex:2; box-flex:2;}
+.sys-vertical,.m2o-vertical{-webkit-box-orient:vertical;-ms-flex-direction:column;} /*column：纵向排列。*/
+.sys-pack-center{-webkit-box-pack: center;}
+.flex-justify-center{-ms-flex-pack: center;justify-content: center;-webkit-justify-content: center;-moz-justify-content: center;-ms-justify-content: center;} /*center：弹性盒子元素将向行中间位置对齐。*/      
+header{width: 100%;height:auto;}
+header img{width:100%;height:auto;}
+
+/*完全居中*/
+.Absolute-Center{margin:auto;position:absolute;top:0;bottom: 0;right:0;left:0;}
+.pos_r{position:relative;}
+.pos_a{position:absolute;}
+.pad_bottom{padding-bottom: 1rem!important;}
+
+/*动态的固定顶部*/
+.header-name{max-height:11rem;width:44%;}
+.header-name img{display: block; margin: 3px auto;width:40%;height:auto;border:5px solid hsla(0,1%,80%,0.5);border-radius: 50%;}
+.header-name .channel-list{display:block;width:100%;height: 2rem;margin: 0 auto;text-align: center;line-height: 2rem;color:white;font-size: 1.5rem;}    
+
+/*频道列表*/
+.broadcast-center{box-sizing:border-box;flex-flow: row wrap;padding: 1rem;width:100%;margin: 0 auto;background: white;margin-top: 1rem;}
+.broadcast-center .item-header{display: block;width:100%;border-bottom: 1px solid hsl(0,1%,90%);padding: 10px 0;margin-bottom: 1rem;}
+.broadcast-center .item-header span{font-size: 17px;color:#596c96;}
+.broadcast-center .item-header span:before{content:'';background: green;height: 1.5rem;width:3px;display: inline-block;position:relative;top:2px;margin-right: 8px;}
+/*.broadcast-center .item-header span:after{content:'';background: green;height: 3px;width:3px;display: inline-block;position:relative;top:2px;left:-91px;top:-20px;}*/
+.new-media:after{left:-111px!important;}
+.broadcast-center .bro-item{width:25%;height: auto;margin-bottom: 1rem;}
+.broadcast-center .bro-item img{display: block;padding:10px;    margin: 2px auto;width:70%;height:auto;}
+.broadcast-center .bro-item span{display:block;width:100%;height: 2rem;margin: 0 auto;text-align: center;line-height: 2rem;color:#9b9c9c;font-size: 1.3rem;}
+</style>        
+    </head>
+    <body>
+         朋友圈列表
+        <!--<script type="text/javascript" src="./js/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="./js/jquery/jquery-ui.min.js"></script>
+        <!--<script type="text/javascript" src="./js/tool/nia"></script>-->
+        <!--<script type="text/javascript" src="./js/tool/jquery.tmpl.min.js"></script>
+        <script type="text/javascript" src="./js/tool/ajaxload_new.js"></script>
+        <script type="text/javascript" src="./js/tool/template.js"></script>
+        <script type="text/javascript" src="./js/global/config.js"></script>
+        <script type="text/javascript" src="./js/tool/smartCity_sdk.js"></script>
+        <script type="text/javascript" src="./js/tool/print.js"></script>
+        <script type="text/javascript" src="./js/index.js"></script>-->
+
+<input class="bind_id" name="bind_id" value="13" type="hidden">
+<!--微信自定义分享接口开始-->
+<input id="wx-share-title" type="hidden" value="<?php echo $__info['site']['name'];?>" />
+<input id="wx-share-desc" type="hidden" value="这里是互动朋友圈，邀请你一起参与！" />
+<input id="wx-share-cfss" type="hidden" value="亲！推荐一个精彩的朋友圈矩阵给你，可别错过了哦↓↓↓" />
+<input id="wx-share-img" type="hidden" value="<?php echo $__info['column']['indexpic'];?>" />
+<input id="wx-share-link" type="hidden" value="" />
+<input id="wx-share-type" type="hidden" value="" />
+<input id="wx-share-dataUrl" type="hidden" value="" />
+<!--微信自定义分享接口结束-->
+<script id="wxfx" type="text/javascript"></script>
+<script>
+$(function(){
+  var bind_id = $('.bind_id').val();
+  var link = encodeURIComponent(location.href.split('#')[0]);
+    $.ajax({
+                 type : "get",
+                 url : "http://m.fjtv.net/microweb/jssdk.php?bind_id="+bind_id+"&url="+link,
+                 dataType : "json",
+                  success : function(data){
+                     $('#wxfx').text(data.data);
+                  }
+           })
+  })
+</script>
+    </body>
+</html>

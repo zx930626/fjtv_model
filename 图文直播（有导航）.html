@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <link href="http://weixin.fjtv.net/wap/css/cate/cate4_0.css" rel="stylesheet" type="text/css"/>
+    <link href="http://weixin.fjtv.net/wap/css/cate/cate4kz2.css" rel="stylesheet" type="text/css"/>
+    <link href="//cdn.bootcss.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/lightgallery/1.3.9/css/lightgallery.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/lightgallery/1.3.9/css/lg-fb-comment-box.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/lightgallery/1.3.9/css/lg-transitions.css" rel="stylesheet">
+
+    <title>图文直播</title>
+
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/lightgallery/1.3.9/js/lightgallery.js"></script>
+    <style>
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            color: #333;
+            background-color: #fff;
+        }
+
+        a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        div {
+            box-sizing: border-box;
+        }
+
+        header {
+            width: 100%;
+            height: auto;
+            position: relative;
+        }
+
+        .wrapper {
+            width: 100%;
+            background-color: hsl(0, 1%, 99%);
+            z-index: 3;
+        }
+
+        .wrapper-header {
+            width: 100%;
+            min-height: 3rem;
+            padding-left: 2rem;
+        }
+
+        .click_num {
+            width: 10%;
+            height: 1rem;
+            display: inline-block;
+            background: url(http://www.yanan.siteyun.hoge.cn/t/icon/201702/20170208113255rxkE.png) no-repeat left center;
+            background-size: 1rem 1rem;
+            padding: 1rem 1rem 1rem 1.3rem;
+        }
+
+        .comment_num {
+            width: 10%;
+            height: 1rem;
+            display: inline-block;
+            background: url(http://www.yanan.siteyun.hoge.cn/t/icon/201701/201701031450054UXx.png) no-repeat left center;
+            background-size: 1rem 1rem;
+            padding: 1rem 1rem 1rem 1.3rem;
+        }
+
+        /*tab切换*/
+        .tab {
+            width: 100%;
+            height: auto;
+            margin: 0 auto 0;
+            position: relative;
+            background-color: hsl(0, 1%, 98%);
+        }
+
+        .tab_menu {
+            display: block;
+            width: 100%;
+            min-height: 4rem;
+            margin: 0px auto;
+        }
+
+        .tab_menu ul {
+            display: block;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .tab_menu ul li {
+            height: 4.5rem;
+            line-height: 4.5rem;
+            position: relative;
+            width: calc(33.33%);
+            float: left;
+            text-align: center;
+            transition: all 0.1s ease-in;
+            -webkit-transition: all 0.1s ease-in;
+            -moz-transition: all 0.1s ease-in;
+            cursor: pointer;
+            font-size: 1.4rem;
+            display: block;
+            background-color: hsl(0, 1%, 95%);
+            color: hsl(0, 1%, 60%);
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        }
+
+        /*selected{color:hsl(0,1%,50%);}*/
+        /*.selected a{-webkit-tap-highlight-color: rgba(240,240,240,0.7);}*/
+        .tab_menu ul li.selected {
+            color: white;
+            font-weight: 700;
+            border-radius: 2%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tab_menu ul li.selected:before {
+            display: block;
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 70%;
+            border-radius: 20px;
+            background-color: rgb(251, 67, 71);
+            top: 14%;
+            left: 9%;
+            z-index: -1;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .tab .tab_content {
+            display: block;
+            width: 100%;
+            height: auto;
+            padding: 0 0 0;
+            box-sizing: border-box;
+            font-size: 1.4rem;
+            position: relative;
+        }
+
+        /*.tab .tab_content div{width:100%;font-size: 1.5rem;}*/
+        .first-cont {
+            padding: 0 1rem 1rem 1rem;
+            position: relative;
+            background-color: hsl(0, 1%, 98%);
+        }
+        /* .first-cont div:first-child{
+            top: 0.6rem;
+        } */
+
+        .first-cont .item {
+            width: 100%;
+            height: auto;
+            /* border-top: 1px dashed lightslategray; */
+            /* margin-bottom: 20px; */
+            position: relative;
+        }
+
+        .item-cont {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .item-left {
+            width: 12%;
+            height: 100%;
+        }
+
+        .cur-date {
+            margin: 20px 0;
+            color: hsl(0, 1%, 70%);
+        }
+
+        #this_time {
+            display: block;
+            position: relative;
+            color: hsl(0, 1%, 70%);
+            font-size: 10px;
+            padding-top: 0.3rem;
+            padding-left: 0.6rem;
+        }
+
+        #this_time:before {
+            position: absolute;
+            min-height: 12000%;
+            width: 1px;
+            background: hsl(0, 1%, 88%);
+            content: "";
+            top: 3rem;
+            left: 20px;
+        }
+
+        .item-right {
+            width: 88% !important;
+            height: auto;
+            margin-left: 1rem;
+            position: relative;
+        }
+
+        .item-right:before {
+            position: absolute;
+            content: "";
+            width: 0;
+            left: -5px;
+            height: 0;
+            top: 5px;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-right: 5px solid white;
+        }
+
+        .item-right-cont {
+            padding: 5px;
+            background: white;
+            padding: 1rem;
+            /* line-height: 2.3rem; */
+            line-height: 2.0rem;
+            color: hsl(0, 1%, 50%);
+        }
+
+        .right-cont-header {
+            margin-bottom: 1rem;
+        }
+
+        .dianzan {
+            float: right;
+            color: hsl(0, 1%, 50%);
+        }
+
+        .dianzan img {
+            max-width: 30%;
+            height: auto;
+        }
+
+        .dianzan span {
+            position: relative;
+            top: -3px;
+        }
+
+        .second-cont {
+            padding: 2rem;
+            line-height: 3rem;
+            font-size: 1.4rem;
+            background: white;
+            text-indent: 2rem;
+            color: hsl(0, 1%, 50%);
+        }
+
+        .chat {
+            position: relative;
+            padding: 5px;
+            z-index: 2;
+            width: 100%;
+            height: auto;
+            margin-bottom: 5rem;
+        }
+
+        .tab .tab_content .comment_list {
+            width: 100%;
+            height: 90%;
+            min-height: 90%;
+            display: flex;
+            flex-flow: row wrap;
+            /* background: hsl(0, 1%, 95%); */
+        }
+
+        .tab .tab_content .comment_list div {
+            background: white;
+            display: block;
+            padding: 5px;
+            line-height: 2.3rem;
+            color: hsl(0, 1%, 50%);
+            margin-bottom: 8px;
+        }
+
+        #comment_list {
+            width: 100%;
+        }
+
+        .comment-cont {
+            padding: 2px 3px;
+            box-sizing: border-box;
+            overflow: hidden;
+            width: 100%;
+            min-height: 3rem;
+        }
+
+        .comment-cont .comment-cont-header {
+            margin-bottom: -4px !important;
+        }
+
+        .comment-cont .comment-cont-header img {
+            max-width: 30px;
+            border-radius: 50%;
+        }
+
+        .comment-cont .comment-cont-header span {
+            margin-right: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            color: black;
+            left: 10px;
+            display: inline-block;
+            position: relative;
+            top: -8px;
+        }
+
+        .comment-cont .comment-cont-header span:last-child {
+            top: -9px;
+            font-size: 12px;
+            font-weight: 200;
+            color: hsl(0, 1%, 40%);
+            display: inline-block;
+            position: relative;
+        }
+
+        .write_comment {
+            position: fixed;
+            bottom: 0.5rem;
+            width: 100%;
+            height: 4rem;
+            box-sizing: border-box;
+        }
+
+        .more-wrap {
+            padding: 10px;
+        }
+
+        .get-more {
+            display: block;
+            width: 100%;
+            height: 30px;
+            color: hsl(0, 1%, 70%);
+            line-height: 30px;
+            text-align: center;
+            font-size: 14px;
+            border-radius: 2px;
+            cursor: pointer;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        }
+
+        #tip {
+            background-color: hsl(0, 1%, 95%) !important;
+            position: absolute;
+            z-index: 4;
+            top: -300%;
+            left: 20%;
+            display: none;
+            height: 3rem;
+            opacity: 0;
+            line-height: 3rem !important;
+            width: 20rem;
+            color: black;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .tip2 {
+            background-color: hsl(0, 1%, 95%) !important;
+            position: absolute;
+            z-index: 4;
+            top: 15%;
+            left: 30%;
+            display: none;
+            height: 3rem;
+            opacity: 0;
+            line-height: 3rem !important;
+            width: 14rem;
+            color: black;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .zan1 {
+        }
+
+        /*.btn-audio{
+                        width: 20px;
+                        height:20px;
+                        background:url(http://ojjsl7zpc.bkt.clouddn.com/voice-stop.png?e=1490876194&token=NUT82f__mRq-ZGvkrbqw7Zxle80aB7nUArvrHibz:Lc_P3HoU6iZifir7QQXMShQMZOo) no-repeat center bottom;
+                        background-size:cover;}*/
+        .audio-style {
+        }
+
+        .imgpos {
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+        /*#getMore{text-align: center;display: block;margin-top: 25px;color: hsl(0,1%,50%);position: relative;bottom:45px;}*/
+        header .mask {
+            width: 100%;
+            height: 268px;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 99;
+        }
+
+        header .mask .center {
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 10px;
+            bottom: 0;
+            right: 0;
+            height: 3rem;
+            line-height: 3rem;
+            width: 6rem;
+            color: black;
+            z-index: 5;
+            font-size: 1.5rem;
+        }
+
+        .wd100 {
+            width: 100% !important;
+        }
+
+        .wd50 {
+            width: 50% !important;
+        }
+
+        #orderby {
+            font-size: 14px;
+            color: hsl(0, 1%, 60%);
+            position: relative;
+            float: right;
+            left: -2.2rem;
+            top: 0.6rem;
+            z-index: 2;
+        }
+
+        #orderby:after {
+        }
+        .playing0{
+            color: #a52a2a !important;
+            border:1px solid #a52a2a  !important;
+        }
+        .audio_box{
+          position: relative;
+          height:4.0rem;
+          width:16rem;
+          border: 1px solid #ebebeb;
+          background-color: #fcfcfc;
+          border-radius: 5px;
+          margin-top: -12px;
+        }
+        .progress{position: absolute;right: 15px;top: 50%;margin-top: -10px;}
+        .progressbur{position: absolute;;height:2px;background: #03be00;border-radius: 4px;bottom: 0px;margin-top: -5px;}
+        .progressbur b.progressbur_wd{
+           position:absolute;left:0px;height: 5px;background: #03be00;border-radius: 8px;z-index: 3;
+        }
+        .audio_play{
+            position:absolute;
+            display: inline-block;
+            width:18px;height:25px;
+            background: url(http://img1.fjtv.net/material/microweb/img/2017/06/20170608170339FvA9.png) no-repeat 0 0 ;
+            background-size: 54px 25px;
+            background-position: -36px center;
+            vertical-align: middle;
+            top:50%;
+            left:10px;
+            margin-top:-12px;
+        }
+        @-webkit-keyframes audio_playing {
+            30% {
+                background-position: 0px center;
+            }
+            31% {
+                background-position: -18px center;
+            }
+            61% {
+                background-position: -18px center;
+            }
+            61.5% {
+                background-position: -36px center;
+            }
+            100% {
+                background-position: -36px center;
+            }
+        }
+        .title{
+            color: #464646;
+            padding: 0.4rem 0 0 1.6rem;
+            font-size: 1.4rem;
+        }
+        .multi_img{
+            width:45%;
+            height:8rem;
+            overflow:hidden;
+            display:inline-block;
+            margin-left:1rem;
+        }
+        .multi_img img{
+            max-width:100%;
+            height:auto;
+        }
+        .single_img{
+            max-width: 100%;
+            height:auto;
+            overflow:hidden;
+            display:inline-block;
+            margin-left:2rem;
+            margin-right:2rem;
+        }
+        .single_img img{
+            max-width:100%;
+            height:auto;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oWin = document.getElementById("win");
+            var oLay = document.getElementById("overlay");
+            var oBtn = document.getElementById("popmenu");
+            var oClose = document.getElementById("close");
+            oBtn.onclick = function () {
+                oLay.style.display = "block";
+                oWin.style.display = "block"
+            };
+            oLay.onclick = function () {
+                oLay.style.display = "none";
+                oWin.style.display = "none"
+            }
+        };
+    </script>
+</head>
+<body>
+<!--顶部栏目下拉菜单开始-->
+<div id="ui-header">
+    <div class="fixed">
+        <a class="ui-title" id="popmenu"><?php echo $__info['column']['name']; ?></a>
+        <a class="ui-btn-left_pre" href="javascript:history.go(-1);"></a>
+        <a class="ui-btn-right" href="javascript:location.reload();"></a>
+        <!--<a class="ui-btn-right_home" href="<?php echo $__info['site']['url']; ?>"></a>-->
+    </div>
+</div>
+<div id="overlay"></div>
+<div id="win">
+    顶部栏目列表
+</div>
+<div class="top46"></div>
+<!--顶部栏目下拉菜单结束-->
+<header>
+
+</header>
+<div class="videoBox" style="position:relative;width:100%;overflow-x:auto;background-color: rgba(0,0,0,0.9);top: -0.4rem;">
+    <p style="display: inline;"></p>
+</div>
+<div class="wrapper">
+    <div class="title"></div>
+    <div class="wrapper-header">
+        <span class="live_status" style="padding-right: 1.8rem;">直播中</span>
+        <span class="click_num">2049</span>
+        <span class="comment_num">130</span>
+        <span class="fa fa-angle-up" style="font-size: 3rem;float: right;margin-right: 3.4rem;margin-top: -1rem;"></span>
+    </div>
+    <div class="tab">
+        <div class="tab_menu">
+            <ul>
+                <li class="selected">图文直播</li>
+                <li class="chatting">边看边聊</li>
+                <li class="secondLi">直播介绍</li>
+            </ul>
+        </div>
+        <div class="tab_content firstTab">
+
+            <div style="position: relative;">
+                <div id="orderby">倒序↓</div>
+                <br/>
+                <div class="first-cont"></div>
+            </div>
+            <!--tab第三列-->
+            <div class="hide chat">
+                <div class="comment_list">
+                    <ul id="comment_list">
+                    </ul>
+                    <span class="get-more"></span>
+                </div>
+
+                <div class="write_comment">
+                    <div id="tip" style="font-size:14px !important;margin: 15px auto;"></div>
+                    <textarea class="comment_content" placeholder="写评论...（请写超过10个字）"
+                              style="width:72%;height:3.5rem;line-height:3.5rem;background:#fff;display:block;border-radius:4px;border:1px solid #ccc;float:left;outline: none;resize: none;color:hsl(0,1%,40%);padding-left: 3px;"></textarea>
+                    <span class="sub_comment"
+                          style="width:20%;height:3rem;line-height:3rem;display:block;border-radius:3px;text-align:center;color:hsl(224,36%,29%);font-size:1.5rem;float:left;padding:3px 5px;background: rgb(251,67,71);color:white;margin-left: 5px;">发送</span>
+                </div>
+            </div>
+            <div class="hide secondTab" id="secondTab" style="margin-top: 1rem;">
+                <!--第二列tab切换##话题详情-->
+                <div>
+                    <div class="second-cont" id="second-cont">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+if(!$__info['content']['share_pic']){
+  $share_pic = $__info['content']['indexpic'];
+}else{
+  $share_pic = $__info['content']['share_pic'];
+}
+$share_pic = json_decode($share_pic,1);
+$share_pic = $share_pic['host'] . $share_pic['dir'] . $share_pic['filepath'] . $share_pic['filename'];
+
+$indexpic = json_decode($__info['content']['indexpic'],1);
+$indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $indexpic['filename'];
+?>
+<input type="hidden" id="topic_id" value="<?php echo $__info['content']['content_fromid'];?>">
+<input type="hidden" id="indexpic" value="<?php echo $indexpic;?>">
+<!--微信分享类型判断-->
+<input id="wx-share-type" type="hidden" value="video"/>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!--微信分享朋友圈开始-->
+<input class="bind_id" name="bind_id" value="<?php echo $__info['site']['bind_id'];?>" type="hidden">
+<input id="wx-share-title" type="hidden" value="<?php echo $__info['site']['name'];?>"/>
+<input id="wx-share-desc" type="hidden" value="<?php echo $__info['content']['share_brief'];?>"/>
+<input id="wx-share-cfss" type="hidden" value="<?php echo $__info['content']['share_title'];?>"/>
+<input id="wx-share-link" type="hidden" value=""/>
+<input id="wx-share-img" type="hidden" value="<?php echo $share_pic;?>"/>
+
+<input id="wx-share-dataUrl" type="hidden" value=""/>
+<script id="wxfx" type="text/javascript"></script>
+<script>
+    $(function () {
+$('.ui-title').unbind('click');
+        var bind_id = $('.bind_id').val();
+        var link = encodeURIComponent(location.href.split('#')[0]);
+        $.ajax({
+            type: "get",
+            url: "http://m.fjtv.net/microweb/jssdk.php?bind_id=" + bind_id + "&url=" + link,
+            dataType: "json",
+            success: function (data) {
+                $('#wxfx').text(data.data);
+            }
+        })
+    })
+</script>
+<!--微信分享朋友圈结束-->
+<script>
+    $(function () {
+        function getCookie(name) {
+            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+            if (arr = document.cookie.match(reg)) {
+                return unescape(arr[2]);
+            }
+            else {
+                return null;
+            }
+        }
+
+        var member_info = getCookie("liv_member_info-i");
+
+        if (member_info) {
+            var str = decodeURIComponent(member_info);
+            var obj = JSON.parse(str);
+            var member_id = obj.member_id;
+            var nick_name = obj.nick_name;
+        }
+        var topic_id = $('#topic_id').val();
+        var access_token = getCookie("liv_access_token-i");
+        var bind_id = $('.bind_id').val();
+        var goUrl = window.location.href;
+//  var thread_id = $('.item').data('thread_id');
+
+        // 隐藏直播机位
+        $(".fa").on('click',function(){
+            $(this).toggleClass('fa-angle-up');
+            $(this).toggleClass('fa-angle-down');
+            if($(this).hasClass('fa-angle-up')){
+                $(".videoBox").css('display','block');
+            }else{
+                $(".videoBox").css('display','none');
+            }
+        })
+
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "http://m.fjtv.net/microweb/Apituwenol_switch.php?id=" + topic_id,
+            success: function (res) {
+                setTimeout(function () {
+                    $('.tab_menu').fadeIn();
+                }, 100)
+
+                // 图文直播开 边看边聊开
+                if (res.tuwen_is_open !== 0 && res.chat_is_open !== 0) {
+                    /*tab切换*/
+                    var $div_li = $(".tab_menu ul li");
+                    $div_li.bind('touchstart', function () {
+                        $(this).addClass('selected').siblings().removeClass('selected');
+                        var index = $div_li.index(this); //获取当前的索引
+                        $('.tab_content>div').eq(index).show().siblings().hide();
+                    });
+                }
+                // 图文直播关 边看边聊关
+                if (res.tuwen_is_open == 0 && res.chat_is_open == 0) {
+                    $('.tab_menu li:first').remove();
+                    $('.tab_menu .chatting').remove();
+                    $('.secondTab').removeClass('hide');
+                    $('.first-cont').remove();
+                    $('.chat').remove();
+                    $('.tab_menu').find('li').addClass('wd100');
+                    $('.tab_menu').find('li').addClass('selected');
+                }
+                // 图文直播关 边看边聊开
+                if (res.tuwen_is_open == 0 && res.chat_is_open == 1) {
+                    $('.secondLi').addClass('selected');
+                    $('.tab_menu li:first').remove();
+                    $('.first-cont').remove();
+                    $('.secondTab').removeClass('hide');
+                    $('.tab_menu').find('li').addClass('wd50');
+                    $('#orderby').remove();
+                    var $div_li = $(".tab_menu ul li");
+                    $div_li.bind('touchstart', function () {
+                        $(this).addClass('selected').siblings().removeClass('selected');
+                        console.log($div_li);
+                        var index = $div_li.index(this); //获取当前的索引
+                        console.log("index"+index);
+                        $('.tab_content>div').eq(index + 1).show().siblings().hide();//图文直播开
+                    });
+                }
+                // 图文直播开 边看边聊关
+                if (res.chat_is_open == 0 && res.tuwen_is_open == 1) {
+
+                    $('.tab_menu li:nth-child(2)').remove();
+                    $('.chat').remove();
+                    $('.tab_menu').find('li').addClass('wd50');
+                    var $div_li = $(".tab_menu ul li");
+                    $div_li.bind('touchstart', function () {
+                        $(this).addClass('selected').siblings().removeClass('selected');
+                        var index = $div_li.index(this); //获取当前的索引
+                        $('.tab_content>div').eq(index).show().siblings().hide();
+                    });
+                }
+            }
+        });
+        //话题详情
+
+        $.ajax({
+            type: "get",
+            url: "http://m.fjtv.net/microweb/Apituwenol_detail.php?id=" + topic_id,//get请求传参数
+            dataType: "json",
+            success: function (json) {
+                var data = json[0];
+                var img_url = $("#indexpic").val();
+                var status_text = data.time_status_text;
+                var time_status = data.time_status;
+                var brief = data.brief;
+                var title = data.title;
+                $('#second-cont').append(data.brief);
+                $('.click_num').text(data.click_num);
+                $('.comment_num').text(data.comment);
+                var str = '';
+                var murl = '';
+                var liveInfo = data.live_info;
+                if(liveInfo.length<1){
+                   //$('.videoBox').css('margin','1rem 0');      
+                   $('#wx-share-type').val('link');         
+                }
+
+                // str += '<div class="mask"><div class="center">' + status_text + '</div>';
+
+                var indexpic = $('#indexpic').val();
+                $(".title").html(title);
+                if (time_status == 2) {
+                    $('.mask').css({"display": "block", 'z-index': 10}).animate({"opacity": "1"}, 1000);
+                } else {
+                    var vHtml = "";
+                    if(liveInfo.length == 1){                      
+                        str += '<video id="video" src="'+liveInfo[0].url+'"  width="100%" height="280" webkit-playsinline playsinline x-webkit-airplay="allow" style="background:#000000;margin-top:-12px;"  preload="auto" controls="controls" poster="'+indexpic+'"></video></div>';
+                        $('header').append(str);
+                        $(".videoBox").css('display','none');
+                        $(".fa").remove();
+                    }else if(liveInfo.length > 1){
+                        $("div.videoBox p").css("display","inline");
+                        $.each(liveInfo, function (key) {
+                            vHtml += "<span class='playing"+key+"' data-src=" + liveInfo[key].url + " style='display:inline-block;background-color:#000;text-align:center;line-height:1.2rem;font-size:1.2rem;color:#fff;padding:6px 16px;margin:1.2rem 0;border-radius:5px;border:1px solid #fff;margin-left:1.0rem;' preload='auto'>"+liveInfo[key].name+"</span>";
+                            $("div.videoBox p").css("width", 250 * (key + 1) + "px");
+                            $("div.videoBox p").html(vHtml);
+                        })
+                        str += '<video id="video" src="'+liveInfo[0].url+'"  width="100%" height="280" webkit-playsinline playsinline x-webkit-airplay="allow" style="background:#000000;margin-top:-12px;"  preload="auto" controls="controls" poster="'+indexpic+'"></video></div>';
+                        $('header').append(str);                 
+                    }else{
+                        $("header").html("<div style='display:inline-block;min-height:14rem;'><div style='font-size:1.4rem;padding:2rem 0 0 2rem;color:#00abff;'>直播介绍</div><div style='text-indent:2rem;font-size:1.4rem;padding:1rem 2rem 3rem 2rem;color:#817e7e;line-height:2rem;'>"+brief+"<div></div>");
+                        $(".videoBox").css('display','none');
+                        $(".fa").remove();
+                        $('.tab_menu li:last').remove();
+                        $(".secondTab").remove();
+                        $('.tab_menu').find('li').addClass('wd50');
+                        var $div_li = $(".tab_menu ul li");
+                        $div_li.bind('touchstart', function () {
+                            $(this).addClass('selected').siblings().removeClass('selected');
+                            var index = $div_li.index(this); //获取当前的索引
+                            $('.tab_content>div').eq(index).show().siblings().hide();
+                        });
+                    }
+
+                    $('.mask').css("display", "block").animate({"opacity": "1"}, 1000);
+                    setTimeout(function () {
+                        $('.center').css({"display": "block", "color": "#fff"})
+                    }, 2000);
+                }
+
+                var i = 0;
+                $("div.videoBox").on("touchstart","span",function () {
+                    $(this).addClass('playing0').siblings().removeClass('playing0');
+                    i++;
+                    // console.log($(this).attr("data-src"));
+                    $("#video").attr("src",$(this).attr("data-src"));
+                    $("#video")[0].play();
+
+                })
+
+                if(status_text == "直播中"){
+                    $(".live_status").html("<font color='green'>"+status_text+"</font>");
+                }else if(status_text == "即将开始"){
+                    $(".live_status").html("<font color='blue'>"+status_text+"</font>");
+                    $(".fa").remove();
+                    if(liveInfo.length > 0){
+                        $("header").html('<img style="width:100%;" src="'+indexpic+'">');
+                    }
+                }else {
+                    $(".live_status").html("<font color='red'>"+status_text+"</font>");
+                    $(".fa").remove();
+                    if(liveInfo.length > 0){
+                        $("header").html('<img style="width:100%;" src="'+indexpic+'">');
+                    }
+                }
+                if(liveInfo.length > 0){
+                    if(liveInfo[0].type == 'record'){
+                        $(".live_status").html("<font color='green'>精彩回放</font>");
+                    }
+                }
+            }
+        });
+
+
+        //报道列表
+        function init() {
+            var url = 'http://m.fjtv.net/microweb/Apituwenol_thread.php?topic_id=' + topic_id;
+            $.getJSON(url, function (json) {
+                if (json[0]) {
+                    var str = "";
+                    var multiImgStr = "";
+                    $.each(json, function (index, array) {
+                        var pic = array.materail;
+                        str += '<div class=\"item\"><div class=\"cur-date\">';
+                        str += '</div><div class=\"item-cont\" style=\"overflow: hidden;\"><div class=\"item-left\"><span id=\"this_time\">' + array.format_create_time + '</span>';
+                        str += '</div><div class="item-right"><div class="item-right-cont"><div class="right-cont-header">';
+                        str += '<span>' + array.user_name + '</span><span style="cursor:pointer;-webkit-tap-highlight-color:rgba(255,255,255,0);position: relative;right: -20px;" class="dianzan" data-thread_id=' + array.id + '><img src="http://yanan.tw.hdyun.hoge.cn//views//res/images/common/2.png"> <span class=\"info-num\">' + array.ding + '</span></span></div>';
+                        str += '<p>' + array.content + '</p><br>';
+                        if (pic) {
+                            $len = pic.length;
+                            for (i = 0; i < $len; i++) {
+                                if (pic[i].type == "video") {
+                                    str += '<video width="100%;" webkit-playsinline="true" controls="controls" poster="' + pic[i].host + pic[i].dir + '300X/' + pic[i].filepath + pic[i].filename + '" src="' + pic[i].m3u8 + '" webkit-playsinline playsinline x-webkit-airplay="allow" style="background-color:#000000;margin-top:-12px;"  preload="auto" ></video>';
+                                } else if (pic[i].type == "audio") {
+                                    // str += '<audio style="width:80%" class="mp3Btn" controls="controls" src=' + pic[i].m3u8 + '/></audio>';
+                                    str +=  '<div class="audio_box">'+
+                                                '<audio src="'+pic[i].m3u8+'"></audio>'+
+                                                '<span class="audio_play""></span>'+
+                                                '<div class="progress">'+
+                                                    '<span class="progress_dur">00:00</span>'+
+                                                '</div>'+
+                                                '<div class="progressbur" style="width:0%;"></div>'+
+                                            '</div>';
+                                } else {
+                                    // if($len > 1){
+                                    //     str += '<div class="multi_img lightgallery"><a href="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"><img src="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"></a></div>';
+                                    // }else{
+                                    //     str += '<div class="single_img lightgallery"><a href="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"><img src="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"></a></div>';
+                                    // }
+
+                                    if($len > 1){
+                                        if(i == 0){
+                                            str += '<div class="multi_img_wrap lightgallery"></div>';
+                                        }
+                                        multiImgStr += '<a class="multi_img" href="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"><img src="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"></a>';
+                                    }else{
+                                        str += '<div class="single_img lightgallery"><a href="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"><img src="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"></a></div>';
+                                    }
+                                }
+                            }
+                            setTimeout(function(){
+                                $('.multi_img_wrap').html(multiImgStr);
+                                console.log('已渲染完成')
+                                imgResponsive();
+                            },500);  
+                        }
+                        str += '</div></div></div><span class="tip2"></span></div>';
+                    });
+                    $('.first-cont').html(str);
+                    audioPlay()
+                }
+            });
+        };
+        init();
+        //排序 '&order_by=asc'
+        $('#orderby').click(function () {
+            if ($(this).hasClass('order')) {
+                $(this).removeClass('order').text('倒序↓');
+                init();
+            } else {
+                $(this).addClass('order').text('正序↑');
+                var url = 'http://m.fjtv.net/microweb/Apituwenol_thread.php?topic_id=' + topic_id + '&order_by=asc';
+                $.getJSON(url, function (json) {
+                    if (json[0]) {
+                        var str = "";
+                        var multiImgStr = "";
+                        $.each(json, function (index, array) {
+                            var pic = array.materail;
+                            str += '<div class=\"item\"><div class=\"cur-date\">';
+                            str += '</div><div class=\"item-cont\" style=\"overflow: hidden;\"><div class=\"item-left\"><span id=\"this_time\">' + array.format_create_time + '</span>';
+                            str += '</div><div class="item-right"><div class="item-right-cont"><div class="right-cont-header">';
+                            str += '<span>' + array.user_name + '</span><span style="cursor:pointer;-webkit-tap-highlight-color:rgba(255,255,255,0);position: relative;right: -20px;" class="dianzan" data-thread_id=' + array.id + '><img src="http://yanan.tw.hdyun.hoge.cn//views//res/images/common/2.png"> <span class=\"info-num\">' + array.ding + '</span></span></div>';
+                            str += '<p>' + array.content + '</p><br>';
+                            if (pic) {
+                                $len = pic.length;
+                                for (i = 0; i < $len; i++) {
+                                    if (pic[i].type == "video") {
+                                        str += '<video width="100%;" webkit-playsinline="true" controls="controls" poster="' + pic[i].host + pic[i].dir + '300X/' + pic[i].filepath + pic[i].filename + '" src="' + pic[i].m3u8 + '" webkit-playsinline playsinline x-webkit-airplay="allow" style="background-color:#000000;"  preload="auto" ></video>';
+                                    } else if (pic[i].type == "audio") {
+                                        // str += '<audio style="width:98%" class="mp3Btn" controls="controls" src=' + pic[i].m3u8 + '/></audio>';
+
+                                        str +=  '<div class="audio_box">'+
+                                                    '<audio src="'+pic[i].m3u8+'"></audio>'+
+                                                    '<span class="audio_play""></span>'+
+                                                    '<div class="progress">'+
+                                                        '<span class="progress_dur">00:00</span>'+
+                                                    '</div>'+
+                                                    '<div class="progressbur" style="width:0%;"></div>'+
+                                                '</div>';
+                                    } else {
+                                        if($len > 1){
+                                            if(i == 0){
+                                                str += '<div class="multi_img_wrap lightgallery"></div>';
+                                            }
+                                            multiImgStr += '<a class="multi_img" href="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"><img src="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"></a>';
+                                        }else{
+                                            str += '<div class="single_img lightgallery"><a href="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"><img src="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"></a></div>';
+                                        }
+                                    }
+                                }
+                                setTimeout(function(){
+                                    $('.multi_img_wrap').html(multiImgStr);
+                                    console.log('已渲染完成')
+                                    imgResponsive();
+                                },500); 
+                            }
+                            str += '</div></div></div><span class="tip2"></span></div>';
+                        });
+                        $('.first-cont').html(str);
+
+                    }
+                });
+            };
+        })
+
+        function audioPlay(){
+            var oAudio=document.querySelectorAll("audio");
+            var audioPlay=document.querySelectorAll("span.audio_play");
+            var aodBox=document.querySelectorAll(".audio_box");
+            var progressDur=document.querySelectorAll(".progress_dur");
+            // progressDur.innerHTML="0:00";
+            var mark=true;
+            for(var i=0;i<aodBox.length;i++){
+                var aodBw=aodBox[i].offsetWidth;
+                audioPlay[i].addEventListener("click",function(){
+                    //  oAudio.play();
+                    var _this=this;
+                    if(mark){
+                        for(var j=0;j<oAudio.length;j++){
+                            audioPlay[j].parentNode.children[0].pause();
+                            audioPlay[j].style.animation="";
+                        }
+                        _this.parentNode.children[0].play();
+                        _this.style.animation="audio_playing 5s infinite";
+
+                    }else{
+                        // oAudio[i-1].pause()
+                        _this.parentNode.children[0].pause();
+                        _this.style.animation="";
+                    }
+                    mark=!mark;
+                });
+                // progressDur[i].innerHTML="0"+(oAudio[i].duration/60)+":"+(oAudio[i].duration%60);
+                oAudio[i].addEventListener("timeupdate",function(){
+                    var _this=this;
+                    if(parseInt(_this.currentTime) != 0){
+                    }else if(parseInt(_this.currentTime)===parseInt(_this.duration)){
+                        _this.parentNode.querySelector(".audio_play").style.animation="";
+                        console.log(_this.parentNode.querySelector(".audio_play"));
+                    }
+                    var l=_this.currentTime/_this.duration;//获得时间戳比例
+                    var cm=parseInt(_this.currentTime/60);
+                    var cs=parseInt(_this.currentTime%60);
+                    var dm=parseInt(_this.duration/60);
+                    var ds=parseInt(_this.duration%60);
+                    var progressBur=_this.parentNode.querySelector(".progressbur");
+                    var progressDur=_this.parentNode.querySelector(".progress_dur");
+                    if(parseInt(l*aodBw)===aodBw){
+                        progressBur.style.width=parseInt(aodBw-3)+"px";
+                    }else{
+                        progressBur.style.width=parseInt(l*aodBw-3)+"px";
+                    }
+                    
+                    if((ds-cs)<10){
+                        if((ds-cs)<=0){
+                            progressDur.innerHTML="0"+(dm-cm)+":00";
+                        }else{
+                            progressDur.innerHTML="0"+(dm-cm)+":0"+(ds-cs)
+                        }
+                    }else{
+                        if((ds-cs)<=0){
+                            progressDur.innerHTML="0"+(dm-cm)+":00"
+                        }else{
+                            progressDur.innerHTML="0"+(dm-cm)+":"+(ds-cs)
+                        }
+                    }                        
+                })
+            }
+        }
+
+//点赞成功
+        $(document).on("touchstart", '.dianzan', function (event) {
+            var target = $(event.currentTarget);//获取当前点击元素
+            var thread_id = target.data('thread_id');
+            if (!access_token) {
+                location.href = "http://m.fjtv.net/i/my.php?bind_id=13&goUrl=" + goUrl;//如果没有access_token请登陆
+                return;
+            }
+            ;
+            var tip = target.parents("div.item-cont").siblings('span.tip2');//当前元素的父级元素以及兄弟元素
+            var num = parseInt(target.children('span.info-num').text()); //把值转换成整数
+
+            if (target.hasClass('zan1')) {
+                tip.css("display", "block").animate({"opacity": "1"}, 1000).html("您已赞过");
+                setTimeout(function () {
+                    tip.css("display", "none")
+                }, 2000);
+                target.unbind();
+            } else {
+                $.ajax({
+                    type: "post",
+                    url: "http://m.fjtv.net/microweb/Apituwenol_like.php",
+                    dataType: "json",
+                    data: {
+                        "topic_id": topic_id,
+                        "thread_id": thread_id,
+                        "user_id": member_id,
+                        "user_name": nick_name,
+                        "access_token": access_token
+                    },
+                    success: function (data) {
+                        num++;
+                        target.children('span.info-num').text(num);
+                        target.addClass('zan1');
+                        tip.css("display", "block").animate({"opacity": "1"}, 1000).html("点赞成功");
+                        setTimeout(function () {
+                            tip.css("display", "none")
+                        }, 2000);
+                    }
+                });
+            }
+
+        });
+//评论列表
+
+        load(1);
+        $(".get-more").click(function () {
+            load(null);
+
+        });
+        var j = 0;
+
+        function load(a) {
+            if (a) {
+                j = 0;
+            }
+//  $(document).on("click",".chatting",function(){
+            $.ajax({
+                type: "get",
+                url: "http://m.fjtv.net/microweb/Apituwenol_show_comment.php",
+                data: {"topic_id": topic_id, 'offset': j, 'count': 10},
+                dataType: "json",
+                success: function (data) {
+                    if (data[0] && data[0].content) {
+                        var str = '';
+                        $.each(data, function (k, v) {
+                            var pic = "";
+                            pic = data[k].avatar;
+                            str += "<li><div class='comment-cont'><div class='comment-cont-header'>";
+                            if(pic != undefined){
+                                str += '<img src="' + pic.host + pic.dir + pic.filepath + pic.filename + '">';
+                            }
+                            str += '<span>' + v.user_name + '</span>' + '<span>' + v.create_time_format + '</span></div>';
+                            str += "<div class='comment-cont-bottom'>" + v.content;
+                            str += "</div></div>";
+                        });
+                        if (a) {
+                            $('#comment_list').html(str);
+                        }
+                        else {
+                            $('#comment_list').append(str);
+                        }
+                        j += 10;
+                        $(".get-more").html("加载更多");
+                    }
+                    else {
+                        $(".get-more").html('没有了.....');
+                    }
+                }
+            })
+
+//  });
+        }
+
+//新增评论
+        $('.sub_comment').click(function () {
+            if (!access_token) {
+                location.href = "http://m.fjtv.net/i/my.php?bind_id=13&goUrl=" + goUrl;//如果没有access_token请登陆
+                return;
+            }
+            var comment = $('.comment_content').val();
+            var tip = $('#tip');
+            $.ajax({
+                type: "post",
+                url: "http://m.fjtv.net/microweb/Apituwenol_comment.php",
+                dataType: "json",
+                data: {
+                    "topic_id": topic_id,
+                    "user_id": member_id,
+                    "user_name": nick_name,
+                    "content": comment,
+                    "access_token": access_token
+                },
+                success: function (json) {
+                    if (comment === '') {
+                        tip.css("display", "block").animate({"opacity": "1"}, 1000).html("您的评论不能为空！");
+                        setTimeout(function () {
+                            tip.css("display", "none")
+                        }, 2000);
+                    } else {
+                        tip.css("display", "block").animate({"opacity": "1"}, 1000).html("评论成功，请耐心等待审核");
+                        setTimeout(function () {
+                            tip.css("display", "none")
+                        }, 2000);
+                    }
+                }
+
+            })
+        });
+
+
+        // 图片放大
+        // $('.lightgallery').lightGallery({
+        //     download: false
+        // });
+        function imgResponsive(){
+            setTimeout(function(){
+                $('.lightgallery').lightGallery({
+                    download: false
+                });
+                console.log('已绑定事件')
+            },500); 
+        }    
+
+        //播放完毕
+//                  $('.mp3Btn').on('ended', function(event) {
+//                      var target=$(event.currentTarget);
+//                      target.parent('div.btn-audio').css({'background':'url(http://ojjsl7zpc.bkt.clouddn.com/voice-stop.png?e=1490876194&token=NUT82f__mRq-ZGvkrbqw7Zxle80aB7nUArvrHibz:Lc_P3HoU6iZifir7QQXMShQMZOo) no-repeat center bottom','background-size':'cover'});
+//                  })
+//                  //播放器控制
+////                    var audio = document.getElementsByClassName('mp3Btn');
+////                    audio.volume = .3;
+//                  $(document).on('click',".btn-audio",function(event){
+////                        var target=$(event.currentTarget);
+////                        var audio_mp3=target.children("audio.mp3Btn");
+//                  var audio_mp3=$('audio.mp3Btn')[0];
+//                      event.stopPropagation();//防止冒泡
+//                      if(audio_mp3.paused){ //如果当前是暂停状态
+//                          $(this).css({'background':'url(http://ojjsl7zpc.bkt.clouddn.com/voice-play.gif?e=1490876194&token=NUT82f__mRq-ZGvkrbqw7Zxle80aB7nUArvrHibz:01qZL6r442EtMFcoealthnhcVGk) no-repeat center bottom','background-size':'cover'});
+//                          audio_mp3.play(); //播放
+//                          return;
+//                      }else{//当前是播放状态
+//                          $(this).css({'background':'url(http://ojjsl7zpc.bkt.clouddn.com/voice-stop.png?e=1490876194&token=NUT82f__mRq-ZGvkrbqw7Zxle80aB7nUArvrHibz:Lc_P3HoU6iZifir7QQXMShQMZOo) no-repeat center bottom','background-size':'cover'});
+//                          audio_mp3.pause(); //暂停
+//                      }
+//                  });
+
+    });
+</script>
+
+<!--<script src="<?php echo $__info['site']['url'];?>menu.js" type="text/javascript"></script>-->
+<!--栏目列表底部导航开始-->
+<div style="display:none"></div>
+<div style="display:none"> <script src="http://m.fjtv.net/res/js/jquery/count.js" type="text/javascript"></script></div>
+</body>
+</html>
+<!--栏目列表底部导航结束-->

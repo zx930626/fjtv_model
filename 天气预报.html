@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><?php echo $__info['site']['name']?></title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- <link href="https://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="http://m.fjtv.net/res/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://weixin.fjtv.net/wap/css/lxwm.css" media="all">
+    <link rel="stylesheet" type="text/css" href="http://weixin.fjtv.net/wap/css/wxlist.css" media="all">
+    <style>
+        html{font-size: 62.5%;height: 100%;overflow-x: hidden;}
+        body{overflow-x: hidden;height: 100%;padding: 0;margin: 0;font-size:1.6rem ;font-family:'Avenir Next',Avenir,'Helvetica Neue',Helvetica,'Lantinghei SC','Hiragino Sans GB','Microsoft YaHei',STHeiti,'WenQuanYi Micro Hei',SimSun,sans-serif;  }
+        #main{ width: 100%;height:20rem; } 
+        .location{ color: #fff; font-size: 1.4rem; position: relative; top: 0rem; left: 7rem; } 
+        .weather_icon{ display: inline-block; width: 99%; margin: 0 0.2rem; margin-bottom: 1rem; border-radius: 0.5rem; background-color: rgba(255,255,255,0.7); } 
+        .weather_icon ul{ display: flex; text-align: center; padding: 2rem; } 
+        .weather_icon li{ list-style: none; display: inline-block; flex: 1; color: #333; } 
+        .weather_icon .icon_d{ position: relative; top: 0; } 
+        .weather_icon .icon_n{ position: relative; bottom: 0; } 
+        .weather_icon .icon_d div:first-child{ font-size: 1.4rem; } 
+        .weather_icon .icon_d div:nth-child(2){ color: #666; font-size: 1.2rem; padding: 0.4rem 0; } 
+        .weather_icon .icon_n div:nth-child(2){ font-size: 1.2rem; padding: 1rem 0; } 
+        .weather_icon .icon_n div:last-child{ color: #666; font-size: 1rem; } 
+        .weather_icon img{ width: 3.0rem; background-color: rgba(0, 0, 0, 0.1); } 
+        .subtitle{ display: inline-block; width: 100%; height: 4rem; color: #333; font-size: 1.6rem; line-height: 4rem; margin-bottom: 0.4rem; } 
+        .now{ color: #fff; margin-bottom: 1rem; position: relative; } 
+        .now .today div{ display: inline-block; } 
+        .now .today{ display: inline-block; font-size: 1.4rem; position: relative; top: 1.8rem; left: 2.0rem; } 
+        .now .nowinfo{ position: relative; top: -1.2rem; left: 2.2rem; } 
+        .now .wrap .nowtmp div{ display: inline-block; } 
+        .now .wrap .nowtmp{ position: relative; top: 0.6rem; left: 1.6rem; font-size: 10rem; } 
+        .now .wrap .nowtmp .degree{ font-size: 2.0rem; position: relative; bottom: 5.4rem; right: 2.8rem; } 
+        .now .wrap .class_name{ display: inline-block; font-size: 1.4rem; width: 4.0rem; height: 2.0rem; } 
+        .now .wrap .city_name{ text-align: right; padding-right: 1rem; display: inline-block; } 
+        .now .wrap .nowcond{ display: inline-block; font-size: 1.6rem; text-align: left; padding-left: 0.6rem; } 
+        .now .prev{ display: inline-block; width: 7rem; height: 7rem; position: absolute; top: 6rem; left: 20rem; } 
+        .now .prev img{ width: 100%; height: 100%; } 
+        .sug{ height: 8rem; margin: 0 0.2rem; margin-bottom: 1rem; background-color: rgba(255, 255, 255, 0.7); border-radius: 0.5rem; } 
+        .sug > div:first-child{ font-size: 1.4rem; padding: 0.6rem 0.4rem; } 
+        .sug_info{ font-size: 1.4rem; padding-left: 0.4rem; } 
+        .recently{ text-align: center; color: #fff; margin-bottom: 1rem; } 
+        .recently .rh{ border-left: 1px solid #fff; border-right: 1px solid #fff; } 
+        .recently .col-xs-4 div:first-child{ font-size: 1.4rem; padding-bottom: 0.4rem; } 
+        .recently .col-xs-4 div:last-child{ font-size: 1.6rem; }
+        .showList {
+            display: block !important;
+        }
+        .down{            
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: rgba(255,255,255,0.8);
+            list-style: none;
+            width: 20%;
+            text-align: center;
+            position: fixed;
+            line-height: 26px;
+            left: 38%;
+            padding: 8px 0;
+            display: none;
+            color: #495060;
+        }
+        .down li{
+            width: 100%;
+        }
+        .addrActive{
+            background-color: rgba(255, 255, 255, 0.7);
+            color: #1c2438;
+        }
+    </style>
+</head>
+<body id="listhome3">
+    <!--顶部栏目下拉菜单开始-->
+    <div id="ui-header">
+        <div class="fixed">
+            <a class="ui-title" id="popmenu"><?php echo $__info['column']['name']; ?></a>
+            <a class="ui-btn-left_pre" href="javascript:history.go(-1);"></a>
+            <a class="ui-btn-right_home" href="<?php echo $__info['site']['url']; ?>"></a>
+            <ul class="down">
+                <li>福州</li>
+                <li>厦门</li>
+                <li>莆田</li>
+                <li>泉州</li>
+                <li>漳州</li>
+                <li>龙岩</li>
+                <li>三明</li>
+                <li>南平</li>
+                <li>宁德</li>
+                <li>平潭</li>
+            </ul>
+        </div>
+    </div>
+    <div id="overlay"></div>
+    <div id="win">
+    顶部栏目列表
+    </div>
+    <!--顶部栏目下拉菜单结束-->
+    <div class="Listpage">
+        <div class="top46"></div>
+    </div>
+    <div class="content">
+<!--         <div class="form-group">
+            <select name="area" id="area" class="form-control">
+
+            </select>
+        </div> -->
+        <div class="container now">
+            <div class="wrap">
+                <div class="today">
+                    <div class="date"></div>&nbsp;&nbsp;
+                    <div class="week"></div>
+                    <div class="location">
+                        <p>当前城市：<span class="city_name">福州</span></p>
+                    </div>
+                </div>
+                <div class="nowtmp">
+                    <div class="tmp"></div>
+                    <div class="degree">℃</div>
+                </div>
+                <div class="nowinfo">
+                    <div class="city_name">福州</div>|
+                    <div class="nowcond"></div>                 
+                </div>
+                <div class="prev">
+                    <img alt="今日天气">
+                </div>
+            </div>
+        </div>
+        <div class="container recently">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="wind_dir"></div>
+                    <div class="wind_sc"></div>
+                </div>
+                <div class="col-xs-4 rh">
+                    <div class="rh_title"></div>
+                    <div class="rh_num"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="aqi"></div>
+                    <div class="api"></div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="container subtitle">
+            预报
+        </div> -->
+        <div class="container weather_icon">
+            <ul class="row icon_d">
+                <li>
+                    <div>今天</div>
+                    <div></div>
+                    <img alt="天气">
+                </li>
+                <li>
+                    <div>明天</div>
+                    <div></div>
+                    <img alt="天气">
+                </li>
+                <li>
+                    <div></div>
+                    <div></div>
+                    <img alt="天气">
+                </li>
+                <li>
+                    <div></div>
+                    <div></div>
+                    <img alt="天气">
+                </li>
+                <li>
+                    <div></div>
+                    <div></div>
+                    <img alt="天气">
+                </li>
+                <li>
+                    <div></div>
+                    <div></div>
+                    <img alt="天气">
+                </li>
+                <li>
+                    <div></div>
+                    <div></div>
+                    <img alt="天气">
+                </li>
+            </ul>
+            <div id="main"></div>       
+            <ul class="row icon_n" style="margin-top: -10.0rem;">
+                <li>
+                    <img alt="天气">
+                    <div></div>
+                    <div></div>
+                </li>
+                <li>
+                    <img alt="天气">
+                    <div></div>
+                    <div></div>
+                </li>
+                <li>
+                    <img alt="天气">
+                    <div></div>
+                    <div></div>
+                </li>
+                <li>
+                    <img alt="天气">
+                    <div></div>
+                    <div></div>
+                </li>
+                <li>
+                    <img alt="天气">
+                    <div></div>
+                    <div></div>
+                </li>
+                <li>
+                    <img alt="天气">
+                    <div></div>
+                    <div></div>
+                </li>
+                <li>
+                    <img alt="天气">
+                    <div></div>
+                    <div></div>
+                </li>
+            </ul>
+        </div>
+        <div class="container sug">
+            <div>出行建议</div>
+            <div class="sug_info" id="chuxing"></div>
+        </div>
+        <div class="container sug">
+            <div>穿衣建议</div>
+            <div class="sug_info" id="chuanyi"></div>
+        </div>
+        <div class="container sug">
+            <div>运动建议</div>
+            <div class="sug_info" id="yundong"></div>
+        </div>
+        <div class="container sug">
+            <div>旅行建议</div>
+            <div class="sug_info" id="luxing"></div>
+        </div>
+        <div class="container sug">
+            <div>驾车建议</div>
+            <div class="sug_info" id="jiache"></div>
+        </div>          
+    </div>
+    <div class="clr"></div>
+    
+
+    <script src="http://m.fjtv.net/res/js/jquery/echarts.common.min.js"></script>
+    <script src="http://m.fjtv.net/res/js/jquery/bootstrap.min.js"></script>
+    <script>
+        var city = "福州";
+        // var cities = ['福州','厦门','莆田','泉州','漳州','龙岩','三明','南平','宁德','平潭'];
+        // for(var i=0;i<cities.length;i++){
+        //     $("#area").append("<option value='"+cities[i]+"'>"+cities[i]+"</option>");
+        // }
+
+        var backgroundUrl = "";
+        $('.ui-title').on('touchstart',function(){
+            $('.down').toggleClass('showList')            
+        })
+        $($(".down").children("li").get(0)).addClass('addrActive');
+        $('.down > li').on('touchstart',function(){
+            $(this).addClass('addrActive').siblings().removeClass('addrActive');
+            city = $(this).html();
+            $('.down').toggleClass('showList');
+            $(".city_name").html(city);         
+            getWeather(city);
+        })
+        $(".city_name").on('touchstart',function() {
+            $('.down').toggleClass('showList')
+        });
+        // $("document")
+        // 获取天气信息
+        function getWeather (city){
+            var url = "http://m.fjtv.net/microweb/weather_detail.php?name="+city;
+            $.ajax({
+                url : url,
+                type : "get",
+                success : function(data){
+                    var data = JSON.parse(data);
+                    if(data.error_code < 1){
+                        var result = data.data;
+                        // console.log(result);
+                        $(".city_name").html(result.city_name);
+                        var background = result.background;
+                        backgroundUrl = background.host + background.dir + background.filepath + background.filename;
+                        $("body").css({
+                            "background-image":"url("+backgroundUrl+")",
+                            "background-size":"cover",
+                        });
+                        var nowArr = result.update_time.split("-");
+                        nowArr[1] = nowArr[1].charAt(0) == "0" ? nowArr[1].substring(1, 2) : nowArr[1];
+                        nowArr[2] = nowArr[2].charAt(0) == "0" ? nowArr[2].substring(1, 2) : nowArr[2].substring(0, 2);
+                        $(".now .today .date").html(nowArr[0]+"年"+nowArr[1]+"月"+nowArr[2]+"日");
+                        getWeekTmp(result.daily_forecast);
+                        getIcon(result.daily_forecast);
+                        getNow(result);
+                        getSug(result.suggestion);
+                        getWeekend(result.daily_forecast)
+                    }
+                },
+                error : function(data){
+                    // console.log(data);
+                }
+            })
+        }
+        setInterval(getWeather(city),1200000);
+
+        // 获取当前天气情况
+        function getNow(data){
+            $(".nowcond").html(data.now.cond.txt);
+            $(".tmp").html(data.now.tmp);
+            $(".wind_dir").html(data.now.wind.dir);
+            $(".wind_sc").html(data.now.wind.sc+"级");
+            $(".rh_title").html("相对湿度");
+            $(".rh_num").html(data.now.hum+"%");
+            $(".aqi").html("空气"+data.aqi.city.qlty);
+            $(".api").html(data.aqi.city.pm10);
+            var obj = data.now.cond.icon;
+            $('.prev img').prop('src',obj.host + obj.dir + obj.filepath + obj.filename);
+        }
+
+        // 获取天气图标
+        function getIcon (data){
+            var icon_d = [];
+            var icon_n = [];
+            $.each(data,function(index,item){
+                icon_d.push(item.cond.icon_d.host + item.cond.icon_d.dir + item.cond.icon_d.filepath + item.cond.icon_d.filename);
+                icon_n.push(item.cond.icon_n.host + item.cond.icon_n.dir + item.cond.icon_n.filepath + item.cond.icon_n.filename);
+            })
+            var icon_dBox = $(".weather_icon .icon_d img");
+            // console.log(icon_dBox);
+            $.each(icon_dBox,function(index,item){
+                item.src = icon_d[index];
+            })
+            var icon_nBox = $(".weather_icon .icon_n img");
+            // console.log(icon_nBox);
+            $.each(icon_nBox,function(index,item){
+                item.src = icon_n[index];
+            })
+        }
+
+        // 获取日期
+        function getWeekend(data){
+            var dates = [];
+            var weeks = [];
+            var windDirs = [];
+            var windScs = [];
+            var week = "";
+            var weekSel = ['周日','周一','周二','周三','周四','周五','周六'];
+            $.each(data,function(index,item){
+                week = weekSel[new Date(item.date).getDay()];
+                var tempArr = item.date.split("-");
+                tempArr[1] = tempArr[1].charAt(0) == "0" ? tempArr[1].substring(1, 2) : tempArr[1];
+                tempArr[2] = tempArr[2].charAt(0) == "0" ? tempArr[2].substring(1, 2) : tempArr[2];
+                item.date = tempArr[1]+"."+tempArr[2];
+                dates.push(item.date);
+                weeks.push(week);
+                windDirs.push(item.wind.dir);
+                windScs.push(item.wind.sc+"级");
+            });
+            var icon_dWeek = $(".weather_icon .icon_d li div:first-child");
+            var icon_dDate = $(".weather_icon .icon_d li div:nth-child(2)");
+            var wind_dir = $(".weather_icon .icon_n li div:nth-child(2)");
+            var wind_sc = $(".weather_icon .icon_n li div:last-child");
+            for(var i=2;i<icon_dWeek.length;i++){
+                icon_dWeek[i].innerHTML = weeks[i];
+            }
+            $.each(dates,function(index,item){
+                icon_dDate[index].innerHTML = item;
+            })
+            $.each(wind_dir,function(index,item){
+                windDirs[index] = (windDirs[index]=="无持续风向") ? "无风" : windDirs[index];
+                item.innerHTML = windDirs[index];
+            })
+            $.each(wind_sc,function(index,item){
+                item.innerHTML = windScs[index];
+            })
+            $(".now .today .week").html(weeks[0]);
+        }
+
+        // 获取一周气温变化
+        function getWeekTmp (data){
+            var maxtmp = [];
+            var mintmp = [];
+            $.each(data,function(index,item){
+                maxtmp.push(item.tmp.max);
+                mintmp.push(item.tmp.min);
+            })
+            lineChart(maxtmp,mintmp);
+        }
+
+        // 获取建议
+        function getSug(data){
+            $("#chuxing").html(data.uv.txt);
+            $("#chuanyi").html(data.drsg.txt);
+            $("#yundong").html(data.sport.txt);
+            $("#luxing").html(data.trav.txt);
+            $("#jiache").html(data.cw.txt);
+        }
+
+        // 生成温度折线图
+        function lineChart(maxtmp,mintmp){
+            var myChart = echarts.init(document.getElementById('main'));
+            // 指定图表的配置项和数据
+            var option = {
+                // title: {
+                //     text: '未来一周气温变化',
+                //     subtext: '纯属虚构'
+                // },
+                legend: {
+                    data:['最高气温','最低气温']
+                },
+                xAxis:  {
+                    show : false,
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['周一','周二','周三','周四','周五','周六','周日']
+                },
+                lineStyle : {
+                    color : "#fff"
+                },
+                yAxis: {
+                    show : false,
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '{value} °C'
+                    },
+                },
+                series: [
+                    {
+                        name:'最高气温',
+                        type:'line',
+                        itemStyle : {
+                            normal : {
+                                // color : "#fff",
+                                // lineStyle : {
+                                //  color : "#fff"
+                                // },
+                                label:{
+                                    show : true
+                                }
+                            }
+                        },
+                        data:maxtmp,
+                    },
+                    {
+                        name:'最低气温',
+                        type:'line',
+                        itemStyle : {
+                            normal : {
+                                // color : "#fff",
+                                // lineStyle : {
+                                //  color : "#fff"
+                                // },
+                                label:{
+                                    show : true
+                                }
+                            }
+                        },
+                        data:mintmp,
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+            window.onresize = myChart.resize;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<html><head>
+<meta charset="utf-8">
+<title><?php echo $__info['site']['name']?></title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="0" http-equiv="expires">
+<meta content="telephone=no, address=no" name="format-detection">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" type="text/css" href="http://weixin.fjtv.net/wap/css/lxwm.css" media="all">
+<link rel="stylesheet" type="text/css" href="http://weixin.fjtv.net/wap/css/wxlist.css" media="all">
+<script>
+window.onload = function ()
+{
+var oWin = document.getElementById("win");
+var oLay = document.getElementById("overlay");  
+var oBtn = document.getElementById("popmenu");
+var oClose = document.getElementById("close");
+oBtn.onclick = function ()
+{
+oLay.style.display = "block";
+oWin.style.display = "block"    
+};
+oLay.onclick = function ()
+{
+oLay.style.display = "none";
+oWin.style.display = "none" 
+}
+};
+</Script>
+<style>
+/*#ui-header{display: noneblock ;}.top46{height: 0;}*/
+img{height:150px}
+a{display:inline-block}
+</style>
+</head>
+<body id="listhome3">
+<!--顶部栏目下拉菜单开始-->
+<div id="ui-header">
+<div class="fixed">
+<a class="ui-title" id="popmenu"><?php echo $__info['column']['name']; ?></a>
+<a class="ui-btn-left_pre" href="javascript:history.go(-1);"></a>
+<a class="ui-btn-right_home" href="<?php echo $__info['site']['url']; ?>"></a>
+</div>
+</div>
+<div id="overlay"></div>
+<div id="win">
+顶部栏目列表
+</div>
+<!--顶部栏目下拉菜单结束-->
+<div class="Listpage">
+<div class="top46"></div>
+  <div class="act_top" id="actTop" style="">
+    <div class="act_top_show"> <a href="index.asp"><img src="http://weixin.fjtv.net/wap/images/logo/pic01.jpg" width="720" id="bannerPic"></a></div>
+  </div>
+  <div class="box box_up">
+    <h3>集团概况</h3>
+<div class="box_info">
+<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;福建省广播影视集团于2004年2月8日正式挂牌成立，由原福建人民广播电台、福建电视台、福建电影制片厂等单位整合而成，系由中共福建省委批准设立的公益二类事业单位。集团以发展公益性广播影视事业和经营性广播影视产业为宗旨，以做好广播影视新闻宣传工作，加快产业发展，实现国有资产保值增值为己任。集团根据精简高效原则，实行扁平化管理，取消两台建制，保留福建人民广播电台和福建电视台呼号，直接管理到频率、频道、中心及所属企事业单位。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;集团本部现有：10个职能部门；26个业务部门，包括8个业务中心：广播电视新闻中心、广播影视节目交流中心、广播电视技术中心、广播电视播出中心、广播电视媒体策划中心、新媒体中心、广告管理中心、广播传媒中心，6个广播频率（新闻综合频率、东南广播公司、经济频率、交通频率、都市生活频率、音乐频率），10个电视频道（两个卫视频道：东南卫视、海峡卫视，8个地面频道：综合频道、公共频道、新闻频道、电视剧频道、都市时尚频道、经济生活频道、体育频道、少儿频道），北京演播室，产业办；以及省广播电视传输发射中心（下辖40个发射台站）等4家事业单位；海峡世纪（福建）影视文化有限公司等十多家企业单位。是一个以广播、电视、电影、传输、网络、报刊出版和互联网站宣传为主，兼营科技开发、影视艺术、广告经营等相关产业的综合性新闻传媒集团，拥有员工3600多人。</span><br><br>
+   </div>
+    <a href="javascript:void(0);"  class="btn_more"><span>更多</span></a> </div>
+  <div class="box box_up"><!-- 收起时加上样式box_up,展开时去掉 -->
+    <h3>联系我们</h3>
+    <div class="box_time">
+        <ul>
+            <li><span>官方网站：</span><a href="http://www.fjtv.net/3g" target="_blank">http://www.fjtv.net</a></li>
+            <li>官方微信：fjtvnet</li>
+            <li>新浪微博：<a href="http://m.weibo.cn/u/5109906546" target="_blank">@福建广电</a></li>
+            <li>联系地址：福州市台江区西环南路128号</li>
+            <li>联系电话：0591-83313789</li>
+        </ul>
+    </div>
+    <a href="javascript:void(0);" class="btn_more"><span>更多</span></a>
+    </div>
+    <style>
+        .wxSite{
+            display: flex;
+            background-color: #fff;
+            margin: 15px 10px;
+            border-radius: 5px;
+            padding: 16px;
+        }
+        .wxSite_info,.wxSite_qrcode{
+            flex: 1;
+        }
+        .wxSite_info div{
+            margin-bottom: 8px;
+        }
+        .wxSite_icon{
+            display: inline-block;
+            width: 100%;
+            padding-top: 10px;
+            text-align: center;
+        }
+        .wxSite_icon img{
+            height: 50px;
+        }
+        .wxSite_name{
+            font-size: 16px;
+            text-align: center;
+        }
+        .wxSite_number{
+            font-size: 14px;
+            border-left: 4px solid green;
+            padding-left: 6px;
+            margin-left: 18px;
+        }
+        .wxSite_tip{
+            font-size: 12px;
+            color: #ccc;
+        }
+        .wxSite_qrcode{
+            display: inline-block;
+            text-align: center;
+        }
+        .wxSite_qrcode img{
+            height: 150px;
+        }
+    </style>
+    <div class="wxSite">
+        <div class="wxSite_info">
+            <div class="wxSite_icon">
+                <img src="http://img1.fjtv.net/material/microweb/img/2017/10/20171025161351HPFW.jpg" alt="">
+            </div>
+            <div class="wxSite_name">海博TV</div>
+            <div class="wxSite_number">微信号：fjtvnet</div>
+            <div class="wxSite_tip">长按右侧二维码 关注公众号</div>
+        </div>
+        <div class="wxSite_qrcode">
+            <img src="http://img1.fjtv.net/material/microweb/img/2017/10/20171025161351Eda8.jpg" alt="">
+        </div>
+    </div>
+</div>
+<div class="clr"></div>
+<script src="<?php echo $__info['site']['url'];?>menu.js" type="text/javascript"></script>
+<script>
+ $(function(){
+   $('.btn_more').click(function(){
+         var par = $(this).parent();
+         par.toggleClass("box_up");
+         var cla= par.attr("class");
+          if(cla.indexOf("box_up")!=-1){
+            $(this).children().html("展开");
+          }else{
+            $(this).children().html("收起");
+          }
+   })
+ })
+</script>
+</body>
+</html>

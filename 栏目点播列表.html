@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title><?php echo $__info['site']['name']?></title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="http://weixin.fjtv.net/wap/css/diy/cate29_0.css" rel="stylesheet" type="text/css" />
+<noscript><iframe><src="*.htm"></iframe></noscript>
+<script>
+window.onload = function ()
+{
+var oWin = document.getElementById("win");
+var oLay = document.getElementById("overlay");
+var oBtn = document.getElementById("popmenu");
+var oClose = document.getElementById("close");
+oBtn.onclick = function ()
+{
+oLay.style.display = "block";
+oWin.style.display = "block"
+};
+oLay.onclick = function ()
+{
+oLay.style.display = "none";
+oWin.style.display = "none"
+}
+};
+</Script>
+<style>/*#ui-header{display: noneblock ;}.top46{height: 0;}*/
+   .focus{position:relative;height:130px;background:rgba(0,0,0,0.7);}
+   .focus span{display:inline-block;}
+   .focus .focus_img{width:30%;margin:10px;}
+   .focus .focus_brief{width:62%;margin-top:10px;color:#aaa;font-size:14px;vertical-align:top;}
+   .focus  .data_icon{position:absolute;bottom:0px;text-align:center;
+       color:#fff;width:100%;height:30px;background:rgba(0,0,0,0.3);z-index:6;line-height:30px;
+   }
+    #todayList{clear:both;margin-top:20px;}
+   .todayList {padding:5px;}
+   .todayList li{width:45%;min-height:160px;float:left;padding-left:12px;margin-bottom:10px;}
+   .todayList li div.img{
+       text-align:center;
+   }
+   .todayList li img{
+       width:100%;
+       height:100%;
+   }
+   .todayList li .box_title{
+       text-align:left;
+       font-size:14px;
+   }
+   .todayList li .box_time{
+       text-align:left;
+       color:#666;
+       font-size:12px;
+   }
+   #todayList .more_list{text-align:center;color:#aaa;clear:both;}
+   #vBox{position:absolute;background:#000;z-index:30;opacity:0;padding:5px;text-align:center;}
+   #vBox span{position:absolute;right:5px;top:0px;z-index:31,display:block;color:#fff;cursor:pointer;}
+</style>
+</head>
+<body id="cate29" class="pd29">
+<!--顶部栏目下拉菜单开始-->
+<div id="ui-header">
+<div class="fixed">
+<a class="ui-title" id="popmenu"><?php echo $__info['column']['name']; ?></a>
+<a class="ui-btn-left_pre" href="javascript:history.go(-1);"></a>
+<a class="ui-btn-right_home" href="<?php echo $__info['site']['url']; ?>"></a>
+</div>
+</div>
+<div id="overlay"></div>
+<div id="win">
+    顶部栏目列表
+</div>
+<!--顶部栏目下拉菜单结束-->
+<div class="Listpage">
+<div class="top46"></div>
+<div class="banner" id="content">
+<!--电视直播代码开始-->
+<div class="focus" >
+    <div class="opacity" id="focus_top"></div>
+    <div class="data_icon">v</div>
+</div>
+<!--电视直播代码结束-->
+</div>
+<div id="insert1" ></div>
+
+<div id="insert2" ></div>
+<div id="todayList">
+    <ul class="todayList"></ul>
+</div>
+<div id="vBox">
+    <video src="" controls="controls" autoplay></video>
+    <span>x</span>
+</div>
+<!--微信分享朋友圈开始-->
+<input class="bind_id" name="bind_id" value="<?php echo $__info['site']['bind_id'];?>" type="hidden">
+<input id="wx-share-title" type="hidden" value="<?php echo $__info['site']['name'];?>" />
+<input id="wx-share-desc" type="hidden" value="在这里你可以随时随地通过微信观看福建最精彩的电视节目" />
+<input id="wx-share-cfss" type="hidden" value="嗨！亲爱的小伙伴！告诉你一个小秘密哦↓↓↓" />
+<input id="wx-share-link" type="hidden" value="" />
+<input id="wx-share-img" type="hidden" value="http://weixin.fjtv.net/wap/images/wxtv.jpg" />
+<input id="wx-share-type" type="hidden" value="link" />
+<input id="wx-share-dataUrl" type="hidden" value="" />
+<script id="wxfx" type="text/javascript"></script>
+<script>
+$(function(){
+    $("#vBox").css({"width":innerWidth+"px","height":innerHeight+"px","left":(-innerWidth)+"px","top":"0px"})
+    $("#vBox video").css({"height":"auto"+"px","width":"80%","margin-top":innerWidth/2+"px"})
+    $("#vBox").on("click","span",function(){
+        $(this).parent().css("opacity",0)
+    })
+   $.ajax({
+     type : "get",
+     url : "http://m.fjtv.net/microweb/column.php",
+     dataType : "json",
+     success : function(data){
+         //console.log(data[0].indexpic,"data[0].index_pic");
+         var mark=true;
+         var html='<span class="focus_img"><img src="'+data[0].indexpic.host+data[0].indexpic.dir
+         +data[0].indexpic.filepath+data[0].indexpic.filename+'"></span>'+
+                  '<span class="focus_brief">'+data[0].brief+'</span>';
+        $("#focus_top").before(html);
+        $(".data_icon").on("click",function(){
+            if(mark){
+                $(this).parent().css("height","auto");
+                $(this).text("")
+            }else{
+                $(this).parent().css("height","130px");
+                $(this).text("v")
+            }
+            mark=!mark;
+        })
+      }
+    })
+    $.ajax({
+      type : "get",
+      url : "http://m.fjtv.net/microweb/content.php",
+      dataType : "json",
+      success : function(data){
+            $.each(data,function(v,k){
+                getList(k.id)
+             })
+             var offset=0;
+             $(".todayList").after("<div class='more_list'>查看更多</div>");
+             $("#todayList").on("click",".more_list",function(){
+                 offset++;
+                 if(offset>300){
+                     $(".todayList").after("<div class='more_list'>暂无更多数据了</div>");
+                 }else{
+                     $(this).remove();
+                     getMoreList(offset)
+                 }
+             })
+
+        }
+     })
+     function getList(id){
+         $.ajax({
+           type : "get",
+           url : "http://m.fjtv.net/microweb/item.php?id="+id,
+           dataType : "json",
+           success : function(data){
+               var html="";
+               $.each(data,function(v,k){
+                    html+='<li>'+
+                        '<a href='+ k.hostwork+"/"+k.video_path+k.video_filename+'>'+
+                            '<div class="img"><img src="'+k.indexpic.host+k.indexpic.dir+k.indexpic.filepath+k.indexpic.filename+'"/></div>'+
+                            '<div class="box_title">'+k.column_name+'</div>'+
+                            '<div class="box_time">'+k.create_time_format+'</div></a></li>';
+                    $(".todayList").append(html);
+                    $("#todayList").on("click",".todayList li a",function(e){
+                        e.preventDefault();
+                        $("#vBox").css({"left":0+"px","top":"0px","opacity":1});
+                        $("#vBox video").attr("src",$(this).attr("href"))
+                        $("body").css("overflow","hidden");
+                    })
+               })
+             }
+          })
+     }
+      function getMoreList(offset){
+          $.ajax({
+            type : "get",
+            url : "http://m.fjtv.net/microweb/content.php?offset="+offset,
+            dataType : "json",
+            success : function(data){
+                  $.each(data,function(v,k){
+                      getList(k.id)
+                   })
+                   $(".todayList").after("<div class='more_list'>查看更多</div>");
+              }
+           })
+      }
+})
+</script>
+<!--微信分享朋友圈结束-->
+<!--栏目列表底部导航开始-->
+<script src="<?php echo $__info['site']['url'];?>menu.js" type="text/javascript"></script>
+<div class="copyright" style="clear:both;"><p>© 2015-2017&nbsp;福建省广播影视集团 版权所有</p><p><a href="http://weixin.fjtv.net" target="_blank">技术支持:福建广电新媒体中心</a></p></div>
+<div style="display:none"></div>
+</body>
+</html>
+<!--栏目列表底部导航结束-->

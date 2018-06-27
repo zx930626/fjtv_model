@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title><?php echo $__info['site']['name']?></title>
+    <meta name="viewport"
+          content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://m.fjtv.net/css/common_d5d7dba.css">
+    <link rel="stylesheet" type="text/css"
+          href="//s3a.pstatp.com/toutiao/resource/wei_toutiao/page/wei_toutiao/css/share_0e84083.css">
+    <link href="http://m.fjtv.net/css/news14_0.css" rel="stylesheet" type="text/css"/>
+    <style>.page-bizinfo .header #activity-name {
+        margin-top: 40px
+    }</style>
+    <style>.page-bizinfo .header .commentNum {
+        display: inline
+    }</style>
+    <style>
+        :not(input,textarea) {
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-touch-callout: none;
+            -webkit-text-size-adjust: none;
+        }
+    </style>
+    <noscript>
+        <iframe>
+            <src
+            ="*.htm">
+        </iframe>
+    </noscript>
+    <script>
+        window.onload = function () {
+            var oWin = document.getElementById("win");
+            var oLay = document.getElementById("overlay");
+            var oBtn = document.getElementById("popmenu");
+            var oClose = document.getElementById("close");
+            oBtn.onclick = function () {
+                oLay.style.display = "block";
+                oWin.style.display = "block"
+            };
+            oLay.onclick = function () {
+                oLay.style.display = "none";
+                oWin.style.display = "none"
+            }
+        };
+    </Script>
+    <style>/*#ui-header{display: noneblock ;}.top46{height: 0;}*/</style>
+    <script type="text/javascript">
+         define = null;
+        require = null;
+    </script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+</head>
+<body id="listhome3">
+<!--顶部栏目下拉菜单开始-->
+<div id="ui-header">
+    <div class="fixed">
+        <a class="ui-title" id="popmenu"><?php echo $__info['column']['name']; ?></a>
+        <a class="ui-btn-left_pre" href="javascript:history.go(-1);"></a>
+        <a class="ui-btn-right_home" href="<?php echo $__info['site']['url']; ?>"></a>
+    </div>
+</div>
+<div id="overlay"></div>
+<div id="win">
+    顶部栏目列表
+</div>
+<!--顶部栏目下拉菜单结束-->
+内容正文
+<input type="hidden" id="site_id" value="<?php echo $__info['site']['id']; ?>">
+<input type="hidden" id="column_id" value="<?php echo $__info['column']['id']; ?>">
+<input type="hidden" id="content_id" value="<?php echo $id; ?>">
+<div class="action_section" style="position:relative;">
+    <div class="action_button like">
+        <div class="logo"></div>
+        <div class="info"></div>
+    </div>
+    <?php
+         if($__info['site']['is_comment']){
+        ?>
+        <div class="action_button w_comment" style="margin-left:15px;">
+            <div class="comment_logo"></div>
+            <div style="color:#707070;font-size:14px;">写评论</div>
+        </div>
+    <?php }?>
+    <div class="tip"
+         style="background-color: hsl(0,1%,95%);position:absolute;top:15%;left:22%;display:none;height: 2rem;opacity:0;line-height:2rem;width:12rem;color:black;border-radius: 5px;">
+    </div>
+</div>
+<div class="write_comment" style="display:none;">
+    <textarea class="comment_content" value="" placeholder="请输入评论内容..."
+              style="border: 1px solid #D8D8D8;border-radius: 10px;width:80%;margin: 0 2.2rem;resize: none;font-size:14px;min-height:7rem;outline:none;padding:0.5rem 0em;text-indent:1rem;color:#707070;"></textarea>
+    <span class="exit_comment"
+          style="width:60px;height:32px;background:#c3c3c3;border-radius:6px;color:white;text-align:center;line-height:32px;font-size:14px;margin-left:43%;margin-top:15px;margin-bottom:15px;margin-right:10px;display:inline-block">取消</span>
+    <span class="sub_comment"
+          style="width:60px;height:32px;background:#80b929;border-radius:6px;color:white;text-align:center;line-height:32px;font-size:14px;margin-top:15px;margin-bottom:15px;display:inline-block">发表</span>
+</div>
+<div class="comment_list">
+    <ul id="comment_list">
+    </ul>
+    <div class="tips" id="getMore" style="font-size:14px !important;">加载更多</div>
+</div>
+<!--<div class="tips" style="font-size:14px !important;">以上为热门评论</div>-->
+<script>
+    $(function () {
+        function getCookie(name) {
+            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+            if (arr = document.cookie.match(reg))
+                return unescape(arr[2]);
+            else
+                return null;
+        }
+        var member_id , nick_name , thumb_url;
+        var member_info = getCookie("liv_member_info-i");
+        if (member_info) {
+            var str = decodeURIComponent(member_info);
+            var obj = JSON.parse(str);
+             member_id = obj.member_id;
+             nick_name = obj.nick_name;
+             thumb_url = obj.avatar.host + obj.avatar.dir + obj.avatar.filepath + obj.avatar.filename;
+        }
+        var access_token = getCookie("liv_access_token-i");
+        var bind_id = $('.bind_id').val();
+        var id = $('._id').val();
+        var goUrl = window.location.href;
+        var site_id = $('#site_id').val();
+        var column_id = $('#column_id').val();
+        var content_id = $('#content_id').val();
+         getContentList();
+        $('.w_comment').click(function () {
+            $.ajax({
+                type: "get",
+                url: "http://m.fjtv.net/microweb/comment_status.php?site_id=" + site_id,
+                success: function (json) {
+                    var data = JSON.parse(json);
+                    if (data.error_code == 0) {
+                        $('.write_comment').css('display', 'block');
+                    } else {
+                        alert('评论功能已关闭')
+                    }
+                }
+            });
+
+        });
+        var page = 2;
+        $('#getMore').click(function () {
+            $.ajax({
+                type: "get",
+                url: "http://m.fjtv.net/microweb/news_more_comments.php?id=" + id + "&site_id=" + site_id + "&column_id=" + column_id + '&page=' + page,
+                dataType: "json",
+                success: function (data) {
+                    var res = data.data;
+                    //console.log(res,'res');
+                    var str = '';
+                    $.each(res, function (k, v) {
+                        str += "<li><div class='comment'><div class='left'><div class='poster' style='background-image: url(" + v.thumb_url + ")'></div></div><div class='right'><div class='name'>" + v.nick_name + "</div><div class='word'>" + v.content + "</div><div class='bottom'><div class='date'>" + v.created_at + "</div></div></div></div></li>";
+                    });
+                    page++;
+                    $('#comment_list').append(str);
+                    if (res.length == 10) {
+                        $('#getMore').text('加载更多');
+                    } else {
+                        $('#getMore').text('以上为热门评论');
+                    }
+                }
+            })
+
+        });
+        $('.exit_comment').click(function () {
+            $('.write_comment').css('display', 'none');
+        })
+        $('.sub_comment').click(function () {
+             if (!access_token) {
+                 location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl=" + goUrl;
+                 return;
+             }
+            var comment = $('.comment_content').val();
+            var tip = $('.tip');
+            $.ajax({
+                type: "post",
+                url: "http://m.fjtv.net/microweb/addcomment.php",
+                dataType: "json",
+                data: {
+                    "site_id": site_id,
+                    "column_id": column_id,
+                    "content_id": content_id,
+                    "open_id": member_id,
+                    "nick_name": nick_name,
+                    "thumb_url": thumb_url,
+                    "content": comment
+                },
+                success: function (data) {
+                    if (comment === '') {
+                        tip.css("display", "block").animate({"opacity": "1"}, 1000).html("您的评论不能为空！");
+                        setTimeout(function () {
+                            tip.css("display", "none")
+                        }, 1500)
+                    } else if (data.error_code == 0) {
+                        tip.css("display", "block").animate({"opacity": "1"}, 1000).html("感谢您的精彩点评");
+                        getContentList();
+                    }
+                    setTimeout(function () {
+                        tip.css("display", "none");
+                        $('.write_comment').css('display', 'none');
+                        $('.comment_content').val("")
+                    }, 1500);
+                }
+            })
+        })
+        $('.like').click(function () {
+            if (!access_token) {
+                location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl=" + goUrl;
+                return;
+            };
+            var tip = $('.tip');
+            $.ajax({
+                type: "post",
+                url: "http://m.fjtv.net/microweb/addlike.php",
+                dataType: "json",
+                data: {
+                    "site_id": site_id,
+                    "column_id": column_id,
+                    "content_id": content_id,
+                    "open_id": member_id,
+                    "nick_name": nick_name,
+                    "thumb_url": thumb_url
+                },
+                success: function (data) {
+                    if (data.error_code) {
+                        tip.css("display", "block").animate({"opacity": "1"}, 1000).html("您已赞过");
+                        setTimeout(function () {
+                            tip.css("display", "none")
+                        }, 1500)
+                    } else {
+                        tip.css("display", "block").animate({"opacity": "1"}, 1000).html("点赞成功");
+                        setTimeout(function () {
+                            tip.css("display", "none")
+                        }, 1500)
+                        var num = $('.info').text();
+                        num++;
+                        $('.info').text(num);
+                    }
+                }
+            })
+        })
+        function getContentList(){
+
+            var tip = $('.tip');
+            $.ajax({
+                type: "get",
+                url: "http://m.fjtv.net/microweb/statistics.php?id=" + id + "&site_id=" + site_id + "&column_id=" + column_id,
+                dataType: "json",
+                success: function (data) {
+                    var liked_num = data.data.liked_num;
+                    var res = data.data.comment;
+                    $('.info').text(liked_num);
+                    var str = '';
+                    $('#comment_list').html(str)
+                    $.each(res, function (k, v) {
+                        // if(v.is_audit===1){
+                       str += "<li><div class='comment'><div class='left'><div class='poster' style='background-image: url(" + v.thumb_url + ")'></div></div><div class='right'><div class='name'>" + v.nick_name + "</div><div class='word'>" + v.content + "</div><div class='bottom'><div class='date'>" + v.created_at + "</div></div></div></div></li>";
+                    //    }else if(v.is_audit===0){
+                    //         setTimeout(function () {
+                    //             tip.css("display", "block").animate({"opacity": "1"}, 1000).html("评论正在审核中");
+                    //         }, 1500)
+                    //     }
+                    });
+                    //console.log(str,"str");
+                    $('#comment_list').append(str);
+
+
+                }
+            })
+        }
+    })
+</script>
+<script src="<?php echo $__info['site']['url'];?>menu.js" type="text/javascript"></script>
+<script id="wxfx" type="text/javascript"></script>
+<!--栏目列表底部导航开始-->
+<!--<div class="copyright"><p>© 2015-2016&nbsp;福建省广播影视集团 版权所有</p><p><a href="http://weixin.fjtv.net" target="_blank">技术支持:福建广电新媒体中心</a></p></div>-->
+<div style="display:none"></div>
+</body>
+<script>
+    $(function () {
+        var id = $('._id').val();
+        var bind_id = $('.bind_id').val();
+        var link = encodeURIComponent(location.href.split('#')[0]);
+        $.ajax({
+            type: "get",
+            url: "http://m.fjtv.net/microweb/readnum.php?content_id=" + id,
+            dataType: "json",
+            success: function (data) {
+                $('.xnview').append(data.data);
+            }
+        })
+        $.ajax({
+            type: "get",
+            url: "http://m.fjtv.net/microweb/jssdk.php?bind_id=" + bind_id + "&url=" + link,
+            dataType: "json",
+            success: function (data) {
+                $('#wxfx').text(data.data);
+            }
+        })
+    })
+</script>
+</html>

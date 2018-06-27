@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>在线留言</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link  rel="stylesheet" href="http://www.wuxi.siteyun.hoge.cn/t/1/16/css/common.css" type="text/css" />
+<link  rel="stylesheet" href="http://www.wuxi.siteyun.hoge.cn/t/1/16/css/program_list.css" media="screen" title="no title" charset="utf-8"/>
+<link href="http://weixin.fjtv.net/wap/css/diy/cate29_0.css" rel="stylesheet" type="text/css" />
+<style type="text/css">.section .section_style{height:100%;}
+.section_style .style_list{height:100%;position: relative;}
+.list_content{position: relative;}
+.title-block{padding-top: 51px!important;}
+#listhome3{overflow-x:hidden;}
+</style>
+<script>
+window.onload = function ()
+{
+var oWin = document.getElementById("win");
+var oLay = document.getElementById("overlay");  
+var oBtn = document.getElementById("popmenu");
+var oClose = document.getElementById("close");
+oBtn.onclick = function ()
+{
+oLay.style.display = "block";
+oWin.style.display = "block"    
+};
+oLay.onclick = function ()
+{
+oLay.style.display = "none";
+oWin.style.display = "none" 
+}
+};
+</script>
+<style>
+/*#ui-header{display: noneblock ;}.top46{height: 0;}*/
+img{height:150px}
+.brief-inner-block{display:none}
+</style>
+</head>
+<body id="listhome3">
+<!--顶部栏目下拉菜单开始-->
+<div id="ui-header">
+<div class="fixed">
+<a class="ui-title" id="popmenu"><?php echo $__info['column']['name']; ?></a>
+<a class="ui-btn-left_pre" href="javascript:history.go(-1);"></a>
+<a class="ui-btn-right_home" href="<?php echo $__info['site']['url']; ?>"></a>
+</div>
+</div>  
+<div id="overlay"></div>
+<div id="win">
+顶部栏目列表
+</div>
+<!--顶部栏目下拉菜单结束-->
+
+<iframe src="" width="100%" height="100%" id="iframe" style="position:absolute;top:35px;left:0;" > 
+</iframe>
+<?php
+if(!$__info['column']['brief']){
+$__info['column']['brief'] = '我在'.$__info['site']['name'].'发现了一个不错的栏目'.$__info['column']['name'].'，推荐给你哦！';
+}
+if(!$__info['column']['indexpic']){
+$__info['column']['indexpic'] ='http://weixin.fjtv.net/wap/images/wxlist.jpg';
+}
+?>
+<input id="wx-share-title" type="hidden" value="<?php echo $__info['column']['name'];?>" />
+<input id="wx-share-desc" type="hidden" value="<?php echo $__info['column']['brief'];?>" />
+<input id="wx-share-cfss" type="hidden" value="嗨！亲爱的小伙伴！告诉你一个小秘密哦↓↓↓" />
+<input id="wx-share-img" type="hidden" value="<?php echo $__info['column']['indexpic'];?>" />
+<input id="wx-share-link" type="hidden" value="" />
+<input id="wx-share-type" type="hidden" value="" />
+<input id="wx-share-dataUrl" type="hidden" value="" />
+<!--微信自定义分享接口结束-->
+<script id="wxfx" type="text/javascript"></script>
+<script src="<?php echo $__info['site']['url'];?>menu.js" type="text/javascript"></script>
+<!--栏目列表底部导航开始-->
+<script src="menu.asp" type="text/javascript"></script>
+<div style="display:none"></div> 
+<script>
+    var iframe =document.getElementById("iframe");
+    iframe.setAttribute('src',"http://h5.fjtv.net//dengji/BXjmlnPq5lRq.html");
+</script>
+</body>
+</html>
+<!--栏目列表底部导航结束-->

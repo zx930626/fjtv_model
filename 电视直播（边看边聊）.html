@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <title><?php echo $__info['site']['name']?></title>
+    <link href="http://cdn.bootcss.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
+    <link href="http://weixin.fjtv.net/wap/css/listhome/listhome3_0.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        var gUserAgent= navigator.userAgent.toLowerCase();
+    </script>
+    <style>
+        *{margin: 0px;padding:0px;-webkit-appearance: none;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        div.nav{position: relative;width: 100%;height: 40px;background: #191919;line-height: 40px;color: #fff;}
+        div.nav a{position:absolute;height: 100%;font-size: 16px;color: #fff;}
+        div.nav a.nav_left{left: 5px;}
+        div.nav a.nav_home{right: 5px;}
+        div.nav div.nav_down{position: absolute;left: 50%;margin-left: -48px;}
+        div.nav div.down_menu{position: absolute;left: 50%;margin-left: -95px;top: 40px;width: 200px;height: 125px;
+            background:#191919 ;border-radius: 3px;opacity:0;
+        }
+        div.nav div.down_menu ul{float:left;width:100%;height:100%;}
+        div.nav div.down_menu ul li{float: left;width: 45%;height: 39px;line-height: 39px;}
+        div.nav div.down_menu ul li a{width:100%;text-align: center;color: #fff;}
+        div.video_box{  width:100%;  height: 200px;margin-top:44px;}
+        div.video_box video{width: 100%;height: 100%;}
+        div.program_title{height: 40px;line-height: 40px;background:#dcdcdc;color:#999}
+        div.program_title span{display: inline-block;width: 45%;height: 100%;text-align: center;margin-left: 10px;}
+        div.program_title span.active{color:#ffa200;}
+        div.list_date{width:100%;height: 40px;line-height: 40px;background: #eee;color: #999;}
+        div.list_date ul{display:flex;}
+        div.list_date ul li{flex:auto;font-size: 14px;text-align:center;}
+        div.list_date ul li.on{color: #ffa200;}
+
+        /*节目列表*/
+        div.parent{position: relative;width: 100%;overflow-y: auto;}
+        div.program_list{position: absolute;left:0px;top: 0px;width:100%;height:100%;overflow-y: auto;}
+        div.list_box{width:100%;height: 100%;overflow-y: auto;}
+        div.list_box ul{width:100%;height: 150%;}
+        div.list_box ul li{position: relative;width:100%;height: 40px;line-height: 40px;}
+        div.list_box ul li:nth-child(odd){background: #f5f5f5;}
+        div.list_box ul li.select{color:#ffa200}
+        div.list_box ul li label{position: absolute;left:5px;}
+        div.list_box ul li span.list_title{position: absolute;left:50%;margin-left: -40px;width: 60%;}
+        div.list_box ul li span.video_ctr{position: absolute;right:5px;color:#353935;background-color: inherit;z-index: 222;padding-left: 4px;}
+        /*聊天室*/
+        div.chat_box{position: absolute;left:0px;top: 0px;width: 100%;height: 100%;display: none;z-index:-1;overflow-y: auto;}
+        div.chat_box .chat_content{width:100%;height:240px;overflow-y: auto;}
+        div.chat_box .chat_content ul{width:100%;height:300px;overflow: hidden;}
+        div.chat_box .chat_content ul li{clear:both;width: 100%;height: auto;margin: 5px;padding:5px;}
+        div.chat_box .chat_content ul li div.img_box{float:left;width:10%;box-sizing:border-box;}
+        div.chat_box .chat_content ul li div.img_box img{width: 30px;height: 30px;border-radius: 50%;}
+        div.chat_box .chat_content ul li div.message_box{float:left;margin-left: 5px;background:#dcdcdc;border-radius: 3px;padding: 6px 12px;width:75%;box-sizing:border-box;}
+        div.chat_box .chat_content ul li div.message_box .message_time{font-size: 12px;}
+        div.chat_box .input_box{position: fixed;bottom:10px;width:100%;height:40px;line-height: 40px;z-index:999;}
+        div.chat_box .input_box input{
+            display: inline-block;width: 75%;height:100%;outline: none;border: 1px solid #b2b2b2;
+            margin-left:5px;border-radius: 3px;
+
+        }
+        div.chat_box .input_box span{
+            display: inline-block;width: 20%;height: 100%;text-align:center;background: #b2b2b2;
+            margin-left:5px;border-radius: 3px;border: 1px solid #b2b2b2;
+        }
+        /*页面底部*/
+        div.footer{position: fixed;bottom:0px;width:100%;height: 40px;background:#0065d0}
+        div.footer a{display:inline-block;width: 30%;height:100%;
+            text-align: center;border-radius: 5px;margin-left: 6px;color:#fff;
+        }
+        div.footer a i{display: block;margin-top:2px;}
+        div.footer a span{display: block;}
+        .message_content_detail{
+            font-size: 14px;
+            padding: 2px 0;
+        }
+        #listhome3::-webkit-scrollbar{display:none}
+    </style>
+</head>
+<body>
+<body id="listhome3" >
+<!--顶部栏目下拉菜单开始-->
+<div id="ui-header">
+<div class="fixed">
+<a class="ui-title" id="popmenu"><?php echo $__info['column']['name']; ?></a>
+<a class="ui-btn-left_pre" href="javascript:history.go(-1);"></a>
+<a class="ui-btn-right_home" href="<?php echo $__info['site']['url'];?>"></a>
+</div>
+</div>
+<div id="overlay"></div>
+<div id="win">
+顶部栏目列表
+</div>
+<!--顶部栏目下拉菜单结束-->
+
+<div class="video_box">
+    <video src="mp4/birds.mp4" controls></video>
+</div>
+<div class="program_title">
+    <span class="active">节目列表</span>
+    <span>边看边聊</span>
+</div>
+<div class="parent">
+    <div class="program_list">
+        <div class="list_date">
+            <ul>
+                <li data-i="-3"></li>
+                <li data-i="-2" ></li>
+                <li data-i="-1"></li>
+                <li class="on" data-i="0"></li>
+                <li data-i="1"></li>
+                <li data-i="2"></li>
+                <li data-i="3"></li>
+            </ul>
+        </div>
+        <div class="list_box">
+            <ul></ul>
+        </div>
+    </div>
+    <div class="chat_box">
+        <div class="chat_content">
+            <ul></ul>
+        </div>
+        <div class="input_box">
+            <input type="text" placeholder="请输入要内容"><span>发送</span>
+        </div>
+    </div>
+</div>
+<!-- <script type="text/javascript">
+        seajs.use("http://m.fjtv.net/fjgd/res/js/menu");
+</script>
+<script id="menu" src="<?php echo $__info['site']['url'];?>menu.js" type="text/javascript"></script> -->
+<script>
+        window.onload = function () {
+            var oWin = document.getElementById("win");
+            var oLay = document.getElementById("overlay");
+            var oBtn = document.getElementById("popmenu");
+            var oClose = document.getElementById("close");
+            oBtn.onclick = function () {
+                oLay.style.display = "block";
+                oWin.style.display = "block"
+            };
+            oLay.onclick = function () {
+                oLay.style.display = "none";
+                oWin.style.display = "none"
+            }
+        };
+    </script>
+<?php
+    if($channel_info=$__info['column']['channel_info']){
+        $channel_info = json_decode($channel_info,1);
+        $channel_id = $channel_info['channel_id'];
+    }
+    $channel_id = isset($channel_id) ? $channel_id : '';
+?>
+<input type="hidden" name="channel_id" class="channel_id" value="<?php  echo $channel_id;?>">
+<input class="bind_id" name="bind_id" value="<?php echo $__info['site']['bind_id'];?>" type="hidden">
+<script src="http://cdn.bootcss.com/jquery/1.8.0/jquery-1.8.0.js"></script>
+<script type="text/javascript">
+$(function(){
+    var channelId = $('.channel_id').val();
+    var access_token = getCookie("liv_access_token-i");
+    var goUrl = window.location.href;
+    var offset=0;
+    var chatroom_id="";
+    var mark=true;
+    var bind_id = $('.bind_id').val();
+    getInit(channelId,0);
+    getChatRoomId();
+    $(".nav_down").on("click",function(){
+        if(mark){
+            $(".down_menu").css("opacity",1);
+        }else{
+            $(".down_menu").css("opacity",0);
+        }
+        mark=!mark;
+    })
+    var maxHeight=window.innerHeight;
+    var videoHeight=$(".video_box").height();
+    var titleHeight=$(".program_title").height();
+    var dateHeight=$(".list_date").height();
+    $(".parent").css("height",maxHeight-videoHeight-titleHeight+"px");
+    $(".parent").find(".list_box").css("height",(maxHeight-videoHeight-titleHeight-dateHeight)+40+"px");
+    $(".parent").find(".chat_content").css("height",(maxHeight-videoHeight-titleHeight-dateHeight)+40+"px");
+    $(".parent").find(".list_box ul").css("min-height",(maxHeight-videoHeight-titleHeight-dateHeight+200)+"px");
+    $(".parent").find(".chat_content ul").css("min-height",(maxHeight-videoHeight-titleHeight-dateHeight+200)+"px");
+    $(".program_title").on("click","span",function(){
+        $(this).addClass("active").siblings(".active").removeClass();
+        $(".parent").children().eq($(this).index()).css({"display":"block","z-index":0}).siblings().css({"display":"none","z-index":-1})
+        //getChatRoomId();
+    })
+    $("div.list_date ul").on("click","li",function(){
+        $(this).addClass("on").siblings(".on").removeClass();
+        var zone=$(this).attr("data-i");
+        getInit(channelId,zone);
+    })
+    $("div.list_box ul").on("click","li",function(){
+        $(this).addClass("select").siblings(".select").removeClass();
+        $(this).children().find("i").attr("class","fa fa-pause").parent().parent().siblings().find("i").attr("class","fa fa-play");
+        $(".video_box video").attr("src",$(this).attr("data_src"));
+        $(".video_box video").get(0).play();
+        var index = $('.select').index() + 1;
+        if(index >= 7 ){
+            $('.list_box').scrollTop((index - 7) * 40 + 200);
+        }else{
+            if(index >= 3){
+                $('.list_box').scrollTop((index - 2) * 40);
+            }
+        }
+
+    })
+    $(".list_date ul li").each(function(){
+        var arrDay=new Array("日","一","二","三","四","五","六");
+        var today=new Date().getDay();
+        var dataI=$(this).attr("data-i");
+        var num=(today+parseInt(dataI)+7)%7;
+        var Day=arrDay[num];
+        $(this).html("周"+Day);
+        if(today==num){$(this).html("周"+Day)}
+
+    });
+    function getInit(channelId,zone){//获得初始信息
+        var url = 'http://www.fjtv.net/m2o/channel/program.php?channel_id=' + channelId + '&zone='+ zone;
+        $.ajax({
+            url:url,
+            type:"get",
+            success:function(data){
+                var data=JSON.parse(data);
+                var html="";
+                $.each(data,function(k,v){
+                    var date = new Date();
+                    var start = Number(v.start.replace(/:/,''));
+                    var end = Number(v.end.replace(/:/,''));
+                    var currentTime = Number((date.getHours()+":"+date.getMinutes()).replace(/:/,''))
+                    if(start<currentTime && end>currentTime){
+                        $(".video_box video").attr("src",v.m3u8);
+                        $(".video_box video").get(0).play();
+                        html+='<li data_src="'+v.m3u8+'" class="select">'+
+                                    '<label>'+v.start+'-'+v.end+'</label>'+
+                                    '<span class="list_title">'+v.title+'</span>'+
+                                    '<span class="video_ctr">'+
+                                        '<i class="fa fa-play"></i>'+
+                                    '</span>'+
+                               '</li>';
+                    }else{
+                        html+='<li data_src='+v.m3u8+'>'+
+                                    '<label>'+v.start+'-'+v.end+'</label>'+
+                                    '<span class="list_title">'+v.title+'</span>'+
+                                    '<span class="video_ctr">'+
+                                        '<i class="fa fa-play"></i>'+
+                                    '</span>'+
+                               '</li>';
+                    }
+
+                })
+                $(".list_box ul").html(html)
+                var index = $('.select').index() + 1;
+                if(index >= 7 ){
+                    $('.list_box').scrollTop((index - 7) * 40 + 200);
+                }else{
+                    if(index >= 3){
+                        $('.list_box').scrollTop((index - 2) * 40);
+                    }
+                }
+            }
+        })
+    };
+    function getChatRoomId(){//获取聊天室信息id
+        var url='http://m.fjtv.net/microweb/channel_curr_topic.php?channel_id='+channelId;
+        var content=$(".chat_box .input_box input").val();
+        $.getJSON(url,function(data){
+            chatroom_id=data.info.chatroom_id;
+            getChatInfo(chatroom_id,offset);
+        })
+        $(".chat_box .input_box span").click(function(){
+            if (!access_token) {
+                location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl=" + goUrl;
+                return;
+            };
+            $(".chat_box .input_box input").val("");
+            sendMessage(chatroom_id,content,access_token,offset);
+        })
+    };
+    var screenHeight=window.screen.height;
+    window.onscroll=function(){
+        if(screenHeight+ document.body.scrollTop >= document.body.scrollHeight){
+            offset++;
+            setTimeout(function(){
+                getChatInfo(chatroom_id,offset);
+            },500)
+        }
+    }
+    function sendMessage(chatroom_id,meaasage,access_token,offset){
+        var url="http://m.fjtv.net/microweb/reply_message.php";
+        $.ajax({
+            url:url,
+            type:"post",
+            data:{chatroom_id:chatroom_id,meaasage:meaasage,access_token:access_token},
+            success:function(data){
+                //console.log(JSON.parse(data),"data");
+                getChatInfo(chatroom_id,offset)
+            }
+        })
+    }
+    function getChatInfo(chatroom_id,offset){//获取聊天室信息
+        var url="http://m.fjtv.net/microweb/get_chatroom_messages.php?chatroom_id="+chatroom_id+"&offset="+offset;
+        var html="";
+        $.getJSON(url,function(data){
+            $(".chat_box .chat_content ul").html(html);
+            $.each(data.messages,function(v,k){
+                html+='<li>'+
+                    '<div class="img_box">'+
+                        '<img src="'+k.send_uavatar.host+k.send_uavatar.dir+k.send_uavatar.filepath+k.send_uavatar.filename+'" alt="">'+
+                    '</div>'+
+                    '<div class="message_box">'+
+                        '<div class="message_content">'+
+                            '<div class="">'+k.send_uname+'</div>'+
+                            '<div class="message_content_detail">'+k.message+'</div>'+
+                        '</div>'+
+                        '<div class="message_time">'+k.send_time_show+'</div>'+
+                    '</div>'+
+                '</li>';
+            });
+            $(".chat_box .chat_content ul").append(html);
+        })
+    }
+    function getCookie(name) {
+        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        if (arr = document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
+    }
+})
+</script>
+</body>
+</html>
