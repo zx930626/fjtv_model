@@ -535,6 +535,80 @@
             max-width:100%;
             height:auto;
         }
+        .loadm{
+            color: #969696;
+            text-align: center;
+            font-size: 1.4rem;
+            margin-top: 1rem;
+        }
+        .zhiDing{position: relative;display: inline !important;top: 0.3rem;left: 0.5rem}
+        ::-webkit-scrollbar{display:none;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        div.wrap{width: 100%;margin-top: 46px;overflow-y: auto;}
+        div.nav{position: relative;width: 100%;height: 40px;background: #191919;line-height: 40px;color: #fff;}
+        div.nav a{position:absolute;height: 100%;font-size: 16px;color: #fff;}
+        div.nav a.nav_left{left: 5px;}
+        div.nav a.nav_home{right: 5px;}
+        div.nav div.nav_down{position: absolute;left: 50%;margin-left: -48px;}
+        div.nav div.down_menu{position: absolute;left: 50%;margin-left: -95px;top: 40px;width: 200px;height: 125px;
+            background:#191919 ;border-radius: 3px;opacity:0;
+        }
+        div.nav div.down_menu ul{float:left;width:100%;height:100%;}
+        div.nav div.down_menu ul li{float: left;width: 45%;height: 39px;line-height: 39px;}
+        div.nav div.down_menu ul li a{width:100%;text-align: center;color: #fff;}
+        div.video_box{  width:100%;  height: 200px;}
+        div.video_box video{width: 100%;height: 100%;}
+        div.program_title{height: 40px;line-height: 40px;background:#dcdcdc;color:#999}
+        div.program_title span{display: inline-block;width: 100%;height: 100%;text-align: center;}
+        div.program_title span.active{color:#ffa200;}
+        div.list_date{width:100%;height: 40px;line-height: 40px;color: #999;border-bottom: 1px solid #e6e6e6;}
+        div.list_date ul{display:flex;}
+        div.list_date ul li{flex:auto;font-size: 14px;text-align:center;}
+        div.list_date ul li.on{border-bottom: 2px solid #EF4850;}
+
+        /*节目列表*/
+        div.parent{position: relative;width: 100%;}
+        div.program_list{position: absolute;left:0px;top: 0px;width:100%;}
+        div.list_box{width:100%;height: 100%;margin-top: 1px;overflow-y: auto;}
+        div.list_box ul{box-sizing:border-box;width:100%;height: 150%;padding:0px 8px;}
+        div.list_box ul li{position: relative;width:100%;height: 40px;line-height: 40px;border-bottom: 1px solid #e6e6e6;}
+
+        div.list_box ul li label{position: absolute;left:5px;color:#999; font-size: 14px;}
+        div.list_box ul li span.list_title{position: absolute;left:50%;margin-left: -45px;color: #999;font-size: 14px}
+        div.list_box ul li span.video_ctr{position: absolute;right:10px;font-size: 14px;}
+        div.list_box ul li.select label,span.video_ctr{color:#EF4850}
+        div.list_box ul li.select span.list_title{color:#EF4850 }
+        /*聊天室*/
+        div.chat_box{position: absolute;left:0px;top: 0px;width: 100%;opacity:0;z-index:-1;}
+        div.chat_box .chat_content{width:100%;height:240px;overflow-y: auto;}
+        div.chat_box .chat_content ul{width:100%;height:300px;overflow: hidden;}
+        div.chat_box .chat_content ul li{clear:both;width: 100%;height: auto;margin: 5px;padding:5px;}
+        div.chat_box .chat_content ul li div.img_box{float:left;width:10%;box-sizing:border-box;}
+        div.chat_box .chat_content ul li div.img_box img{width: 30px;height: 30px;border-radius: 50%;}
+        div.chat_box .chat_content ul li div.message_box{float:left;margin-left: 5px;background:#dcdcdc;border-radius: 3px;padding: 6px 12px;width:75%;box-sizing:border-box;}
+        div.chat_box .chat_content ul li div.message_box .message_time{font-size: 12px;}
+        div.chat_box .input_box{position: fixed;bottom:10px;width:100%;height:40px;line-height: 40px;z-index:999;}
+        div.chat_box .input_box input{
+            display: inline-block;width: 75%;height:100%;outline: none;border: 1px solid #b2b2b2;
+            margin-left:5px;border-radius: 3px;
+
+        }
+        div.chat_box .input_box span{
+            display: inline-block;width: 20%;height: 100%;text-align:center;background: #b2b2b2;
+            margin-left:5px;border-radius: 3px;border: 1px solid #b2b2b2;
+        }
+        /*页面底部*/
+        div.footer{position: fixed;bottom:0px;width:100%;height: 40px;background:#0065d0}
+        div.footer a{display:inline-block;width: 30%;height:100%;
+            text-align: center;border-radius: 5px;margin-left: 6px;color:#fff;
+        }
+        div.footer a i{display: block;margin-top:2px;}
+        div.footer a span{display: block;}
+        .message_content_detail{
+            font-size: 14px;
+            padding: 2px 0;
+        }
     </style>
     <script>
         window.onload = function () {
@@ -589,6 +663,7 @@
                 <li class="selected">图文直播</li>
                 <li class="chatting">边看边聊</li>
                 <li class="secondLi">直播介绍</li>
+                <li class="TV_li">节目单</li>
             </ul>
         </div>
         <div class="tab_content firstTab">
@@ -615,15 +690,35 @@
                 </div>
             </div>
             <div class="hide secondTab" id="secondTab" style="margin-top: 1rem;">
-                <!--第二列tab切换##话题详情-->
+                <!-- 第二列tab切换##话题详情 -->
                 <div>
                     <div class="second-cont" id="second-cont">
+                    </div>
+                </div>
+            </div>
+            <div class="TV_list parent hide">
+                <div class="program_list">
+                    <div class="list_date">
+                        <ul>
+                            <li data-i="-3"></li>
+                            <li data-i="-2" ></li>
+                            <li data-i="-1"></li>
+                            <li class="on" data-i="0"></li>
+                            <li data-i="1"></li>
+                            <li data-i="2"></li>
+                            <li data-i="3"></li>
+                        </ul>
+                    </div>
+                    <div class="list_box">
+                        <ul></ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <?php
 if(!$__info['content']['share_pic']){
@@ -633,13 +728,23 @@ if(!$__info['content']['share_pic']){
 }
 $share_pic = json_decode($share_pic,1);
 $share_pic = $share_pic['host'] . $share_pic['dir'] . $share_pic['filepath'] . $share_pic['filename'];
-
 $indexpic = json_decode($__info['content']['indexpic'],1);
+
 $indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $indexpic['filename'];
 ?>
 <input type="hidden" id="topic_id" value="<?php echo $__info['content']['content_fromid'];?>">
 <input type="hidden" id="indexpic" value="<?php echo $indexpic;?>">
 <!--微信分享朋友圈开始-->
+<?php
+if($__info['site']['oauth_bind_id']){
+$__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
+}
+?>
+
+
+
+
+
 <input class="bind_id" name="bind_id" value="<?php echo $__info['site']['bind_id'];?>" type="hidden">
 <input id="wx-share-title" type="hidden" value="<?php echo $__info['site']['name'];?>"/>
 <input id="wx-share-desc" type="hidden" value="<?php echo $__info['content']['share_brief'];?>"/>
@@ -650,6 +755,204 @@ $indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $inde
 <input id="wx-share-dataUrl" type="hidden" value=""/>
 <script>
     $(function () {
+
+
+        // 节目单列表
+        var access_token = getCookie("liv_access_token-i");
+        var goUrl = window.location.href;
+        var offset=1;
+        var chatroom_id="";
+        var mark=true;
+        var maxHeight=innerHeight;
+        var bind_id = $('.bind_id').val();
+        var imHeight=$(".video_box").height();
+        var dHeight=$(".list_date").height();
+        $(".wrap").css("height",parseInt(maxHeight-46)+"px");
+        $(".list_box").css("height",parseInt(maxHeight-imHeight-dHeight-46)+"px")
+        $(".list_box ul").css("height",parseInt(maxHeight-imHeight-dHeight-46)+50+"px")
+        
+        
+        // $(".nav_down").on("click",function(){
+        //     if(mark){
+        //         $(".down_menu").css("opacity",1);
+        //     }else{
+        //         $(".down_menu").css("opacity",0);
+        //     }
+        //     mark=!mark;
+        // })
+        // $(".program_title").on("click","span",function(){
+        //     $(this).addClass("active").siblings(".active").removeClass();
+        //     $(".parent").children().eq($(this).index()).css({"opacity":1,"z-index":0}).siblings().css({"opacity":0,"z-index":-1})
+        //     //getChatRoomId();
+        // })
+        $("div.list_date ul").on("click","li",function(){
+            $(this).addClass("on").siblings(".on").removeClass();
+            var zone=$(this).attr("data-i");
+            getInit(channelId,zone);
+        })
+        $(".list_date ul li").each(function(){
+            var arrDay=new Array("日","一","二","三","四","五","六");
+            var today=new Date().getDay();
+            var dataI=$(this).attr("data-i");
+            var num=(today+parseInt(dataI)+7)%7;
+            var Day=arrDay[num];
+            $(this).html("周"+Day);
+            if(today==num){$(this).html("周"+Day)}
+        });
+        $("div.list_box ul").on("click","li",function(){
+            var day=$(".list_date ul li.on").text();
+            var arrDay=new Array("周日","周一","周二","周三","周四","周五","周六");
+            var today=new Date().getDay();
+            if(arrDay[today]==day){
+                $(this).addClass("select").siblings(".select").removeClass();
+            }
+            player.attr("src",$(this).attr("data_src"));
+            player[0].play();
+            var index = $('.select').index() + 1;
+            if(index >= 7 ){
+                $('.list_box').scrollTop((index - 7) * 40 + 200);
+            }else{
+                if(index >= 3){
+                    $('.list_box').scrollTop((index - 2) * 40);
+                }
+            }
+
+        })
+        // 时间补0
+        function addZero (num) {
+            if (num < 10) {
+                return '0' + num;
+            }else{
+                return num;
+            }
+        }
+        function getInit(channelId,zone){//获得初始信息
+            // 虚拟朋友圈模版特殊处理：当直播id=177，178时，177调用莆田节目表ID 7，178调用莆田节目表ID8
+            var ptChanelInFjtvIds = [177,178];
+            var ptChanelIds = {
+                'c-177':7,
+                'c-178':8,
+            };
+            if ($.inArray(channelId, ptChanelInFjtvIds)){
+                var url = 'http://www.ptbtv.com/m2o/channel/program.php?channel_id=' + ptChanelIds['c-' + channelId] + '&zone='+ zone;
+            }else{
+                var url = 'http://www.fjtv.net/m2o/channel/program.php?channel_id=' + channelId + '&zone='+ zone;
+            }
+            $.ajax({
+                url:url,
+                type:"get",
+                success:function(data){
+                    var data=JSON.parse(data);
+                    var html="";
+                    try{
+                        $.each(data,function(k,v){
+                            var day=$(".list_date ul li.on").text();
+                            var arrDay=new Array("周日","周一","周二","周三","周四","周五","周六");
+                            var date = new Date();
+                            var start = Number(v.start.replace(/:/,''));
+                            var end = Number(v.end.replace(/:/,''));
+                            var currentTime = Number((date.getHours()+":"+addZero(date.getMinutes())).replace(/:/,''))
+                            var src=v.channel_logo.rectangle.host+v.channel_logo.rectangle.dir+v.channel_logo.rectangle.filepath+v.channel_logo.rectangle.filename;
+                            player.attr("poster",src);
+                            if(start<currentTime && end>currentTime){
+                                if(arrDay[date.getDay()]==day){
+                                    player.attr("src",v.m3u8);
+                                    player.attr("poster",indexpic);
+                                    player[0].play();
+                                    html+='<li data_src="'+v.m3u8+'" class="select">'+
+                                                '<label>'+v.start+'-'+v.end+'</label>'+
+                                                '<span class="list_title">'+v.title+'</span>'+
+                                                '<span class="video_ctr">直播中</span>'+
+                                        '</li>';
+                                }
+                            }else{
+                                html+='<li data_src='+v.m3u8+'>'+
+                                            '<label>'+v.start+'-'+v.end+'</label>'+
+                                            '<span class="list_title">'+v.title+'</span>'+
+                                            '<span class="video_ctr"></span>'+
+                                    '</li>';
+                            }
+
+                        })
+
+                    }catch(err){
+                       
+                    }
+                    $(".list_box ul").html(html)
+                    var index = $('.select').index() + 1;
+                    if(index >= 7 ){
+                        $('.list_box').scrollTop((index - 7) * 40 + 200);
+                    }else{
+                        if(index >= 3){
+                            $('.list_box').scrollTop((index - 2) * 40);
+                        }
+                    }
+                }
+            })
+        };
+
+        // function getChatRoomId(){//获取聊天室信息id
+        //     var url='http://m.fjtv.net/microweb/channel_curr_topic.php?channel_id='+channelId;
+        //     var content=$(".chat_box .input_box input").val();
+        //     $.getJSON(url,function(data){
+        //         chatroom_id=data.info.chatroom_id;
+        //         getChatInfo(chatroom_id,offset);
+        //     })
+        //     $(".chat_box .input_box span").click(function(){
+        //         if (!access_token) {
+        //             location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl=" + goUrl;
+        //             return;
+        //         };
+        //         $(".chat_box .input_box input").val("");
+        //         sendMessage(chatroom_id,content,access_token,offset);
+        //     })
+        // };
+        // // setInterval(function(){
+        // //     offset++;
+        // //     getChatInfo(chatroom_id,offset);
+        // // },3000)
+        // function sendMessage(chatroom_id,meaasage,access_token,offset){
+        //     var url="http://m.fjtv.net/microweb/reply_message.php";
+        //     $.ajax({
+        //         url:url,
+        //         type:"post",
+        //         data:{chatroom_id:chatroom_id,meaasage:meaasage,access_token:access_token},
+        //         success:function(data){
+        //             //console.log(JSON.parse(data),"data");
+        //             getChatInfo(chatroom_id,offset)
+        //         }
+        //     })
+        // }
+        // function getChatInfo(chatroom_id,offset){//获取聊天室信息
+        //     var url="http://m.fjtv.net/microweb/get_chatroom_messages.php?chatroom_id="+chatroom_id+"&offset="+offset;
+        //     var html="";
+        //     $.getJSON(url,function(data){
+        //         $(".chat_box .chat_content ul").html(html);
+        //         $.each(data.messages,function(v,k){
+        //             html+='<li>'+
+        //                 '<div class="img_box">'+
+        //                     '<img src="'+k.send_uavatar.host+k.send_uavatar.dir+k.send_uavatar.filepath+k.send_uavatar.filename+'" alt="">'+
+        //                 '</div>'+
+        //                 '<div class="message_box">'+
+        //                     '<div class="message_content">'+
+        //                         '<div class="">'+k.send_uname+'</div>'+
+        //                         '<div class="message_content_detail">'+k.message+'</div>'+
+        //                     '</div>'+
+        //                     '<div class="message_time">'+k.send_time_show+'</div>'+
+        //                 '</div>'+
+        //             '</li>';
+        //         });
+        //         $(".chat_box .chat_content ul").html(html);
+        //     })
+        // }
+        // 节目单列表结束
+
+
+
+
+
+
+
         function getCookie(name) {
             var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
             if (arr = document.cookie.match(reg)) {
@@ -684,7 +987,11 @@ $indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $inde
                 $(".videoBox").slideUp(200);
             }
         })
-
+        
+        // 判断图文直播封面的字段
+        var isPoster = true;
+        var isAudioLive = false;
+        var program_is_open = true;
         $.ajax({
             type: "get",
             dataType: "json",
@@ -693,6 +1000,23 @@ $indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $inde
                 setTimeout(function () {
                     $('.tab_menu').fadeIn();
                 }, 100)
+                
+                // 图文直播种类 判断有无直播封面
+                if (res.tuwen_type == '3') {
+                    isPoster = false;
+                }else if(res.tuwen_type == '2'){
+                    isAudioLive = true
+                }
+                
+                // 节目单列表开关
+                if (parseInt(res.program_is_open) == 0) {
+                    $('.tab_menu .TV_li').remove();
+                    $('.TV_list').remove();
+                    program_is_open = false;
+                }else{
+                    $('.tab_menu .secondLi').remove();
+                    $('.secondTab').remove();
+                }
 
                 // 图文直播开 边看边聊开
                 if (res.tuwen_is_open !== 0 && res.chat_is_open !== 0) {
@@ -745,14 +1069,14 @@ $indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $inde
             }
         });
         //话题详情
-
+        var channelId = '';
+        var indexpic = $('#indexpic').val();
         $.ajax({
             type: "get",
             url: "http://m.fjtv.net/microweb/Apituwenol_detail.php?id=" + topic_id,//get请求传参数
             dataType: "json",
             success: function (json) {
                 var data = json[0];
-                var img_url = $("#indexpic").val();
                 var status_text = data.time_status_text;
                 var time_status = data.time_status;
                 var brief = data.brief.replace(/\n/g,"<br>&emsp;&emsp;");
@@ -763,22 +1087,48 @@ $indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $inde
                 var str = '';
                 var murl = '';
                 var liveInfo = data.live_info;
+                
+                // 节目单初始化
+                if(liveInfo && program_is_open) {
+                    channelId = data.live_info[0].id;
+                    getInit(channelId,0);
+                }else{
+                    $("header").html('<img style="width:100%;" src="'+indexpic+'">');
+                }
+
+                // 走音频直播
+                // if (isAudioLive) {
+                //     var radio_tmp = '<div id="playerDrag">' +
+                //         '<img id="audio-img" width="100%" height="auto" src="">' +
+                //         '<audio controls="" autoplay="autoplay" id="audio-html5" preload="none" src="" style="width:100%"></audio>' +
+                //     '</div>';
+                //     $('header').html(radio_tmp);
+                //     $("#audio-img").attr('src',indexpic);
+                //     player = $('audio');
+                //     return
+                // }
+                // 音频直播结束
+
+
+                // getChatRoomId(channelId);
+
+
                 // if(liveInfo.length>=2){
                 //     $('.videoBox').css('margin','1rem 0');                    
                 // }
 
                 // str += '<div class="mask"><div class="center">' + status_text + '</div>';
 
-                var indexpic = $('#indexpic').val();
+                
                 $(".title").html(title);
-                if (time_status == 2) {
-
-                    $('.mask').css({"display": "block", 'z-index': 10}).animate({"opacity": "1"}, 1000);
-                } else {
+                // if (time_status == 2) {
+                //     $('.mask').css({"display": "block", 'z-index': 10}).animate({"opacity": "1"}, 1000);
+                // } else 
+                if(!isAudioLive) {
                     var vHtml = "";
                     if(liveInfo.length == 1){
-                        str += '<video id="video" src="'+liveInfo[0].url+'"  width="100%" height="280" webkit-playsinline playsinline x-webkit-airplay="allow" style="background:#000000;margin-top:-12px;"  preload="auto" controls="controls" poster="'+indexpic+'"></video></div>';
-                        $('header').append(str);
+                        str += '<video id="video" src="'+liveInfo[0].url+'"  width="100%" height="280" webkit-playsinline playsinline x-webkit-airplay="allow" style="background:#000000;margin-top:-12px;"  preload="auto" controls="controls" ></video></div>';
+                        $('header').html(str);
                         $(".videoBox").css('display','none');
                         $(".fa").remove();
                     }else if(liveInfo.length > 1){
@@ -788,7 +1138,7 @@ $indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $inde
                             $("div.videoBox p").css("width", 300 * key + "px");
                             $("div.videoBox p").html(vHtml);
                         })
-                        str += '<video id="video" src="'+liveInfo[0].url+'"  width="100%" height="280" webkit-playsinline playsinline x-webkit-airplay="allow" style="background:#000000;margin-top:-12px;"  preload="auto" controls="controls" poster="'+indexpic+'"></video></div>';
+                        str += '<video id="video" src="'+liveInfo[0].url+'"  width="100%" height="280" webkit-playsinline playsinline x-webkit-airplay="allow" style="background:#000000;margin-top:-12px;"  preload="auto" controls="controls"></video></div>';
                         $('header').append(str);
                     }else{
                         $('#wx-share-type').val('link');
@@ -806,11 +1156,30 @@ $indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $inde
                         //     $('.tab_content>div').eq(index).show().siblings().hide();
                         // });
                     }
-
+                    
+                    if(navigator.userAgent.indexOf('iPhone OS 11') > -1){
+                        $('#video').prop({'poster':''});
+                       
+                    }else{
+                        if (isPoster) {
+                            $('#video').prop('poster',indexpic);
+                        }else{
+                            $('#video').prop('poster','');
+                        }
+                    }
                     $('.mask').css("display", "block").animate({"opacity": "1"}, 1000);
                     setTimeout(function () {
                         $('.center').css({"display": "block", "color": "#fff"})
                     }, 2000);
+                    player = $('header video');
+                }else{
+                    var radio_tmp = '<div id="playerDrag">' +
+                        '<img id="audio-img" width="100%" height="auto" src="">' +
+                        '<audio controls="" autoplay="autoplay" id="audio-html5" preload="none" src="'+ liveInfo[0].url +'" style="width:100%"></audio>' +
+                    '</div>';
+                    $('header').html(radio_tmp);
+                    $("#audio-img").attr('src',indexpic);
+                    player = $('header audio');
                 }
 
                 var i = 0;
@@ -828,13 +1197,13 @@ $indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $inde
                 }else if(status_text == "即将开始"){
                     $(".live_status").html("<font color='blue'>"+status_text+"</font>");
                     $(".fa").remove();
-                    if(liveInfo.length > 0){
+                    if(liveInfo.length > 0 && !isAudioLive){
                         $("header").html('<img style="width:100%;" src="'+indexpic+'">');
                     }
                 }else {
                     $(".live_status").html("<font color='red'>"+status_text+"</font>");
                     $(".fa").remove();
-                    if(liveInfo.length > 0){
+                    if(liveInfo.length > 0 && !isAudioLive){
                         $("header").html('<img style="width:100%;" src="'+indexpic+'">');
                     }
                 }
@@ -848,25 +1217,33 @@ $indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $inde
 
 
         //报道列表
+        var page = 1;
+        var totalPage = 0;
         function init() {
-            var url = 'http://m.fjtv.net/microweb/Apituwenol_thread.php?topic_id=' + topic_id;
-            $.getJSON(url, function (json) {
+            $(window).unbind('scroll');
+            var url = 'http://m.fjtv.net/microweb/Apituwenol_thread.php?tid=' + topic_id+'&page='+page;
+            $.getJSON(url, function (resp) {
+                var json = resp.data.data;
+                totalPage = resp.page_info.total_page
                 if (json[0]) {
                     var str = "";
-                    // var multiImgStr = "";
                     $.each(json, function (index, array) {
                         var content = replaceURL(array.content);
                         var pic = array.materail;
                         str += '<div class=\"item\"><div class=\"cur-date\">';
                         str += '</div><div class=\"item-cont\" style=\"overflow: hidden;\"><div class=\"item-left\"><span id=\"this_time\">' + array.format_create_time + '</span>';
                         str += '</div><div class="item-right"><div class="item-right-cont"><div class="right-cont-header">';
-                        str += '<span>' + array.user_name + '</span><span style="cursor:pointer;-webkit-tap-highlight-color:rgba(255,255,255,0);position: relative;right: -20px;" class="dianzan" data-thread_id=' + array.id + '><img src="http://yanan.tw.hdyun.hoge.cn//views//res/images/common/2.png"> <span class=\"info-num\">' + array.ding + '</span></span></div>';
+                        str += '<span>' + array.user_name + '</span>';
+                        if(+array.top){
+                            str += '<span class="zhiDing"><img style="max-width:30px;" src="http://m.fjtv.net/logo/zhiding.png"></span>';
+                        }
+                        str += '<span style="cursor:pointer;-webkit-tap-highlight-color:rgba(255,255,255,0);position: relative;right: -20px;" class="dianzan" data-thread_id=' + array.id + '><img src="http://yanan.tw.hdyun.hoge.cn//views//res/images/common/2.png"> <span class=\"info-num\">' + array.ding + '</span></span></div>';
                         str += '<p>' + content + '</p><br>';
                         if (pic) {
                             $len = pic.length;
                             for (i = 0; i < $len; i++) {
                                 if (pic[i].type == "video") {
-                                    str += '<video width="100%;" webkit-playsinline="true" controls="controls" poster="' + pic[i].host + pic[i].dir + '300X/' + pic[i].filepath + pic[i].filename + '" src="' + pic[i].m3u8 + '" webkit-playsinline playsinline x-webkit-airplay="allow" style="background-color:#000000;margin-top:-12px;"  preload="auto" ></video>';
+                                    str += '<video width="100%;" webkit-playsinline="true" controls="controls" poster="' + pic[i].host + pic[i].dir + '300X/' + pic[i].filepath + pic[i].filename + '" src="' + pic[i].m3u8 + '" webkit-playsinline playsinline style="background-color:#000000;margin-top:-12px;"  preload="auto" autoplay="autoplay"></video>';
                                 } else if (pic[i].type == "audio") {
                                     // str += '<audio style="width:80%" class="mp3Btn" controls="controls" src=' + pic[i].m3u8 + '/></audio>';
                                     str +=  '<div class="audio_box">'+
@@ -892,80 +1269,124 @@ $indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $inde
                                 }
                             }
                             setTimeout(function(){
-                                // $('.multi_img_wrap').html(multiImgStr);
                                 imgResponsive();
                             },500);  
                         }
                         str += '</div></div></div><span class="tip2"></span></div>';
                     });
-                    $('.first-cont').html(str);
-                    audioPlay()
+                    if(page == 1){
+                        $('.first-cont').html("");
+                        var loadMore = '<div class="loadm">正在加载更多。。。</div>';
+                        $('.first-cont').append(str).append(loadMore);
+                    }else{
+                        $('.loadm').before(str);
+                    } 
+                    if(json.length<20){
+                        $('.loadm').text("没有更多了");
+                    }else{
+                        page ++;
+                        $(window).scroll(function(){
+                            var bottomsubmit = $('.loadm').offset().top+20;
+                            var nowtop = $(document).scrollTop()+$(window).height();
+                            if(nowtop>bottomsubmit){
+                                init();
+                            }
+                        })
+                    }
+                    audioPlay();
                 }
             });
         };
         init();
+
+        // 倒序
+        function desc (){
+            $(window).unbind('scroll');
+            var url = 'http://m.fjtv.net/microweb/Apituwenol_thread.php?tid=' + topic_id + '&page=' + page;
+            $.getJSON(url, function (resp) {
+                var json = resp.data.data.reverse();
+                if (json[0]) {
+                    var str = "";
+                    $.each(json, function (index, array) {
+                        var pic = array.materail;
+                        var content = replaceURL(array.content);
+                        str += '<div class=\"item\"><div class=\"cur-date\">';
+                        str += '</div><div class=\"item-cont\" style=\"overflow: hidden;\"><div class=\"item-left\"><span id=\"this_time\">' + array.format_create_time + '</span>';
+                        str += '</div><div class="item-right"><div class="item-right-cont"><div class="right-cont-header">';
+                        str += '<span>' + array.user_name + '</span><span style="cursor:pointer;-webkit-tap-highlight-color:rgba(255,255,255,0);position: relative;right: -20px;" class="dianzan" data-thread_id=' + array.id + '><img src="http://yanan.tw.hdyun.hoge.cn//views//res/images/common/2.png"> <span class=\"info-num\">' + array.ding + '</span></span></div>';
+                        str += '<p>' + content + '</p><br>';
+                        if (pic) {
+                            $len = pic.length;
+                            for (i = 0; i < $len; i++) {
+                                if (pic[i].type == "video") {
+                                    str += '<video width="100%;" webkit-playsinline="true" controls="controls" poster="' + pic[i].host + pic[i].dir + '300X/' + pic[i].filepath + pic[i].filename + '" src="' + pic[i].m3u8 + '" webkit-playsinline playsinline style="background-color:#000000;"  preload="auto" autoplay="autoplay"></video>';
+                                } else if (pic[i].type == "audio") {
+                                    // str += '<audio style="width:98%" class="mp3Btn" controls="controls" src=' + pic[i].m3u8 + '/></audio>';
+
+                                    str +=  '<div class="audio_box">'+
+                                                '<audio src="'+pic[i].m3u8+'"></audio>'+
+                                                '<span class="audio_play""></span>'+
+                                                '<div class="progress">'+
+                                                    '<span class="progress_dur">00:00</span>'+
+                                                '</div>'+
+                                                '<div class="progressbur" style="width:0%;"></div>'+
+                                            '</div>';
+                                } else {
+                                    if($len > 1){
+                                        if(i == 0){
+                                            str += '<div class="multi_img_wrap lightgallery">';
+                                        }
+                                        str += '<a class="multi_img" href="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"><img src="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"></a>';
+                                        if(i == $len){
+                                            str += '<div>';
+                                        }
+                                    }else{
+                                        str += '<div class="single_img lightgallery"><a href="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"><img src="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"></a></div>';
+                                    }
+                                }
+                            }
+                            setTimeout(function(){
+                                // $('.multi_img_wrap').html(multiImgStr);
+                                imgResponsive();
+                            },500); 
+                        }
+                        str += '</div></div></div><span class="tip2"></span></div>';
+                    });
+                    if(page == totalPage){
+                        $('.first-cont').html("");
+                        var loadMore = '<div class="loadm">正在加载更多。。。</div>';
+                        $('.first-cont').append(str).append(loadMore);
+                    }else{
+                        $('.loadm').before(str);
+                    } 
+                    if(page <= 1){
+                        $('.loadm').text("没有更多了");
+                    }else{
+                        page --;
+                        $(window).scroll(function(){
+                            var bottomsubmit = $('.loadm').offset().top+20;
+                            var nowtop = $(document).scrollTop()+$(window).height();
+                            if(nowtop>bottomsubmit){
+                                desc();
+                            }
+                        })
+                    }
+                }
+            });
+        }
         //排序 '&order_by=asc'
         $('#orderby').on('touchstart',function () {
             if ($(this).hasClass('order')) {
                 $(this).removeClass('order').text('倒序↓');
+                page = 1;
                 init();
             } else {
+                page = totalPage;
                 $(this).addClass('order').text('正序↑');
-                var url = 'http://m.fjtv.net/microweb/Apituwenol_thread.php?topic_id=' + topic_id + '&order_by=asc';
-                $.getJSON(url, function (json) {
-                    if (json[0]) {
-                        var str = "";
-                        $.each(json, function (index, array) {
-                            var pic = array.materail;
-                            var content = replaceURL(array.content);
-                            str += '<div class=\"item\"><div class=\"cur-date\">';
-                            str += '</div><div class=\"item-cont\" style=\"overflow: hidden;\"><div class=\"item-left\"><span id=\"this_time\">' + array.format_create_time + '</span>';
-                            str += '</div><div class="item-right"><div class="item-right-cont"><div class="right-cont-header">';
-                            str += '<span>' + array.user_name + '</span><span style="cursor:pointer;-webkit-tap-highlight-color:rgba(255,255,255,0);position: relative;right: -20px;" class="dianzan" data-thread_id=' + array.id + '><img src="http://yanan.tw.hdyun.hoge.cn//views//res/images/common/2.png"> <span class=\"info-num\">' + array.ding + '</span></span></div>';
-                            str += '<p>' + content + '</p><br>';
-                            if (pic) {
-                                $len = pic.length;
-                                for (i = 0; i < $len; i++) {
-                                    if (pic[i].type == "video") {
-                                        str += '<video width="100%;" webkit-playsinline="true" controls="controls" poster="' + pic[i].host + pic[i].dir + '300X/' + pic[i].filepath + pic[i].filename + '" src="' + pic[i].m3u8 + '" webkit-playsinline playsinline x-webkit-airplay="allow" style="background-color:#000000;"  preload="auto" ></video>';
-                                    } else if (pic[i].type == "audio") {
-                                        // str += '<audio style="width:98%" class="mp3Btn" controls="controls" src=' + pic[i].m3u8 + '/></audio>';
-
-                                        str +=  '<div class="audio_box">'+
-                                                    '<audio src="'+pic[i].m3u8+'"></audio>'+
-                                                    '<span class="audio_play""></span>'+
-                                                    '<div class="progress">'+
-                                                        '<span class="progress_dur">00:00</span>'+
-                                                    '</div>'+
-                                                    '<div class="progressbur" style="width:0%;"></div>'+
-                                                '</div>';
-                                    } else {
-                                        if($len > 1){
-                                            if(i == 0){
-                                                str += '<div class="multi_img_wrap lightgallery">';
-                                            }
-                                            str += '<a class="multi_img" href="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"><img src="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"></a>';
-                                            if(i == $len){
-                                                str += '<div>';
-                                            }
-                                        }else{
-                                            str += '<div class="single_img lightgallery"><a href="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"><img src="' + pic[i].host + pic[i].dir + pic[i].filepath + pic[i].filename + '"></a></div>';
-                                        }
-                                    }
-                                }
-                                setTimeout(function(){
-                                    $('.multi_img_wrap').html(multiImgStr);
-                                    imgResponsive();
-                                },500); 
-                            }
-                            str += '</div></div></div><span class="tip2"></span></div>';
-                        });
-                        $('.first-cont').html(str);
-
-                    }
-                });
+                desc();
             };
         })
+
 
         function audioPlay(){
             var oAudio=document.querySelectorAll("audio");
@@ -1036,7 +1457,7 @@ $indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $inde
             var target = $(event.currentTarget);//获取当前点击元素
             var thread_id = target.data('thread_id');
             if (!access_token) {
-                location.href = "http://m.fjtv.net/i/my.php?bind_id=13&goUrl=" + goUrl;//如果没有access_token请登陆
+                location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl=" + goUrl;//如果没有access_token请登陆
                 return;
             }
             ;
@@ -1129,7 +1550,7 @@ $indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $inde
 //新增评论
         $('.sub_comment').on( 'touchstart',function () {
             if (!access_token) {
-                location.href = "http://m.fjtv.net/i/my.php?bind_id=13&goUrl=" + goUrl;//如果没有access_token请登陆
+                location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl=" + goUrl;//如果没有access_token请登陆
                 return;
             }
             var comment = $('.comment_content').val();

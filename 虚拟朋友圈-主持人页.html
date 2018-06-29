@@ -50,7 +50,7 @@
             /*频道动态和频道主持人*/
             .channel-des{font-size: 1.2rem!important;min-width: 8rem!important;}
             .wrapper{width:100%;height:auto;color: #434343;font-weight: 400;font-size: 1.4rem;position: relative;margin-bottom: 3rem;}
-            .two-item{width: 100%;display: none;}
+            .two-item{width: 100%;}
             .two-item li{width:50%;height:4rem;display: block;line-height: 4rem;text-align: center;font-size: 1.4rem;cursor: pointer;}
             li.selected{color:#57668d;border-bottom:1px solid #57668d;}
             .channel-dynamic{height: auto;padding: 1.5rem 1.5rem 1.5rem 1rem;}
@@ -100,7 +100,7 @@
             /*.img-cont .img-list img{max-width: 84%;}*/
             /*频道主持人列表*/
             .channel-host{padding: 2rem 1rem 1rem;width: 100%;height: auto;overflow: hidden;box-sizing: border-box;}
-            .host-info{width:48%;border:1px solid hsl(0,1%,80%);float: left;display: flex;margin-bottom: 0.4rem;border-top-left-radius:45px 46px;border-bottom-left-radius:45px 46px;height: 70px;overflow: hidden;}
+            .host-info{width:48%;border:1px solid hsl(0,1%,90%);float: left;display: flex;margin-bottom: 1rem;border-top-left-radius:45px 46px;border-bottom-left-radius:45px 46px;height: 70px;overflow: hidden;}
             .host-info:nth-child(odd){border-right:none;margin-right: 0.4rem;}
             .host-info img{width:42%;height: 100%;display: block;margin-right: 5px;border-radius: 50%;}
             /* .host-cont{padding-right:0.5rem ;} */
@@ -391,6 +391,74 @@
                 .multiImg li:nth-child(4),li:nth-child(5),li:nth-child(6){
                     padding: 2px 0;
                 }
+                /* 节目单css样式 */
+                ::-webkit-scrollbar{display:none;}
+                li{list-style: none;}
+                a{text-decoration: none;}
+                div.wrap{width: 100%;margin-top: 46px;overflow-y: auto;}
+                div.nav{position: relative;width: 100%;height: 40px;background: #191919;line-height: 40px;color: #fff;}
+                div.nav a{position:absolute;height: 100%;font-size: 16px;color: #fff;}
+                div.nav a.nav_left{left: 5px;}
+                div.nav a.nav_home{right: 5px;}
+                div.nav div.nav_down{position: absolute;left: 50%;margin-left: -48px;}
+                div.nav div.down_menu{position: absolute;left: 50%;margin-left: -95px;top: 40px;width: 200px;height: 125px;
+                    background:#191919 ;border-radius: 3px;opacity:0;
+                }
+                div.nav div.down_menu ul{float:left;width:100%;height:100%;}
+                div.nav div.down_menu ul li{float: left;width: 45%;height: 39px;line-height: 39px;}
+                div.nav div.down_menu ul li a{width:100%;text-align: center;color: #fff;}
+                div.video_box{  width:100%;  height: auto;}
+                div.video_box video{width: 100%;height: 100%;}
+                div.program_title{height: 40px;line-height: 40px;background:#dcdcdc;color:#999}
+                div.program_title span{display: inline-block;width: 100%;height: 100%;text-align: center;}
+                div.program_title span.active{color:#ffa200;}
+                div.list_date{width:100%;height: 40px;line-height: 40px;color: #999;border-bottom: 1px solid #e6e6e6;}
+                div.list_date ul{display:flex;}
+                div.list_date ul li{flex:auto;font-size: 14px;text-align:center;}
+                div.list_date ul li.on{border-bottom: 2px solid #EF4850;}
+
+                /*节目列表*/
+                div.parent{width: 100%;}
+                div.program_list{left:0px;top: 0px;width:100%;}
+                div.list_box{width:100%;height: 100%;margin-top: 1px;overflow-y: auto;}
+                div.list_box ul{box-sizing:border-box;width:100%;height: 150%;padding:0px 8px;}
+                div.list_box ul li{position: relative;width:100%;height: 40px;line-height: 40px;border-bottom: 1px solid #e6e6e6;}
+
+                div.list_box ul li label{position: absolute;left:5px;color:#999; font-size: 14px;}
+                div.list_box ul li span.list_title{position: absolute;left:50%;margin-left: -45px;color: #999;font-size: 14px}
+                div.list_box ul li span.video_ctr{position: absolute;right:10px;font-size: 14px;}
+                div.list_box ul li.select label,span.video_ctr{color:#EF4850}
+                div.list_box ul li.select span.list_title{color:#EF4850 }
+                /*聊天室*/
+                div.chat_box{position: absolute;left:0px;top: 0px;width: 100%;opacity:0;z-index:-1;}
+                div.chat_box .chat_content{width:100%;height:240px;overflow-y: auto;}
+                div.chat_box .chat_content ul{width:100%;height:300px;overflow: hidden;}
+                div.chat_box .chat_content ul li{clear:both;width: 100%;height: auto;margin: 5px;padding:5px;}
+                div.chat_box .chat_content ul li div.img_box{float:left;width:10%;box-sizing:border-box;}
+                div.chat_box .chat_content ul li div.img_box img{width: 30px;height: 30px;border-radius: 50%;}
+                div.chat_box .chat_content ul li div.message_box{float:left;margin-left: 5px;background:#dcdcdc;border-radius: 3px;padding: 6px 12px;width:75%;box-sizing:border-box;}
+                div.chat_box .chat_content ul li div.message_box .message_time{font-size: 12px;}
+                div.chat_box .input_box{position: fixed;bottom:10px;width:100%;height:40px;line-height: 40px;z-index:999;}
+                div.chat_box .input_box input{
+                    display: inline-block;width: 75%;height:100%;outline: none;border: 1px solid #b2b2b2;
+                    margin-left:5px;border-radius: 3px;
+
+                }
+                div.chat_box .input_box span{
+                    display: inline-block;width: 20%;height: 100%;text-align:center;background: #b2b2b2;
+                    margin-left:5px;border-radius: 3px;border: 1px solid #b2b2b2;
+                }
+                /*页面底部*/
+                div.footer{position: fixed;bottom:0px;width:100%;height: 40px;background:#0065d0}
+                div.footer a{display:inline-block;width: 30%;height:100%;
+                    text-align: center;border-radius: 5px;margin-left: 6px;color:#fff;
+                }
+                div.footer a i{display: block;margin-top:2px;}
+                div.footer a span{display: block;}
+                .message_content_detail{
+                    font-size: 14px;
+                    padding: 2px 0;
+                }
             </style>
     
 
@@ -404,8 +472,9 @@
             <!--包含两列总内容-->
             <div class="wrapper">
                 <ul class='two-item sys-flex' id="item">
-                    <li class="selected">频道动态</li>
-                    <li id="channel-host-btn">频道主持人</li>
+                    <li class="selected">最新动态</li>
+                    <li id="channel-host-btn">主播朋友圈</li>
+                    <li id="TV_li">节目单</li>
                 </ul>
                 <div class="content" id="content">
                     <!--动态列表第一列-->
@@ -414,6 +483,26 @@
                     </div>
                     <!--tab切换第二列-->
                     <div class="channel-host content-child" style="display: none;">
+                    </div>
+                    <!-- 切换节目单 -->
+                    <div class="TV_list parent content-child" style="display: none;">
+                        <div class="program_list">
+                            <div class="list_date">
+                                <ul>
+                                    <li data-i="-3"></li>
+                                    <li data-i="-2" ></li>
+                                    <li data-i="-1"></li>
+                                    <li class="on" data-i="0"></li>
+                                    <li data-i="1"></li>
+                                    <li data-i="2"></li>
+                                    <li data-i="3"></li>
+                                </ul>
+                            </div>
+                            <div class="list_box">
+                                <ul>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -431,7 +520,7 @@
                 </div>
             </div>
             
-            
+            <input class="is_comment" name="bind_id" value="<?php echo $__info['content']['content_fromid'];?>" type="hidden">
             <input type="hidden" id="topic_id" value="<?php echo $__info['content']['content_fromid'];?>"/>
             <footer>
                 <div class="publish_bottom form-group" style="padding-top: 7px;margin-bottom: 8px;">
@@ -458,7 +547,7 @@
                             <div class="file_preview col-xs-12">
                                 
                             </div>
-                            <label class="col-xs-4 cate_pic"">
+                            <label class="col-xs-4 cate_pic">
                                 <span class="glyphicon glyphicon-picture"></span>
                                 <div>图片</div>
                                 <input type="file" accept="image/*" id="picInput" multiple name="picInput">
@@ -484,6 +573,181 @@
                     </div>
                 </div>
             </footer>
+            <script>
+                // 根据朋友圈类型显示不同的名称
+                var virtual_type = <?php
+                    echo $_cell_data['virtual_info']['type'];
+                ?>;
+                switch (virtual_type) {
+                    case 1 :
+                        $("#item li:first-child").html('最新动态')
+                        break;
+                    case 2 :
+                        $("#item li:first-child").html('栏目动态')
+                        break;
+                    case 3 :
+                        $("#item li:first-child").html('主播动态')
+                        break;
+                    case 4 :
+                        $("#item li:first-child").html('直播互动')
+                        break;
+                }
+
+
+                var channel_info = <?php
+                    if ($_cell_data['virtual_info']['channel_info']) {
+                        echo $_cell_data['virtual_info']['channel_info'];
+                    }else{
+                        echo "''";
+                    }
+                ?>;
+                var live_switch = <?php
+                    echo $_cell_data['virtual_info']['live_switch'];
+                ?>;
+                var channelId = channel_info ? channel_info.id : '';
+                var player = $('video');
+                // 判直播类型是音频直播还是视频直播
+                var live_type = <?php
+                    echo $_cell_data['virtual_info']['live_kind'];
+                ?>;
+                var poster = <?php
+                    echo "'".$_cell_data['virtual_info']['live_pic']."'";
+                ?>;
+                var radio_tmp = '<div id="playerDrag">' +
+                    '<img id="audio-img" width="100%" height="auto" src="">' +
+                    '<audio controls="" autoplay="autoplay" id="audio-html5" preload="none" src="" style="width:100%"></audio>' +
+                '</div>';
+                if (parseInt(live_type) == 0 && live_switch) {
+                    $('header>div').html(radio_tmp);
+                    $("#audio-img").attr('src',poster);
+                    player = $('audio');
+                }
+
+                // 判断主持人列表是否展现
+                var host_switch = <?php
+                    echo $_cell_data['virtual_info']['host_switch'];
+                ?>;
+                if (parseInt(host_switch) == 0){
+                    $('#channel-host-btn').remove();
+                    $('.channel-host').remove();
+                }
+                // 节目单
+                var program_switch = <?php
+                    echo $_cell_data['virtual_info']['program_switch'];
+                ?>;
+                channelId && _getListInit(0);
+                if (parseInt(program_switch) == 0){
+                    $('#TV_li').remove();
+                    $('.TV_list').remove();
+                }
+                if (parseInt(program_switch) == 0 && parseInt(host_switch) == 0) {
+                    $("#item").remove()
+                }
+                // 时间补0
+                function addZero (num) {
+                    if (num < 10) {
+                        return '0' + num;
+                    }else{
+                        return num;
+                    }
+                }
+                function _getListInit(zone){
+                    $(".list_date ul li").each(function(){
+                        var arrDay=new Array("日","一","二","三","四","五","六");
+                        var today=new Date().getDay();
+                        var dataI=$(this).attr("data-i");
+                        var num=(today+parseInt(dataI)+7)%7;
+                        var Day=arrDay[num];
+                        $(this).html("周"+Day);
+                        if(today==num){$(this).html("周"+Day)}
+                    });
+                    // 虚拟朋友圈模版特殊处理：当直播id=177，178时，177调用莆田节目表ID 7，178调用莆田节目表ID8
+                    var ptChanelInFjtvIds = [177,178];
+                    var ptChanelIds = {
+                        'c-177':7,
+                        'c-178':8,
+                    };
+                    if ($.inArray(channelId, ptChanelInFjtvIds)){
+                        var url = 'http://www.ptbtv.com/m2o/channel/program.php?channel_id=' + ptChanelIds['c-' + channelId] + '&zone='+ zone;
+                    }else{
+                        var url = 'http://www.fjtv.net/m2o/channel/program.php?channel_id=' + channelId + '&zone='+ zone;
+                    }
+                    $.ajax({
+                        url:url,
+                        type:"get",
+                        success:function(data){
+                            var data=JSON.parse(data);
+                            var html="";
+                            try{
+                                $.each(data,function(k,v){
+                                    var day=$(".list_date ul li.on").text();
+                                    var arrDay=new Array("周日","周一","周二","周三","周四","周五","周六");
+                                    var date = new Date();
+                                    var start = Number(v.start.replace(/:/,''));
+                                    var end = Number(v.end.replace(/:/,''));
+                                    var currentTime = Number((date.getHours()+":"+addZero(date.getMinutes())).replace(/:/,''))
+                                    var src=v.channel_logo.rectangle.host+v.channel_logo.rectangle.dir+v.channel_logo.rectangle.filepath+v.channel_logo.rectangle.filename;
+                                    if(start<currentTime && end>currentTime){
+                                        if(arrDay[date.getDay()]==day){
+                                            player.attr("src",v.m3u8);
+                                            player.attr("poster",$('video').attr('poster'));
+                                            // $('video').css({'width':'100%','height':'200px'})
+                                            // $('video')[0].play();
+                                            html+='<li data_src="'+v.m3u8+'" class="select">'+
+                                                        '<label>'+v.start+'-'+v.end+'</label>'+
+                                                        '<span class="list_title">'+v.title+'</span>'+
+                                                        '<span class="video_ctr">直播中</span>'+
+                                                '</li>';
+                                        }
+                                    }else{
+                                        html+='<li data_src='+v.m3u8+'>'+
+                                                    '<label>'+v.start+'-'+v.end+'</label>'+
+                                                    '<span class="list_title">'+v.title+'</span>'+
+                                                    '<span class="video_ctr"></span>'+
+                                            '</li>';
+                                    }
+
+                                })
+
+                            }catch(err){
+                                // alert(err)
+                            }
+                            $(".list_box ul").html(html);
+                            var index = $('.select').index() + 1;
+                            if(index >= 7 ){
+                                $('.list_box').scrollTop((index - 7) * 40 + 200);
+                            }else{
+                                if(index >= 3){
+                                    $('.list_box').scrollTop((index - 2) * 40);
+                                }
+                            }
+                        }
+                    })
+                }
+                
+                $("div.list_date ul").on("click","li",function(){
+                    $(this).addClass("on").siblings("li").removeClass('on');
+                    var zone=$(this).attr("data-i");
+                    _getListInit(zone);
+                })
+                
+                $("div.list_box ul").on("click","li",function(){
+                    var day=$(".list_date ul li.on").text();
+                    var arrDay=new Array("周日","周一","周二","周三","周四","周五","周六");
+                    var today=new Date().getDay();
+                    $(this).addClass("select").siblings("li").removeClass('select');
+                    player.attr("src",$(this).attr("data_src"));
+                    player[0].play();
+                    var index = $('.select').index() + 1;
+                    if(index >= 7 ){
+                        $('.list_box').scrollTop((index - 7) * 40 + 200);
+                    }else{
+                        if(index >= 3){
+                            $('.list_box').scrollTop((index - 2) * 40);
+                        }
+                    }
+                })
+            </script>
             <script type="text/javascript">
                 var item=document.getElementById('item');
                 var oLi=item.getElementsByTagName('li');
@@ -515,6 +779,8 @@
             var nick_name = "";
             var access_token = "";
             var picArr = [];
+            var hasPic = false;
+            var uploading = false;
             var dianzanStatus = true;
             var bind_id = $('.bind_id').val();
             $(function(){
@@ -539,16 +805,15 @@
 
                         access_token = getCookie("liv_access_token-i");
                         $('.publishAvatar > img').prop('src',thumb_url);
-                        // var bind_id = $('.bind_id').val();
                         var goUrl = window.location.href;
                         var id =$("#topic_id").val();
                         fc_id = id;
 
                         // 方便调试
-                        if(!access_token){
-                            location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl="+goUrl;
-                            return;
-                        };
+                        // if(!access_token){
+                        //     location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl="+goUrl;
+                        //     return;
+                        // };
 
                         // 判断是否有权限发布话题
                         var url = 'http://m.fjtv.net/microweb/check_manage.php';
@@ -630,7 +895,7 @@
                                                                     '</span>'+
                                                                 '{{/if}}'+
                                                                 // 视频测试
-                                                            '{{if $value.type == 4}}'+
+                                                                '{{if $value.type == 4}}'+
                                                                     '<div class="img-cont sys-flex">'+
                                                                         '<div class="img-list sys-flex">'+
                                                                             '<div class="brief" style="">'+
@@ -644,7 +909,7 @@
                                                                                 '<iframe frameborder="0" style="width:100%;height:83%;margin:1rem 0;" src="{{$value.materials[0].vod_url}}" wmode="transparent"></iframe>'+
                                                                             '{{else}}'+
                                                                             '<div class="single-advise" style="margin:1rem 0;">'+
-                                                                                ' <video style="width:100%;" webkit-playsinline="true" playsinline="true" src="{{$value.materials[0].vod_url}}" poster="{{$value.materials[0].pos_url}}" controls></video>'+
+                                                                                ' <video style="width:100%;" x5-playsinline="true" webkit-playsinline="true" playsinline="true" src="{{$value.materials[0].vod_url}}" poster="{{$value.materials[0].pos_url}}" controls></video>'+
                                                                             '</div>'+
                                                                             // '<div class="single-advise" style="">'+
                                                                             //     ' <video x5-video-player-fullscreen="true"  x5-video-player-type="h5" webkit-playsinline="true" playsinline="true" style="width:100%;" src="{{$value.materials[0].vod_url}}" poster="{{$value.materials[0].pos_url}}" controls></video>'+
@@ -690,7 +955,7 @@
                                                                                     '<ul class="lightgallery" class="list-unstyled">'+
                                                                                       '<li  data-src="{{$val.url}}" >'+
                                                                                         '<a href="{{$val.url}}">'+
-                                                                                         '<img src="http://img1.fjtv.net/material/microweb/img/100x100/2017/10/20171010102103vX5r.gif"  class="lazyload img-responsive" data-original = "{{$val.url}}">'+
+                                                                                         '<img src="http://img1.fjtv.net/material/microweb/img/100x100/2017/10/20171010102103vX5r.gif"  class="lazyload img-responsive" data-original = "{{$val.original_url}}">'+
                                                                                         '</a>'+
                                                                                     ' </li>'+
                                                                                     '</ul>'+
@@ -703,7 +968,7 @@
                                                                                     '{{each $value.materials as $val $key}}'+
                                                                                       '<li  data-src="{{$val.url}}" style="flex:1;">'+
                                                                                         '<a href="{{$val.url}}">'+
-                                                                                            '<img src="http://img1.fjtv.net/material/microweb/img/100x100/2017/10/20171010102103vX5r.gif"  class="lazyload img-responsive" data-original = "{{$val.url}}">'+
+                                                                                            '<img src="http://img1.fjtv.net/material/microweb/img/100x100/2017/10/20171010102103vX5r.gif"  class="lazyload img-responsive" data-original = "{{$val.original_url}}">'+
                                                                                         '</a>'+
                                                                                     ' </li>'+
                                                                                     '{{/each}}'+
@@ -735,10 +1000,10 @@
                                                                 '</div>'+
                                                                 '<span class="dialog"><img src="http://m.fjtv.net/logo/comment.png"></span>'+
                                                             '</div>'+
-                                                            '{{if $value.liked.length != "0" || $value.message.length != "0"}}'+
-                                                                '<div class="dianzan-comment interactInfo">'+
-                                                                    '{{if $value.liked.length != "0"}}'+
-                                                                        '<span class="dianzan-display dianzanWrap">'+
+                                                            // '{{if $value.liked.length != "0"}}'+
+                                                                '<div class="dianzan-comment interactInfo" style="display:{{if $value.liked.length != "0" || ($value.message && $value.message.length != "0")}}block{{else}}none{{/if}}">'+
+                                                                    // '{{if $value.liked.length != "0"}}'+
+                                                                        '<span class="dianzan-display dianzanWrap" {{if $value.liked.length == "0"}} style="display:none;" {{/if}} >'+
                                                                             '<img src="http://m.fjtv.net/logo/heart.png">'+
                                                                             //如果点赞者的数量=5.则显示共多少评论，否则直接遍历每个点赞者
                                                                             '{{each $value.liked as val key}}'+
@@ -748,10 +1013,10 @@
                                                                         '{{if $value.liked.length == 5}}'+
                                                                                 '<span class="titalDianzan" content_id="{{$value.content_id}}">...共{{$value.liked_num}}人赞</span>'+
                                                                         '{{/if}}'+
-                                                                '{{/if}}'+
-                                                                '{{if $value.message.length != "0"}}'+
+                                                                    // '{{/if}}'+
+                                                                // '{{if $value.message && $value.message.length != "0"}}'+
                                                                 //如果评论条数大于5则显示查看更多，否则不显示
-                                                                    '<ul class="comment-list">'+
+                                                                    '<ul class="comment-list" style="display:{{if $value.message && $value.message.length != "0"}}block{{else}}none{{/if}}">'+
                                                                         '<img src="http://m.fjtv.net/logo/dialog.png" class="comment-list-dialog">'+
                                                                             '{{each $value.message as val key}}'+
                                                                                 '<li>'+
@@ -766,12 +1031,12 @@
                                                                             '<div class="data_offset" style="display:none">2</div>'+
                                                                     '</ul>'+
                                                                     '{{if $value.message.length == 5}}'+
-                                                                    '<span class="getMore" content_id="{{$value.content_id}}">查看更多评论</span>'+
+                                                                      '<span class="getMore" content_id="{{$value.content_id}}">查看更多评论</span>'+
                                                                     '{{/if}}'+
-                                                                '{{/if}}'+
+                                                                // '{{/if}}'+
                                                                 '<div class="tip"></div>'+
                                                             '</div>'+
-                                                        '{{/if}}'+
+                                                        // '{{/if}}'+
 
                                                             // '<div class="comment-area" style="display: none;">'+
                                                             //     '<div class="comment-text sys-flex">'+
@@ -794,7 +1059,7 @@
                                         '{{if $data}}'+
                                             '{{each $data}}'+
                                                  '<a href="{{$value.link}}">'+
-                                                    '<div class="host-info" style="border:1px solid hsl(0,1%,80%);">'+
+                                                    '<div class="host-info" style="border:1px solid hsl(0,1%,90%);">'+
                                                         '<img src="{{$value.thumb_url}}">'+
                                                         '<div class="host-cont">'+
                                                             '<span class="host-name">{{$value.name}}</span>'+
@@ -841,6 +1106,7 @@
 
                                 _getListInfo:function(pages,sizes){
                                     var url = "http://m.fjtv.net/microweb/virtual_moments_list.php?id="+id+"&size="+sizes+"&page="+pages;
+                                    var _this = this;
                                     $.ajax({
                                         type : 'get',
                                         url : url,
@@ -851,13 +1117,17 @@
                                                 if(item.brief){
                                                     item.brief = replaceURL(item.brief)
                                                 }
-                                                item.message.forEach(function(v1){
-                                                    item.message.forEach(function(v2){
-                                                        if(v1.replied_id == v2.id){
-                                                            v1.content = '回复'+v2.member_name+'：'+v1.content;
-                                                        }
-                                                    })
-                                                })
+                                                if(item.hasOwnProperty('message')){
+                                                  item.message.forEach(function(v1){
+                                                      item.message.forEach(function(v2){
+                                                          if(v1.replied_id == v2.id){
+                                                              v1.content = '回复'+v2.member_name+'：'+v1.content;
+                                                          }
+                                                      })
+                                                  })
+                                                }else{
+                                                    item.message = [];
+                                                }
                                             })
                                             var listHtml = listTpl( json );
                                             if(pages == 1){
@@ -888,13 +1158,21 @@
                                                 loadMoreStatus = false;
                                             }else{
                                                 page ++;
+                                                $(window).scroll(function(){
+                                                    var bottomsubmit = $('.loadMore').offset().top+40;
+                                                    var nowtop = $(document).scrollTop()+$(window).height();
+                                                    if(nowtop>bottomsubmit){
+                                                        _this._loadMore();
+                                                    }
+                                                })
                                             }
+                                            lightG();
                                         }
                                     });
-                                    lightG();
                                 },
 
                                 _loadMore : function(){
+                                    $(window).unbind('scroll');
                                     if(loadMoreStatus){
                                         this._getListInfo(page,size);
                                     }
@@ -985,17 +1263,25 @@
                                     var target=$(event.currentTarget);
                                     var tip=target.parents('.right-item').find('.tip');
                                     var content_id = target.attr('id');
-                                    if(!access_token){
-                                        location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl="+goUrl;
-                                        return;
-                                    };
+                                    var currentDianzan = '<span class="dianzan-name"><img class="comment-thumb" src="'+ thumb_url +'"></span>';
+                                    // if(!access_token){
+                                    //     location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl="+goUrl;
+                                    //     return;
+                                    // };
                                     $.ajax({
                                         type : "post",
                                         url : "http://m.fjtv.net/microweb/virtual_add_like.php",
                                         dataType : "json",
                                         data : {"content_id": content_id,"member_id": member_id,"member_name": nick_name,"thumb_url":thumb_url},
                                         success : function(data){
-                                            tip.css("display","block").animate({"opacity":"1"},500).html(data.data);
+                                            if (data.data == '点赞成功') {
+                                                target.parents('.time-dialog').siblings('.dianzan-comment').css('display','block');
+                                                tip.css("display","block").animate({"opacity":"1"},500).html(data.data);
+                                                target.parents('.time-dialog').siblings('.dianzan-comment').children('.dianzan-display').css('display','contents');
+                                                target.parents('.time-dialog').siblings('.dianzan-comment').children('.dianzan-display').append(currentDianzan);
+                                            }else{
+                                                tip.css("display","block").animate({"opacity":"1"},500).html(data.data);
+                                            }
                                             setTimeout(function(){tip.css({"display":"none","opacity":"0"})},1500);
                                         },
                                         error:function(){
@@ -1005,7 +1291,7 @@
                                     })
                                 },
                                 _titalDianzan:function(event){
-                                    if(dianzanStatus){
+                                    // if(dianzanStatus){
                                         var target =$(event.currentTarget);
                                         var content_id = target.attr('content_id');
                                         var dianzanList = target.prev('span.dianzan-display');
@@ -1019,10 +1305,10 @@
                                                     str += '<span class="dianzan-name"><img src="'+v.thumb_url+'" class="comment-thumb"></span>';
                                                     dianzanList.append(str);
                                                 });
-                                                dianzanStatus = false;
+                                                // dianzanStatus = false;
                                             }
                                         });
-                                    }
+                                    // }
                                 },
                                 _dialog:function(event){
                                     // event.stopPropagation();//阻止事件冒泡到父元素
@@ -1108,20 +1394,22 @@
             </script>
         <script>            
             function audioPlay(){
-                var oAudio=document.querySelectorAll("audio");
-                var audioPlay=document.querySelectorAll("span.audio_play");
-                var aodBox=document.querySelectorAll(".audio_box");
-                var progressDur=document.querySelectorAll(".progress_dur");
+                var oAudio=document.querySelectorAll(".content-child audio");
+                var audioPlay=document.querySelectorAll(".content-child span.audio_play");
+                var aodBox=document.querySelectorAll(".content-child .audio_box");
+                var progressDur=document.querySelectorAll(".content-child .progress_dur");
                 // progressDur.innerHTML="0:00";
                 var mark=true;
                 for(var i=0;i<aodBox.length;i++){
                     var aodBw=aodBox[i].offsetWidth;
                     audioPlay[i].addEventListener("touchstart",function(){
                         //  oAudio.play();
+                        $("#playerDrag audio")[0].pause();
                         var _this=this;
                         if(mark){
                             for(var j=0;j<oAudio.length;j++){
                                 audioPlay[j].parentNode.children[0].pause();
+                                $(_this).removeClass('audio_play_now');
                                 audioPlay[j].style.animation="";
                             }
                             _this.parentNode.children[0].play();
@@ -1135,6 +1423,10 @@
                             // _this.style.animation="";
                         }
                         mark=!mark;
+                    });
+                    oAudio[i].addEventListener("ended",function(){
+                        var _this = this;
+                        var cur_span = $(_this).siblings('.audio_play').removeClass('audio_play_now');
                     });
                     // progressDur[i].innerHTML="0"+(oAudio[i].duration/60)+":"+(oAudio[i].duration%60);
                     oAudio[i].addEventListener("timeupdate",function(){
@@ -1156,19 +1448,23 @@
                             progressBur.style.width=parseInt(l*aodBw-3)+"px";
                         }
                         
-                        if((ds-cs)<10){
-                            if((ds-cs)<=0){
-                                progressDur.innerHTML="0"+(dm-cm)+":00";
-                            }else{
-                                progressDur.innerHTML="0"+(dm-cm)+":0"+(ds-cs)
-                            }
+                        if(isNaN(ds-cs)){
+                            progressDur.innerHTML = "";
                         }else{
-                            if((ds-cs)<=0){
-                                progressDur.innerHTML="0"+(dm-cm)+":00"
+                            if((ds-cs)<10){
+                                if((ds-cs)<=0){
+                                    progressDur.innerHTML="0"+(dm-cm)+":00";
+                                }else{
+                                    progressDur.innerHTML="0"+(dm-cm)+":0"+(ds-cs)
+                                }
                             }else{
-                                progressDur.innerHTML="0"+(dm-cm)+":"+(ds-cs)
-                            }
-                        }                        
+                                if((ds-cs)<=0){
+                                    progressDur.innerHTML="0"+(dm-cm)+":00"
+                                }else{
+                                    progressDur.innerHTML="0"+(dm-cm)+":"+(ds-cs)
+                                }
+                            }                                                                                
+                        }
                     })
                 }
             }
@@ -1199,6 +1495,7 @@
 
             // 点击发布
             var releaseType = 1;
+            var hasClicked = false;
             $('#release').on('click',function(event){
                 event.stopPropagation();
                 var target=$(event.currentTarget);
@@ -1207,7 +1504,6 @@
                 url = 'http://m.fjtv.net/microweb/virtual_add_moments.php';
                 // var linkUrl = $('#linkUrl').val();
                 // var type = 1;
-                // alert(picArr.length);
                 if(picArr.length>0){
                     releaseType = 2;
                 }else{
@@ -1216,49 +1512,65 @@
                 // else if(linkUrl){
                 //     type = 3;
                 // }
-                $.ajax({
-                    type : 'POST',
-                    url : url,
-                    data : {
-                        member_id : obj.member_id,
-                        type : releaseType,
-                        // link : linkUrl,
-                        materials : picArr,
-                        fc_id : fc_id,
-                        member_name : obj.nick_name,
-                        brief : publishText,
-                        avatar : obj.avatar.host+obj.avatar.dir+obj.avatar.filepath+obj.avatar.filename
-                    },
-                    dataType : 'json',
-                    success : function(resp){
-                        $('#newTopic').val("");
-                        tip.css("display","block").animate({"opacity":"1"},1500).html("发布成功，请耐心等待审核");
-                        setTimeout(function(){
-                            tip.css({"opacity":"0",'display':'none'});
-                            $('.file_preview').html('');
-                            picArr = [];
-                            $('footer').css({
-                                'height':'4.4rem',
-                                'background-color':'transparent',
-                            })
-                            $('iframe').removeClass('hideIframe');
-                            $('.publish').hide(100);
-                            $('.publish_bottom').show(100);
-                            $('body').friend();
-                        },1000);
-                    },
-                    error : function(resp){
-                        tip.css("display","block").animate({"opacity":"1"},1500).html('接口错误');
+                if(publishText == '' && !hasPic){
+                    tip.css("display","block").animate({"opacity":"1"},1500).html("发布内容不能为空！");
                         setTimeout(function(){
                             tip.css({"opacity":"0",'display':'none'});
                         },1000);
-                    }
-                })
+                }else if (uploading){
+                    tip.css("display","block").animate({"opacity":"1"},1500).html("图片正在上传！");
+                        setTimeout(function(){
+                            tip.css({"opacity":"0",'display':'none'});
+                        },1000);
+                }else if (!hasClicked) {
+                    hasClicked = true;
+                    $.ajax({
+                        type : 'POST',
+                        url : url,
+                        data : {
+                            member_id : obj.member_id,
+                            type : releaseType,
+                            // link : linkUrl,
+                            materials : picArr,
+                            fc_id : fc_id,
+                            member_name : obj.nick_name,
+                            brief : publishText,
+                            avatar : obj.avatar.host+obj.avatar.dir+obj.avatar.filepath+obj.avatar.filename
+                        },
+                        dataType : 'json',
+                        success : function(resp){
+                            $('#newTopic').val("");
+                            tip.css("display","block").animate({"opacity":"1"},1500).html("发布成功，请耐心等待审核");
+                            setTimeout(function(){
+                                tip.css({"opacity":"0",'display':'none'});
+                                $('.file_preview').html('');
+                                picArr = [];
+                                hasPic = false;
+                                $('footer').css({
+                                    'height':'4.4rem',
+                                    'background-color':'transparent',
+                                })
+                                $('iframe').removeClass('hideIframe');
+                                $('.publish').hide(100);
+                                $('.publish_bottom').show(100);
+                                $('body').friend();
+                                hasClicked = true;
+                            },1000);
+                        },
+                        error : function(resp){
+                            tip.css("display","block").animate({"opacity":"1"},1500).html('接口错误');
+                            setTimeout(function(){
+                                tip.css({"opacity":"0",'display':'none'});
+                            },1000);
+                        }
+                    })                    
+                }
             })
 
             // 点击返回
             $('#back').on('click',function(e){
                 picArr = [];
+                hasPic = false;
                 e.stopPropagation();
                 $('footer').css({
                     'height':'4.4rem',
@@ -1301,6 +1613,8 @@
             })
 
             function uploadImg(file){
+                hasPic = true;
+                uploading = true;
                 var url = 'http://m.fjtv.net/microweb/image_upload.php';
                 var type = "POST";
                 var xhr = new XMLHttpRequest();
@@ -1326,6 +1640,7 @@
                             $(this).prev().remove();
                             $(this).remove();
                         })
+                        uploading = false;
                     }
 
                 };
@@ -1401,13 +1716,13 @@
                 var target=$(event.currentTarget);
                 var tip=target.parent().siblings('.tip');
                 // var content_id = target.prev('.comment-input').attr('id');
-                // if(!access_token){
-                //     location.href = "http://m.fjtv.net/i/my.php?bind_id=13&goUrl="+goUrl;
-                //     return;
-                // };
+                if(!access_token){
+                    location.href = "http://m.fjtv.net/i/my.php?bind_id=13&goUrl="+goUrl;
+                    return;
+                };
                 // var comment=target.prev('.comment-input').val();
                 var comment = $('#newComment').val();
-                if(comment === ""){
+                if(comment == ""){
                     tip.css("display","block").animate({"opacity":"1"},1500).html("您的评论不能为空");
                     setTimeout(function(){tip.css({"opacity":"0",'display':'none'})},1000);
                 }else{
