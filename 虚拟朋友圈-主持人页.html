@@ -667,7 +667,7 @@
                         'c-177':7,
                         'c-178':8,
                     };
-                    if ($.inArray(channelId, ptChanelInFjtvIds)){
+                    if ($.inArray(parseInt(channelId), ptChanelInFjtvIds) != -1){
                         var url = 'http://www.ptbtv.com/m2o/channel/program.php?channel_id=' + ptChanelIds['c-' + channelId] + '&zone='+ zone;
                     }else{
                         var url = 'http://www.fjtv.net/m2o/channel/program.php?channel_id=' + channelId + '&zone='+ zone;
@@ -810,10 +810,10 @@
                         fc_id = id;
 
                         // 方便调试
-                        // if(!access_token){
-                        //     location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl="+goUrl;
-                        //     return;
-                        // };
+                        if(!access_token){
+                            location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl="+goUrl;
+                            return;
+                        };
 
                         // 判断是否有权限发布话题
                         var url = 'http://m.fjtv.net/microweb/check_manage.php';
@@ -1011,7 +1011,7 @@
                                                                             '{{/each}}'+
                                                                         '</span>'+
                                                                         '{{if $value.liked.length == 5}}'+
-                                                                                '<span class="titalDianzan" content_id="{{$value.content_id}}">...共{{$value.liked_num}}人赞</span>'+
+                                                                                '<span class="titalDianzan" hasClicked="false" content_id="{{$value.content_id}}">...共{{$value.liked_num}}人赞</span>'+
                                                                         '{{/if}}'+
                                                                     // '{{/if}}'+
                                                                 // '{{if $value.message && $value.message.length != "0"}}'+
@@ -1264,10 +1264,10 @@
                                     var tip=target.parents('.right-item').find('.tip');
                                     var content_id = target.attr('id');
                                     var currentDianzan = '<span class="dianzan-name"><img class="comment-thumb" src="'+ thumb_url +'"></span>';
-                                    // if(!access_token){
-                                    //     location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl="+goUrl;
-                                    //     return;
-                                    // };
+                                    if(!access_token){
+                                        location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl="+goUrl;
+                                        return;
+                                    };
                                     $.ajax({
                                         type : "post",
                                         url : "http://m.fjtv.net/microweb/virtual_add_like.php",
@@ -1295,19 +1295,23 @@
                                         var target =$(event.currentTarget);
                                         var content_id = target.attr('content_id');
                                         var dianzanList = target.prev('span.dianzan-display');
-                                        $.ajax({
-                                            type : 'get',
-                                            url: 'http://m.fjtv.net/microweb/virtual_more_liked.php?content_id='+content_id,
-                                            dataType : "json",
-                                            success : function(data){
-                                                $.each(data,function(k,v){
-                                                    var str="";
-                                                    str += '<span class="dianzan-name"><img src="'+v.thumb_url+'" class="comment-thumb"></span>';
-                                                    dianzanList.append(str);
-                                                });
-                                                // dianzanStatus = false;
-                                            }
-                                        });
+                                        var hasTital = target.attr('hasClicked')
+                                        if (hasTital == 'false') {
+                                            $.ajax({
+                                                type : 'get',
+                                                url: 'http://m.fjtv.net/microweb/virtual_more_liked.php?content_id='+content_id,
+                                                dataType : "json",
+                                                success : function(data){
+                                                    $.each(data,function(k,v){
+                                                        var str="";
+                                                        str += '<span class="dianzan-name"><img src="'+v.thumb_url+'" class="comment-thumb"></span>';
+                                                        dianzanList.append(str);
+                                                    });
+                                                    // dianzanStatus = false;
+                                                }
+                                            });
+                                            target.attr('hasClicked','true')
+                                        }
                                     // }
                                 },
                                 _dialog:function(event){

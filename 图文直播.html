@@ -732,6 +732,7 @@ $indexpic = json_decode($__info['content']['indexpic'],1);
 
 $indexpic = $indexpic['host'] . $indexpic['dir'] . $indexpic['filepath'] . $indexpic['filename'];
 ?>
+
 <input type="hidden" id="topic_id" value="<?php echo $__info['content']['content_fromid'];?>">
 <input type="hidden" id="indexpic" value="<?php echo $indexpic;?>">
 <!--微信分享朋友圈开始-->
@@ -827,13 +828,14 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
             }
         }
         function getInit(channelId,zone){//获得初始信息
+            console.log(channelId)
             // 虚拟朋友圈模版特殊处理：当直播id=177，178时，177调用莆田节目表ID 7，178调用莆田节目表ID8
             var ptChanelInFjtvIds = [177,178];
             var ptChanelIds = {
                 'c-177':7,
                 'c-178':8,
             };
-            if ($.inArray(channelId, ptChanelInFjtvIds)){
+            if ($.inArray(parseInt(channelId), ptChanelInFjtvIds) != -1){
                 var url = 'http://www.ptbtv.com/m2o/channel/program.php?channel_id=' + ptChanelIds['c-' + channelId] + '&zone='+ zone;
             }else{
                 var url = 'http://www.fjtv.net/m2o/channel/program.php?channel_id=' + channelId + '&zone='+ zone;
@@ -1070,7 +1072,7 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
         });
         //话题详情
         var channelId = '';
-        var indexpic = $('#indexpic').val();
+        var indexpic = '';
         $.ajax({
             type: "get",
             url: "http://m.fjtv.net/microweb/Apituwenol_detail.php?id=" + topic_id,//get请求传参数
@@ -1081,6 +1083,7 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
                 var time_status = data.time_status;
                 var brief = data.brief.replace(/\n/g,"<br>&emsp;&emsp;");
                 var title = data.title;
+                indexpic = $('#indexpic').val();
                 $('#second-cont').html(brief);
                 $('.click_num').text(data.click_num);
                 $('.comment_num').text(data.comment);

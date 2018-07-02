@@ -834,7 +834,7 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
                 'c-177':7,
                 'c-178':8,
             };
-            if ($.inArray(channelId, ptChanelInFjtvIds)){
+            if ($.inArray(parseInt(channelId), ptChanelInFjtvIds) != -1){
                 var url = 'http://www.ptbtv.com/m2o/channel/program.php?channel_id=' + ptChanelIds['c-' + channelId] + '&zone='+ zone;
             }else{
                 var url = 'http://www.fjtv.net/m2o/channel/program.php?channel_id=' + channelId + '&zone='+ zone;
@@ -858,6 +858,7 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
                             if(start<currentTime && end>currentTime){
                                 if(arrDay[date.getDay()]==day){
                                     player.attr("src",v.m3u8);
+                                    player.attr("poster",indexpic);
                                     player[0].play();
                                     html+='<li data_src="'+v.m3u8+'" class="select">'+
                                                 '<label>'+v.start+'-'+v.end+'</label>'+
@@ -1071,6 +1072,7 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
         //话题详情
         var channelId = '';
         var player = null;
+        var indexpic = '';
         $.ajax({
             type: "get",
             url: "http://m.fjtv.net/microweb/Apituwenol_detail.php?id=" + topic_id,//get请求传参数
@@ -1087,7 +1089,7 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
                 var str = '';
                 var murl = '';
                 var liveInfo = data.live_info;
-                var indexpic = $('#indexpic').val();
+                indexpic = $('#indexpic').val();
                 // 节目单初始化
                 if(liveInfo && program_is_open) {
                     channelId = data.live_info[0].id;
