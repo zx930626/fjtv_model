@@ -15,7 +15,7 @@
     <link href="https://cdn.bootcss.com/lightgallery/1.3.9/css/lg-fb-comment-box.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/lightgallery/1.3.9/css/lg-transitions.css" rel="stylesheet">
 
-    <title>图文直播</title>
+    <title>图文直播(有导航)</title>
 
     <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
     <script src="https://cdn.bootcss.com/lightgallery/1.3.9/js/lightgallery.js"></script>
@@ -1095,7 +1095,9 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
                     channelId = data.live_info[0].id;
                     getInit(channelId,0);
                 }else{
-                    $("header").html('<img style="width:100%;" src="'+indexpic+'">');
+                    if(liveInfo.length == 0) {
+                        $("header").html('<img style="width:100%;" src="'+indexpic+'">');
+                    }
                 }
                 
                 // 走音频直播

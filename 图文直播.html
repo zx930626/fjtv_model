@@ -558,7 +558,7 @@
         div.nav div.down_menu ul li{float: left;width: 45%;height: 39px;line-height: 39px;}
         div.nav div.down_menu ul li a{width:100%;text-align: center;color: #fff;}
         div.video_box{  width:100%;  height: 200px;}
-        div.video_box video{width: 100%;height: 100%;}
+        div.video_box video{width: 100%;height: 100%;object-fit:fill;}
         div.program_title{height: 40px;line-height: 40px;background:#dcdcdc;color:#999}
         div.program_title span{display: inline-block;width: 100%;height: 100%;text-align: center;}
         div.program_title span.active{color:#ffa200;}
@@ -828,7 +828,6 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
             }
         }
         function getInit(channelId,zone){//获得初始信息
-            console.log(channelId)
             // 虚拟朋友圈模版特殊处理：当直播id=177，178时，177调用莆田节目表ID 7，178调用莆田节目表ID8
             var ptChanelInFjtvIds = [177,178];
             var ptChanelIds = {
@@ -855,12 +854,12 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
                             var end = Number(v.end.replace(/:/,''));
                             var currentTime = Number((date.getHours()+":"+addZero(date.getMinutes())).replace(/:/,''))
                             var src=v.channel_logo.rectangle.host+v.channel_logo.rectangle.dir+v.channel_logo.rectangle.filepath+v.channel_logo.rectangle.filename;
-                            player.attr("poster",src);
+                            // player.attr("poster",src);
                             if(start<currentTime && end>currentTime){
                                 if(arrDay[date.getDay()]==day){
                                     player.attr("src",v.m3u8);
                                     player.attr("poster",indexpic);
-                                    player[0].play();
+                                    // player[0].play();
                                     html+='<li data_src="'+v.m3u8+'" class="select">'+
                                                 '<label>'+v.start+'-'+v.end+'</label>'+
                                                 '<span class="list_title">'+v.title+'</span>'+
@@ -1090,13 +1089,14 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
                 var str = '';
                 var murl = '';
                 var liveInfo = data.live_info;
-                
                 // 节目单初始化
                 if(liveInfo && program_is_open) {
                     channelId = data.live_info[0].id;
                     getInit(channelId,0);
                 }else{
-                    $("header").html('<img style="width:100%;" src="'+indexpic+'">');
+                    if (liveInfo.length == 0) {
+                        $("header").html('<img style="width:100%;" src="'+indexpic+'">');
+                    }
                 }
 
                 // 走音频直播
@@ -1130,7 +1130,7 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
                 if(!isAudioLive) {
                     var vHtml = "";
                     if(liveInfo.length == 1){
-                        str += '<video id="video" src="'+liveInfo[0].url+'"  width="100%" height="280" webkit-playsinline playsinline x-webkit-airplay="allow" style="background:#000000;margin-top:-12px;"  preload="auto" controls="controls" ></video></div>';
+                        str += '<video id="video" src="'+liveInfo[0].url+'"  x5-playsinline="true"  width="100%" height="280" webkit-playsinline playsinline x-webkit-airplay="allow" style="background:#000000;margin-top:-12px;"  preload="auto" controls="controls" ></video></div>';
                         $('header').html(str);
                         $(".videoBox").css('display','none');
                         $(".fa").remove();
@@ -1141,7 +1141,7 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
                             $("div.videoBox p").css("width", 300 * key + "px");
                             $("div.videoBox p").html(vHtml);
                         })
-                        str += '<video id="video" src="'+liveInfo[0].url+'"  width="100%" height="280" webkit-playsinline playsinline x-webkit-airplay="allow" style="background:#000000;margin-top:-12px;"  preload="auto" controls="controls"></video></div>';
+                        str += '<video id="video" src="'+liveInfo[0].url+'"  width="100%" height="280"  x5-playsinline="true" webkit-playsinline playsinline x-webkit-airplay="allow" style="background:#000000;margin-top:-12px;"  preload="auto" controls="controls"></video></div>';
                         $('header').append(str);
                     }else{
                         $('#wx-share-type').val('link');
@@ -1246,7 +1246,7 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
                             $len = pic.length;
                             for (i = 0; i < $len; i++) {
                                 if (pic[i].type == "video") {
-                                    str += '<video width="100%;" webkit-playsinline="true" controls="controls" poster="' + pic[i].host + pic[i].dir + '300X/' + pic[i].filepath + pic[i].filename + '" src="' + pic[i].m3u8 + '" webkit-playsinline playsinline style="background-color:#000000;margin-top:-12px;"  preload="auto" autoplay="autoplay"></video>';
+                                    str += '<video width="100%;" x5-playsinline="true" webkit-playsinline="true" controls="controls" poster="' + pic[i].host + pic[i].dir + '300X/' + pic[i].filepath + pic[i].filename + '" src="' + pic[i].m3u8 + '" webkit-playsinline playsinline style="background-color:#000000;margin-top:-12px;"  preload="auto" autoplay="autoplay"></video>';
                                 } else if (pic[i].type == "audio") {
                                     // str += '<audio style="width:80%" class="mp3Btn" controls="controls" src=' + pic[i].m3u8 + '/></audio>';
                                     str +=  '<div class="audio_box">'+
@@ -1322,7 +1322,7 @@ $__info['site']['bind_id'] = $__info['site']['oauth_bind_id'];
                             $len = pic.length;
                             for (i = 0; i < $len; i++) {
                                 if (pic[i].type == "video") {
-                                    str += '<video width="100%;" webkit-playsinline="true" controls="controls" poster="' + pic[i].host + pic[i].dir + '300X/' + pic[i].filepath + pic[i].filename + '" src="' + pic[i].m3u8 + '" webkit-playsinline playsinline style="background-color:#000000;"  preload="auto" autoplay="autoplay"></video>';
+                                    str += '<video width="100%;" x5-playsinline="true" webkit-playsinline="true" controls="controls" poster="' + pic[i].host + pic[i].dir + '300X/' + pic[i].filepath + pic[i].filename + '" src="' + pic[i].m3u8 + '" webkit-playsinline playsinline style="background-color:#000000;"  preload="auto" autoplay="autoplay"></video>';
                                 } else if (pic[i].type == "audio") {
                                     // str += '<audio style="width:98%" class="mp3Btn" controls="controls" src=' + pic[i].m3u8 + '/></audio>';
 

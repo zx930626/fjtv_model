@@ -7,17 +7,18 @@
             <meta name="apple-mobile-web-app-capable" content="yes">
             <meta name="apple-mobile-web-app-status-bar-style" content="black">
             <meta name="msapplication-tap-highlight" content="no"/>
-            <link href="https://cdn.bootcss.com/lightgallery/1.3.9/css/lightgallery.css" rel="stylesheet">
-            <link href="https://cdn.bootcss.com/lightgallery/1.3.9/css/lg-fb-comment-box.css" rel="stylesheet">
-            <link href="https://cdn.bootcss.com/lightgallery/1.3.9/css/lg-transitions.css" rel="stylesheet">
-            <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-            <link href="https://cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" rel="stylesheet">
+            <link href="http://img1.fjtv.net/res/microweb/css/lightgallery.css" rel="stylesheet">
+            <link href="http://img1.fjtv.net/res/microweb/css/lg-fb-comment-box.css" rel="stylesheet">
+            <link href="http://img1.fjtv.net/res/microweb/css/lg-transitions.css" rel="stylesheet">
+            <link href="http://img1.fjtv.net/res/microweb/css/bootstrap.min.css" rel="stylesheet">
+            <link href="http://img1.fjtv.net/res/microweb/css/video-js-cdn.min.css" rel="stylesheet">
+            <script src="https://cdn.bootcss.com/jquery/1.10.0/jquery.js"></script>
             <script type="text/javascript" src="http://m.fjtv.net/res/js/jquery/jquery-ui.min.js"></script>
             <script type="text/javascript" src="http://m.fjtv.net/res/js/jquery/template.js"></script>
             <script type="text/javascript" src="http://m.fjtv.net/res/js/jquery/print.js"></script>
-            <script src="https://cdn.bootcss.com/lightgallery/1.3.9/js/lightgallery.js"></script>
-            <script src="https://cdn.bootcss.com/video.js/6.2.8/video.min.js"></script>
-            <script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+            <script src="http://img1.fjtv.net/res/microweb/js/lightgallery.js"></script>
+            <script src="http://img1.fjtv.net/res/microweb/js/video.min.js"></script>
+            <script src="http://img1.fjtv.net/res/microweb/js/jquery.lazyload.min.js"></script>
             <style>
             /*通用列表*/
             body{width: 100%;margin:0;padding:0;background-color: hsl(0,1%,98%);-webkit-font-smoothing: antialiased;font-family:'Microsoft YaHei',STHeiti,'WenQuanYi Micro Hei',SimSun,sans-serif;overflow-x: hidden;}
@@ -224,7 +225,7 @@
         .zhiDing{position: relative;display: inline!important;padding-right: 3px;}
         .advise{padding: 5px 10px;height: 2.5rem;line-height: 2.5rem;border-radius: 9%;border: 1px solid #9b9b9b;position: relative;bottom: 0;left: 64%;}
             .advise a{color:#9b9b9b;}
-        .brief{margin-bottom: 10px;line-height: 20px;}
+        .brief{margin-bottom: 10px;line-height: 20px;width: 100%}
         .brief a{word-break: break-word}
         .pine_img{height: 15px;top: 2px;position: relative;width: 12px;left: 2px;}
         .getMore{display: block;position: relative;left: 70%;padding-bottom: 5px;color: #57668d;padding-top: 3px;}
@@ -759,6 +760,7 @@
                     }
                 })
             </script>
+            
             <script type="text/javascript">
                 var item = document.getElementById('item');
                 if (item) {
@@ -1036,7 +1038,7 @@
                                                                     '<ul class="comment-list" style="display:{{if $value.message && $value.message.length != "0"}}block{{else}}none{{/if}}">'+
                                                                         '<img src="http://m.fjtv.net/logo/dialog.png" class="comment-list-dialog">'+
                                                                             '{{each $value.message as val key}}'+
-                                                                                '<li>'+
+                                                                                '<li class="comment_item" _id="{{val.id}}" content_id="{{val.content_id}}">'+
                                                                                     '<img src="{{val.thumb_url}}" class="comment-thumb">'+
                                                                                     '<div>'+
                                                                                         '<span class="commenter">{{val.member_name}}</span>'+
@@ -1117,6 +1119,7 @@
                                         'touchstart .titalDianzan': '_titalDianzan',//显示更多点赞
                                         'touchstart #channel-host-btn': '_channelHostBtn', //点击频道主持人切换
                                         'touchstart .loadMore' : '_loadMore', //加载更多话题
+                                        'touchstart .comment-list li' : '_replyComment', //回复别人的评论
                                     });
                                 },
 
@@ -1145,7 +1148,6 @@
                                                     item.message = [];
                                                 }
                                             })
-                                            console.log(json);
                                             var listHtml = listTpl( json );
                                             if(pages == 1){
                                                 var loadMore = '<div class="loadMore" id="loadMore">加载更多</div>';
@@ -1338,11 +1340,11 @@
                                     elem.prev().animate({'left':'6%','opacity':'1'},300);
                                 },
 
-//                             _dialog:function(event){
-// //                                                  event.stopPropagation();//阻止事件冒泡到父元素
-//                                                     var elem =$(event.currentTarget);
-                                                    // elem.prev().animate({'left':'8%','opacity':'1'},300);
-//                             },
+                                // _dialog:function(event){
+                                //     event.stopPropagation();//阻止事件冒泡到父元素
+                                //     var elem =$(event.currentTarget);
+                                //     elem.prev().animate({'left':'8%','opacity':'1'},300);
+                                // },
                                 // _commentBtn:function(event){
                                 //     // var commentSign =$('.is_comment').val();
                                 //     // if(commentSign == 1){
@@ -1366,32 +1368,32 @@
                                     showCommentArea();
                                     content_id = _this.siblings('.comment-input').prop('id');
                                 },
-
-                                
-
                                 // _commentInput:function(event){
                                 //     var target =$(event.currentTarget);
                                 //     target.focus();
                                 //     // $('footer').hide();
                                 // },
 
+                                // 回复别人的评论
+                                _replyComment: function(event) {
+                                    var target = $(event.target).parents('.comment_item');
+                                    console.log(target)
+                                }
                             });
                             //如果点赞数量超过3个显示，全部的点赞数，点击全部则显示所有的点赞数,来回切换
-    //
-//                      setTimeout(function(){
-//                              $('.dianzan-display').each(function(){
-//
-//                              });
-//
-//                      },500);
+                            // setTimeout(function(){
+                            //     $('.dianzan-display').each(function(){
+
+                            //     });
+                            // },500);
                             //取消冒泡
-                    document.addEventListener("click",function(e){
-                        if(e.target.className != "commentArea"){
-                            $('.comment-area').hide();
-                        }
-                        $(".dialog-input").css({'left':'100%','opacity':'1'});
-                    });
-                    $('body').friend();
+                            document.addEventListener("click",function(e){
+                                if(e.target.className != "commentArea"){
+                                    $('.comment-area').hide();
+                                }
+                                $(".dialog-input").css({'left':'100%','opacity':'1'});
+                            });
+                            $('body').friend();
 
           });
     // audioPlay();
@@ -1648,19 +1650,23 @@
                     if(this.status == 200||this.status == 304){
                         // var data = JSON.parse(this.responseText);
                         var data = this.responseText;
-                        if(data.error_code > 0 ){
-                            return false;
+                        if(data) {
+                            if(data.error_code > 0 ){
+                                return false;
+                            }
+                            picArr.push(data);
+                            $("<img>").appendTo('.file_preview').prop({'src':data}).addClass('upload_preview');
+                            $("<i>").appendTo('.file_preview').addClass('cancel_upload glyphicon glyphicon-remove')
+                            $('.cancel_upload').off('touchstart').on('touchstart',function(e){
+                                e.stopPropagation();
+                                var pic_index = ($(this).index()+1) / 2 -1;
+                                picArr.splice(pic_index, 1);
+                                $(this).prev().remove();
+                                $(this).remove();
+                            })
+                        }else{
+
                         }
-                        picArr.push(data);
-                        $("<img>").appendTo('.file_preview').prop({'src':data}).addClass('upload_preview');
-                        $("<i>").appendTo('.file_preview').addClass('cancel_upload glyphicon glyphicon-remove')
-                        $('.cancel_upload').off('touchstart').on('touchstart',function(e){
-                            e.stopPropagation();
-                            var pic_index = ($(this).index()+1) / 2 -1;
-                            picArr.splice(pic_index, 1);
-                            $(this).prev().remove();
-                            $(this).remove();
-                        })
                         uploading = false;
                     }
 
@@ -1728,6 +1734,7 @@
                 
             }
         </script>
+
         <script>
             function showCommentArea(){
                 $(".dialog-input").css({'left':'30%','opacity':'1'});
