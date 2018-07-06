@@ -7,18 +7,18 @@
             <meta name="apple-mobile-web-app-capable" content="yes">
             <meta name="apple-mobile-web-app-status-bar-style" content="black">
             <meta name="msapplication-tap-highlight" content="no"/>
-            <link href="http://img1.fjtv.net/res/microweb/css/lightgallery.css" rel="stylesheet">
-            <link href="http://img1.fjtv.net/res/microweb/css/lg-fb-comment-box.css" rel="stylesheet">
-            <link href="http://img1.fjtv.net/res/microweb/css/lg-transitions.css" rel="stylesheet">
-            <link href="http://img1.fjtv.net/res/microweb/css/bootstrap.min.css" rel="stylesheet">
-            <link href="http://img1.fjtv.net/res/microweb/css/video-js-cdn.min.css" rel="stylesheet">
+            <link href="http://m.fjtv.net/res/css/lightgallery.css" rel="stylesheet">
+            <link href="http://m.fjtv.net/res/css/lg-fb-comment-box.css" rel="stylesheet">
+            <link href="http://m.fjtv.net/res/css/lg-transitions.css" rel="stylesheet">
+            <link href="http://m.fjtv.net/res/css/bootstrap.min.css" rel="stylesheet">
+            <link href="http://m.fjtv.net/res/css/video-js-cdn.min.css" rel="stylesheet">
             <script src="https://cdn.bootcss.com/jquery/1.10.0/jquery.js"></script>
             <script type="text/javascript" src="http://m.fjtv.net/res/js/jquery/jquery-ui.min.js"></script>
             <script type="text/javascript" src="http://m.fjtv.net/res/js/jquery/template.js"></script>
             <script type="text/javascript" src="http://m.fjtv.net/res/js/jquery/print.js"></script>
-            <script src="http://img1.fjtv.net/res/microweb/js/lightgallery.js"></script>
-            <script src="http://img1.fjtv.net/res/microweb/js/video.min.js"></script>
-            <script src="http://img1.fjtv.net/res/microweb/js/jquery.lazyload.min.js"></script>
+            <script src="http://m.fjtv.net/res/js/lightgallery.js"></script>
+            <script src="http://m.fjtv.net/res/js/video.min.js"></script>
+            <script src="http://m.fjtv.net/res/js/jquery.lazyload.min.js"></script>
             <style>
             /*通用列表*/
             body{width: 100%;margin:0;padding:0;background-color: hsl(0,1%,98%);-webkit-font-smoothing: antialiased;font-family:'Microsoft YaHei',STHeiti,'WenQuanYi Micro Hei',SimSun,sans-serif;overflow-x: hidden;}
@@ -829,10 +829,10 @@
                         fc_id = id;
 
                         // 方便调试
-                        // if(!access_token){
-                        //     location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl="+goUrl;
-                        //     return;
-                        // };
+                        if(!access_token){
+                            location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl="+goUrl;
+                            return;
+                        };
 
                         // 判断是否有权限发布话题
                         var url = 'http://m.fjtv.net/microweb/check_manage.php';
