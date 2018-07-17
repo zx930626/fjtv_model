@@ -829,10 +829,10 @@
                         fc_id = id;
 
                         // 方便调试
-                        if(!access_token){
-                            location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl="+goUrl;
-                            return;
-                        };
+                        // if(!access_token){
+                        //     location.href = "http://m.fjtv.net/i/my.php?bind_id="+bind_id+"&goUrl="+goUrl;
+                        //     return;
+                        // };
 
                         // 判断是否有权限发布话题
                         var url = 'http://m.fjtv.net/microweb/check_manage.php';
@@ -879,6 +879,9 @@
                                                     '</div>'+
                                                     '<div class="right-item">'+
                                                             '<span class="channel-name">{{$value.publisher}}</span>'+
+                                                            '{{if $value.identify != 1}}'+
+                                                            '<span style="margin-left:5px;color:#999;">{{$value.identify_text}}</span>'+
+                                                            '{{/if}}'+
                                                             '{{if $value.type == 3}}'+
                                                             '<span class="advise"><a href="{{$value.link}}">推广</a></span>'+
                                                             '{{/if}}'+
@@ -1124,6 +1127,7 @@
                                 },
 
                                 _getListInfo:function(pages,sizes){
+                                    var identify_arr = ['不显示','主播','记者','导播','编辑','嘉宾','主持人','直播员','管理员'];
                                     var url = "http://m.fjtv.net/microweb/virtual_moments_list.php?id="+id+"&size="+sizes+"&page="+pages;
                                     var _this = this;
                                     $.ajax({
@@ -1133,6 +1137,9 @@
                                         success : function( json ){
                                             var listTpl = template.compile(viewTpl.html);
                                             json.forEach(function(item,index){
+                                                // 增加身份标识
+                                                item.identify_text = identify_arr[item.identify - 1];
+
                                                 if(item.brief){
                                                     item.brief = replaceURL(item.brief)
                                                 }
@@ -1427,7 +1434,9 @@
                     var aodBw=aodBox[i].offsetWidth;
                     audioPlay[i].addEventListener("touchstart",function(){
                         //  oAudio.play();
-                        $("#playerDrag audio")[0].pause();
+                        if ($("#playerDrag audio")[0]) {
+                            $("#playerDrag audio")[0].pause();
+                        }
                         var _this=this;
                         if(mark){
                             for(var j=0;j<oAudio.length;j++){
